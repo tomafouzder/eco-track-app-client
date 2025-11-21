@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import image from "../../assets/icons8-ecology-100.png"
+import bgImg from "../../assets/coolbackgrounds-particles-compute.png"
 import { Link } from 'react-router';
 import MyContainer from '../../components/Navbar/MyContainer';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
@@ -9,64 +10,72 @@ import { FcGoogle } from 'react-icons/fc';
 const Login = () => {
     const [show, setShow] = useState(false);
     return (
-        <MyContainer >
+        <div
+            style={{
+                backgroundImage: `url(${bgImg})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+            }}
+        >
 
-            <div className="hero ">
-                <div className="hero-content mt-24 p-10 flex-col lg:flex-row gap-30">
+            <MyContainer className="hero text-white min-h-screen ">
+                <div className="hero-content mt-20 p-10 flex-col lg:flex-row gap-30">
                     <div className="text-center lg:text-left">
-                        <figure className='flex items-center justify-center'>
-                            <img src={image} alt="Eco Image" />
+                        <figure className='flex items-center  justify-center'>
+                            <img src={image} className='filter invert brightness-0' alt="Eco Image" />
                         </figure>
                         <h1 className="text-5xl font-bold text-center">Join EcoTrack</h1>
                         <p className="py-6 text-center">
                             Get started with our app, just create an account and enjoy the experience.
                         </p>
                     </div>
-                    <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+                    <div className="card border-2 w-full max-w-sm shrink-0 shadow-2xl">
                         <div className="card-body">
 
-                            <h1 className="text-4xl py-4 font-bold text-center">Login Now</h1>
+                            <h1 className="text-4xl py-1 font-bold text-center">Login Now</h1>
                             <form>
                                 <fieldset className="fieldset">
 
                                     {/* Email */}
-                                    <label className="label ">Email</label>
+                                    <label className="label  font-semibold text-white text-lg ">Email</label>
                                     <input type="email"
                                         name='email'
-                                        className="input  "
+                                        className="input bg-gray-400   "
                                         required
                                         placeholder="Email" />
 
                                     {/* Password */}
                                     <div className='relative'>
-                                        <label className="label pb-2">Password</label>
+                                        <label className="label  font-semibold text-lg text-white pb-2">Password</label>
                                         <input type={show ? "text" : "password"}
                                             name='password'
-                                            className="input "
+                                            className="input bg-gray-400  "
                                             required
                                             placeholder="Password" />
-                                        <span onClick={() => setShow(!show)} className='absolute right-6 top-10 cursor-pointer z-50'>
+                                        <span onClick={() => setShow(!show)} className='absolute right-6 top-12 cursor-pointer z-50'>
                                             {show ? <FaEye /> : <FaEyeSlash />}
                                         </span>
                                     </div>
                                     {/* forgot password */}
-                                    <div><a className="link link-hover">Forgot password?</a></div>
+                                    <div className='text-sm font-semibold pt-1 text-blue-500 '>
+                                        <a className="link underline">Forgot password?</a>
+                                        </div>
 
                                     {/*register button */}
-                                    <button className="btn btn-neutral mt-4">Login</button>
-                                    <div className='text-sm'>
+                                    <button className="btn bg-gray-700 text-white text-lg font-bold mt-4">Login</button>
+                                    <div className='text-sm font-semibold pt-1'>
                                         <p>Don't have an account? Please {' '}
-                                            <Link to="/register" className=' font-semibold text-blue-700'>Register</Link>
+                                            <Link to="/register" className='  text-sm font-bold text-blue-500 underline'>Register</Link>
                                         </p>
                                     </div>
 
                                     {/* Divider */}
                                     <div className="flex w-full flex-col">
-                                        <div className="divider">OR</div>
+                                        <div className="divider divider-primary">OR</div>
                                     </div>
 
                                     {/* Google */}
-                                    <button className="btn bg-white text-black border-[#e5e5e5]">
+                                    <button className="btn  text-white bg-gray-700  border-[#e5e5e5]">
                                         <FcGoogle />  Login with Google
                                     </button>
                                 </fieldset>
@@ -74,8 +83,8 @@ const Login = () => {
                         </div>
                     </div>
                 </div>
-            </div>
-        </MyContainer>
+            </MyContainer>
+        </div>
     );
 };
 
