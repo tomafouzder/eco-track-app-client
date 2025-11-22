@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { use } from 'react';
 import MyContainer from './MyContainer';
 import MyLinks from './MyLinks';
 import { Link } from 'react-router';
 import bgImg from "../../assets/coolbackgrounds-particles-compute.png"
 import icon from "../../assets/icons8-ecosystem-64.png"
+import profileIcon from "../../assets/icons8-profile.gif"
+import { AuthContext } from '../../context/AuthProvider';
 
 const Navbar = () => {
+    const { user, userSignOut } = use(AuthContext);
 
+    const handelLogOut = () => {
+        userSignOut()
+            .then(() => {
+                alert(' Sign-out successful.')
+            }).catch((error) => {
+                console.log(error);
+            });
+    }
 
     return (
         <div className="navbar shadow-sm "
@@ -39,11 +50,21 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <Link to="/login" className="btn bg-gray-800 text-white font-bold text-lg hover:bg-gray-500">Login</Link>
+                    <div className='flex justify-center items-center gap-2'>
+                        <img className='rounded-full w-12 h-12' src={profileIcon} alt="profileIcon" />
+                        {user ?
+                            <button
+                                onClick={handelLogOut}
+                                className="btn btn-outline text-white font-bold text-lg hover:bg-gray-500">LogOut</button>
+                            :
+                            <Link to="/login" className="btn btn-outline text-white font-bold text-lg hover:bg-gray-500">Login</Link>
+                        }
+                    </div>
+
 
                     <div className="dropdown relative">
                         <div tabIndex={0} role="button" className="btn hover:bg-gray-600  btn-outline lg:hidden">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white font-bold " fill="none" viewBox="" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="" d="M4 6h16M4 12h8m-8 6h16" /> </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white font-bold " fill="none" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="" d="M4 6h16M4 12h8m-8 6h16" /> </svg>
                         </div>
                         <ul
                             tabIndex="0"

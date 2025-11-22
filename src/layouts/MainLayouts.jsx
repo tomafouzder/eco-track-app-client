@@ -9,7 +9,10 @@ const MainLayouts = () => {
             <header className='fixed top-0 left-0 w-full z-50 bg-white shadow-md'>
                 <Navbar></Navbar>
             </header>
-            <Outlet></Outlet>
+            <div className='mt-12 pt-10 min-h-screen'>
+                <Outlet></Outlet>
+            </div>
+
             <Footer></Footer>
 
         </div>

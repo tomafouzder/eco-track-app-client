@@ -1,23 +1,52 @@
-import React, { useState } from 'react';
+import React, { use, useState } from 'react';
 import { Link } from 'react-router';
 import image from '../../assets/icons8-ecology-100.png'
 import bgImg from "../../assets/coolbackgrounds-particles-compute.png"
 import MyContainer from '../../components/Navbar/MyContainer';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
+import { AuthContext } from '../../context/AuthProvider';
 
 const Register = () => {
+    const { createUser, setUser } = use(AuthContext);
     const [show, setShow] = useState(false);
+    
+
+
+    const handleRegister = (e) => {
+        e.preventDefault();
+        console.log(e.target)
+        const form = e.target;
+        const name = form.name.value;
+        const email = form.email.value;
+        const photo = form.photo.value;
+        const password = form.password.value;
+        console.log({ name, email, photo, password });
+        createUser(email, password)
+            .then((result) => {
+                const user = result.user;
+                setUser(user)
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                alert(errorMessage);
+            });
+
+    };
+
+
+
     return (
-        <div 
-        style={{
+        <div
+            style={{
                 backgroundImage: `url(${bgImg})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
             }}
-            >
+        >
             <MyContainer className="hero text-white min-h-screen">
-                <div className="hero-content mt-24 p-10 flex-col lg:flex-row-reverse gap-30">
+                <div className="hero-content flex-col lg:flex-row-reverse gap-30">
                     <div className="text-center lg:text-left">
                         <figure className='flex items-center  justify-center'>
                             <img src={image} className='filter invert brightness-0' alt="Eco Image" />
@@ -30,7 +59,7 @@ const Register = () => {
                     <div className="card w-full  border-2 max-w-sm shrink-0 shadow-2xl">
                         <div className="card-body ">
                             <h1 className="text-4xl py-1 font-bold text-center">Register Now</h1>
-                            <form>
+                            <form onSubmit={handleRegister}>
                                 <fieldset className="fieldset">
                                     {/* Name */}
                                     <label className="label font-semibold  ">Name</label>
@@ -68,8 +97,11 @@ const Register = () => {
                                             {show ? <FaEye /> : <FaEyeSlash />}
                                         </span>
                                     </div>
+
                                     {/*register button */}
-                                    <button className="btn bg-gray-700 text-white text-lg font-bold mt-4">Register</button>
+                                    <button
+                                        type='submit'
+                                        className="btn bg-gray-700 text-white text-lg font-bold mt-4">Register</button>
 
                                     <div className='text-sm font-semibold pt-1'>
                                         <p>Have an account? Please {' '}
@@ -79,12 +111,12 @@ const Register = () => {
 
                                     {/* Divider */}
                                     <div className="flex w-full flex-col">
-                                       <div className="divider divider-primary">OR</div>
+                                        <div className="divider divider-primary">OR</div>
                                     </div>
 
                                     {/* Google */}
                                     <button className="btn text-white bg-gray-700  border-[#e5e5e5]">
-                                       <FcGoogle /> Register with Google
+                                        <FcGoogle /> Register with Google
                                     </button>
                                 </fieldset>
                             </form>
