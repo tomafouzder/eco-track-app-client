@@ -4,8 +4,9 @@ import bgImg from "../../assets/coolbackgrounds-particles-compute.png"
 import { Link } from 'react-router';
 import MyContainer from '../../components/Navbar/MyContainer';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { FcGoogle } from 'react-icons/fc';
+
 import { AuthContext } from '../../context/AuthProvider';
+import GoogleLogIn from './GoogleLogIn';
 
 
 const Login = () => {
@@ -103,11 +104,9 @@ const Login = () => {
                                     </div>
 
                                     {/* Google */}
-                                    <button
-                                        type='button'
-                                        className="btn  text-white bg-gray-700  border-[#e5e5e5]">
-                                        <FcGoogle />  Login with Google
-                                    </button>
+                                    <div>
+                                        <GoogleLogIn></GoogleLogIn>
+                                    </div>
                                 </fieldset>
                             </form>
                         </div>

@@ -6,6 +6,9 @@ import MyActivities from "../Pages/MyActivities/MyActivities";
 import Login from "../Pages/AuthPages/Login";
 import Register from "../Pages/AuthPages/Register";
 import ForgotPassword from "../Pages/AuthPages/ForgotPassword";
+import GoogleLogIn from "../Pages/AuthPages/GoogleLogIn";
+import AddNewChallenge from "../Pages/Challenges/AddNewChallenge";
+import ChallengeDetails from "../Pages/Challenges/ChallengeDetails";
 
 const router = createBrowserRouter([
     {
@@ -21,21 +24,33 @@ const router = createBrowserRouter([
                 Component: Challenges
             },
             {
+                path:"/addNewChallenge",
+                element:<AddNewChallenge/>
+            },
+            {
+                path:"/challengeDetails",
+                element:<ChallengeDetails/>
+            },
+            {
                 path: "/my-activities",
                 element: <MyActivities />
             },
             {
-                path:"/login",
-                element:<Login/>
+                path: "/login",
+                element: <Login />
             },
             {
-                path:"/register",
-                element:<Register/>
+                path: "/register",
+                element: <Register />
             },
             {
-                path:"/forgot-password",
-                element: <ForgotPassword/>
+                path: "/forgot-password",
+                element: <ForgotPassword />
             },
+            {
+                path: "/googleLogin",
+                element: <GoogleLogIn />
+            }
         ]
     },
 ]);

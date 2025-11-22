@@ -1,4 +1,4 @@
-import React, { use } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import MyContainer from './MyContainer';
 import MyLinks from './MyLinks';
 import { Link } from 'react-router';
@@ -9,6 +9,19 @@ import { AuthContext } from '../../context/AuthProvider';
 
 const Navbar = () => {
     const { user, userSignOut } = use(AuthContext);
+    const [scrolled, setScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 100) {
+                setScrolled(true);
+            } else {
+                setScrolled(false);
+            }
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     const handelLogOut = () => {
         userSignOut()
@@ -20,13 +33,16 @@ const Navbar = () => {
     }
 
     return (
-        <div className="navbar shadow-sm "
+        <div
+            className={`navbar shadow-sm fixed top-0 left-0 w-full -z-50 transition-all duration-300`}
             style={{
-                backgroundImage: `url(${bgImg})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
+                backgroundImage: scrolled ?  `url(${bgImg})` : 'none',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
             }}
         >
+
+
             <MyContainer className="navbar">
                 <div className="navbar-start">
 
@@ -37,7 +53,7 @@ const Navbar = () => {
                     </div>
                 </div>
                 <div className="navbar-center hidden lg:flex">
-                    <ul className="menu  menu-horizontal gap-2 text-white px-1">
+                    <ul className="menu  menu-horizontal gap-1 text-white px-1">
                         <li>
                             <MyLinks to={"/"}>Home</MyLinks>
                         </li>
@@ -46,6 +62,9 @@ const Navbar = () => {
                         </li>
                         <li>
                             <MyLinks to={"/my-activities"}>My Activities</MyLinks>
+                        </li>
+                        <li>
+                            <MyLinks to={"/addNewChallenge"}>Add Challenge</MyLinks>
                         </li>
                     </ul>
                 </div>
@@ -84,6 +103,9 @@ const Navbar = () => {
                             <li>
                                 <MyLinks to={"/my-activities"}>My Activities</MyLinks>
                             </li>
+                            <li>
+                                <MyLinks to={"/addNewChallenge"}>Add Challenge</MyLinks>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -94,3 +116,8 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
+
+
+

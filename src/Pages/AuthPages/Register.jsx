@@ -4,13 +4,13 @@ import image from '../../assets/icons8-ecology-100.png'
 import bgImg from "../../assets/coolbackgrounds-particles-compute.png"
 import MyContainer from '../../components/Navbar/MyContainer';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { FcGoogle } from 'react-icons/fc';
 import { AuthContext } from '../../context/AuthProvider';
+import GoogleLogIn from './GoogleLogIn';
 
 const Register = () => {
     const { createUser, setUser } = use(AuthContext);
     const [show, setShow] = useState(false);
-    
+
 
 
     const handleRegister = (e) => {
@@ -115,9 +115,9 @@ const Register = () => {
                                     </div>
 
                                     {/* Google */}
-                                    <button className="btn text-white bg-gray-700  border-[#e5e5e5]">
-                                        <FcGoogle /> Register with Google
-                                    </button>
+                                    <div>
+                                        <GoogleLogIn></GoogleLogIn>
+                                    </div>
                                 </fieldset>
                             </form>
                         </div>
