@@ -21,7 +21,8 @@ const router = createBrowserRouter([
             },
             {
                 path: "/challenges",
-                Component: Challenges
+                Component: Challenges,
+                loader: ()=> fetch('http://localhost:3000/get-challenges')
             },
             {
                 path:"/addNewChallenge",

@@ -16,6 +16,9 @@ const MyActivities = () => {
                 </div>
             </div>
             <h3>My Activities</h3>
+
+            <button className='badge '>My Activities</button>
+            
         </div>
     );
 };
