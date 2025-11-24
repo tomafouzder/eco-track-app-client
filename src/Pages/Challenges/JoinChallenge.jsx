@@ -1,10 +1,38 @@
 import React, { use } from 'react';
 import { AuthContext } from '../../context/AuthProvider';
+import axios from 'axios';
 
 
-const JoinChallenge = () => {
+const JoinChallenge = ({ challengeId }) => {
     const { user } = use(AuthContext)
     console.log(user)
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const userId = e.target.userId.value;
+        const status = e.target.status.value;
+        const progress = e.target.progress.value;
+        const joinDate = e.target.joinDate.value;
+
+        console.log(userId, challengeId, status, progress, joinDate,)
+
+        const joinData = {
+            userId: userId,
+            challengeId: challengeId,
+            status: status,
+            progress: progress,
+            joinDate: joinDate,
+            createdAt: new Date()
+        }
+
+        axios.post('http://localhost:3000/join-challenge', joinData)
+            .then(res => {
+                console.log(res);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
 
     return (
         <div>
@@ -12,27 +40,17 @@ const JoinChallenge = () => {
                 Join Challenge
             </h2>
 
-            <form className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4">
 
                 {/* userId */}
                 <div>
                     <label className="block font-medium mb-1">User ID</label>
                     <input
                         type="text"
-                        defaultValue={user?._id}
-                        name='UserId'
+                        defaultValue={user?.email}
+                        name='userId'
                         readOnly
                         placeholder="Enter your user ID"
-                        className="input input-bordered w-full"
-                    />
-                </div>
-
-                {/* challengeId */}
-                <div>
-                    <label className="block font-medium mb-1">Challenge ID</label>
-                    <input
-                        type="text"
-                        placeholder="Enter challenge ID"
                         className="input input-bordered w-full"
                     />
                 </div>
@@ -40,7 +58,9 @@ const JoinChallenge = () => {
                 {/* status */}
                 <div>
                     <label className="block font-medium mb-1">Status</label>
-                    <select className="select select-bordered w-full">
+                    <select
+                        name='status'
+                        className="select select-bordered w-full">
                         <option>Not Started</option>
                         <option>Ongoing</option>
                         <option>Finished</option>
@@ -51,6 +71,7 @@ const JoinChallenge = () => {
                 <div>
                     <label className="block font-medium mb-1">Progress (%)</label>
                     <input
+                        name='progress'
                         type="number"
                         placeholder="0"
                         className="input input-bordered w-full"
@@ -61,6 +82,7 @@ const JoinChallenge = () => {
                 <div>
                     <label className="block font-medium mb-1">Join Date</label>
                     <input
+                        name='joinDate'
                         type="date"
                         className="input input-bordered w-full"
                     />

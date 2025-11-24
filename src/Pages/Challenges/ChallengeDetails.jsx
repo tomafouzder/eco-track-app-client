@@ -120,7 +120,7 @@ const ChallengeDetails = () => {
                 ref={joinModalRef}
                 className="modal modal-bottom sm:modal-middle">
                 <div className="modal-box">
-                  <JoinChallenge></JoinChallenge>
+                  <JoinChallenge challengeId={challenge._id} ></JoinChallenge>
                     <div className="modal-action">
                         <form method="dialog">
                             {/* ------------------ */}
