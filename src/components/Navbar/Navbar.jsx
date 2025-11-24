@@ -36,12 +36,11 @@ const Navbar = () => {
         <div
             className={`navbar shadow-sm fixed top-0 left-0 w-full -z-50 transition-all duration-300`}
             style={{
-                backgroundImage: scrolled ?  `url(${bgImg})` : 'none',
+                backgroundImage: scrolled ? `url(${bgImg})` : 'none',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
             }}
         >
-
 
             <MyContainer className="navbar">
                 <div className="navbar-start">
@@ -52,6 +51,7 @@ const Navbar = () => {
                             <span className='text-green-500'>Eco</span>Track</a>
                     </div>
                 </div>
+
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu  menu-horizontal gap-1 text-white px-1">
                         <li>
@@ -60,14 +60,20 @@ const Navbar = () => {
                         <li>
                             <MyLinks to={"/challenges"}>Challenges</MyLinks>
                         </li>
-                        <li>
-                            <MyLinks to={"/my-activities"}>My Activities</MyLinks>
-                        </li>
-                        <li>
-                            <MyLinks to={"/addNewChallenge"}>Add Challenge</MyLinks>
-                        </li>
+                        {
+                            user && <>
+                                <li>
+                                    <MyLinks to={"/my-activities"}>My Activities</MyLinks>
+                                </li>
+                                <li>
+                                    <MyLinks to={"/addNewChallenge"}>Add Challenge</MyLinks>
+                                </li>
+                            </>
+                        }
+
                     </ul>
                 </div>
+
                 <div className="navbar-end">
                     <div className='flex justify-center items-center gap-2'>
                         <img className='rounded-full w-12 h-12' src={profileIcon} alt="profileIcon" />

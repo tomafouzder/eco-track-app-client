@@ -1,17 +1,22 @@
-import React from "react";
+import React, { useRef } from "react";
 import { FaUsers, FaCalendarAlt, FaRecycle } from "react-icons/fa";
 import 'animate.css';
 import MyContainer from "../../components/Navbar/MyContainer";
 import { Link, useLoaderData } from "react-router";
+import JoinChallenge from "./JoinChallenge";
 
 
 
 
 const ChallengeDetails = () => {
-
     const data = useLoaderData()
     const challenge = data.result;
     console.log(challenge);
+
+    const joinModalRef = useRef(null)
+    const handleJoinModalOpen = () => {
+        joinModalRef.current.showModal()
+    }
 
 
     // const challenge = {
@@ -93,15 +98,38 @@ const ChallengeDetails = () => {
                 </div>
 
                 {/* Join Button */}
-                <button className="btn btn-success w-full md:w-auto px-6 py-3 text-white font-semibold">
+
+                <button
+                    onClick={handleJoinModalOpen}
+                    className="btn btn-success w-full md:w-auto px-6 py-3 text-white font-semibold">
                     Join Challenge
                 </button>
+
+
+
                 <Link to={`/updateChallenge/${challenge._id}`}>
                     <button className="btn btn-success w-full md:w-auto px-6 py-3 text-white font-semibold">
                         Update Challenge
                     </button>
                 </Link>
             </MyContainer>
+
+
+            {/*Join modal */}
+            <dialog
+                ref={joinModalRef}
+                className="modal modal-bottom sm:modal-middle">
+                <div className="modal-box">
+                  <JoinChallenge></JoinChallenge>
+                    <div className="modal-action">
+                        <form method="dialog">
+                            {/* ------------------ */}
+                            {/* --------------------- */}
+                            <button className="btn">Close</button>
+                        </form>
+                    </div>
+                </div>
+            </dialog>
         </div>
     );
 };

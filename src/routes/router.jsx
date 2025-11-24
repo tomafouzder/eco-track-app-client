@@ -10,6 +10,7 @@ import GoogleLogIn from "../Pages/AuthPages/GoogleLogIn";
 import AddNewChallenge from "../Pages/Challenges/AddNewChallenge";
 import ChallengeDetails from "../Pages/Challenges/ChallengeDetails";
 import UpdateChallenge from "../Pages/Challenges/UpdateChallenge";
+import JoinChallenge from "../Pages/Challenges/JoinChallenge";
 
 const router = createBrowserRouter([
     {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
                 path: "/updateChallenge/:id",
                 element: <UpdateChallenge />,
                 loader: ({ params }) => fetch(`http://localhost:3000/challenges/${params.id}`)
+            },
+            {
+                path: "/joinChallenge/:id",
+                element: <JoinChallenge />
             },
             {
                 path: "/my-activities",
