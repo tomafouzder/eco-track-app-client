@@ -4,6 +4,7 @@ import { FaClock, FaUsers, FaLeaf } from 'react-icons/fa';
 import { Link } from 'react-router';
 
 const ChallengeCard = ({ challenge }) => {
+    const { _id } = challenge
     return (
         <div>
             {/* challenge card */}
@@ -39,7 +40,7 @@ const ChallengeCard = ({ challenge }) => {
                         </div>
 
                         {/* Button */}
-                        <Link to="/challengeDetails">
+                        <Link to={`/challengeDetails/${_id}`}>
                             <button className="mt-6 button w-full py-2 bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold rounded-xl shadow-lg hover:scale-[1.02] transition transform duration-300">
                                 Challenge Details
                             </button>

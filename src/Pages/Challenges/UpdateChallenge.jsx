@@ -1,38 +1,14 @@
-import { use, useState } from "react";
-import MyContainer from "../../components/Navbar/MyContainer";
-import axios from "axios";
-import { AuthContext } from "../../context/AuthProvider";
+import React from 'react';
+import MyContainer from '../../components/Navbar/MyContainer';
+import { useLoaderData } from 'react-router';
+import axios from 'axios';
 
-const AddNewChallenge = () => {
-    const { user } = use(AuthContext)
-    console.log(user);
-    const [formData, setFormData] = useState({});
-    const [errors, setErrors] = useState({});
-    const [challenges, setChallenges] = useState([]);
+const UpdateChallenge = () => {
+    const data = useLoaderData()
+    const challenge = data.result;
+    console.log(challenge);
 
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
-
-    const validateForm = () => {
-        const newErrors = {};
-        if (!formData.title) newErrors.title = "Title is required";
-        if (!formData.category) newErrors.category = "Category is required";
-        if (!formData.description) newErrors.description = "Description is required";
-        if (!formData.duration) newErrors.duration = "Duration is required";
-        if (!formData.participants) newErrors.participants = "Participants is required";
-        if (!formData.imageUrl) newErrors.imageUrl = "Image URL is required";
-        if (!formData.target) newErrors.target = "Target is required";
-        if (!formData.impactMetric) newErrors.impactMetric = "Impact metric is required";
-        if (!formData.createdBy) newErrors.createdBy = "Creator email is required";
-        if (!formData.startDate) newErrors.startDate = "Start date is required";
-        if (!formData.endDate) newErrors.endDate = "End date is required";
-
-        setErrors(newErrors);
-        return Object.keys(newErrors).length === 0;
-    };
-
-    // handleSubmit and new data collection : 
+    //  handleSubmit and new data update collection:
     const handleSubmit = (e) => {
         e.preventDefault();
         const formData = {
@@ -47,30 +23,18 @@ const AddNewChallenge = () => {
             createdBy: e.target.createdBy.value,
             startDate: e.target.startDate.value,
             endDate: e.target.endDate.value,
-        } 
+        }
 
-        axios.post('http://localhost:3000/challenges', formData)
+        axios.put(`http://localhost:3000/challenges/${challenge._id}`, formData)
             .then(res => {
                 console.log(res);
             })
             .catch(error => {
                 console.log(error);
             })
-
-
-
-        if (!validateForm()) return;
-
-        const newChallenge = {
-            ...formData,
-            createdAt: new Date(),
-            updatedAt: new Date(),
-        };
-
-        setChallenges([newChallenge, ...challenges]);
-        setFormData({});
-        setErrors({});
     };
+
+
 
     return (
         <div>
@@ -94,7 +58,7 @@ const AddNewChallenge = () => {
                     onSubmit={handleSubmit}
                     className="max-w-3xl mx-auto bg-white rounded-3xl shadow-2xl p-8 space-y-6"
                 >
-                    <h2 className="text-4xl font-bold text-green-700 text-center mb-6">Add Challenge</h2>
+                    <h2 className="text-4xl font-bold text-green-700 text-center mb-6">Update Challenge</h2>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {/* Title */}
@@ -104,12 +68,13 @@ const AddNewChallenge = () => {
                             </label>
                             <input
                                 name="title"
+                                defaultValue={challenge.title}
                                 placeholder="Challenge Title"
-                                value={formData.title || ""}
-                                onChange={handleChange}
-                                className={`input input-bordered w-full ${errors.title ? "input-error" : ""}`}
+                                type='text'
+                                required
+                                className={`input input-bordered w-full`}
                             />
-                            {errors.title && <span className="text-red-500 text-sm">{errors.title}</span>}
+
                         </div>
 
                         {/* Category */}
@@ -119,9 +84,9 @@ const AddNewChallenge = () => {
                             </label>
                             <select
                                 name="category"
-                                value={formData.category || ""}
-                                onChange={handleChange}
-                                className={`select select-bordered w-full ${errors.category ? "select-error" : ""}`}
+                                defaultValue={challenge.category}
+                                required
+                                className={`select select-bordered w-full `}
                             >
                                 <option value="">Select Category</option>
                                 <option>Waste Reduction</option>
@@ -130,7 +95,7 @@ const AddNewChallenge = () => {
                                 <option>Sustainable Transport</option>
                                 <option>Green Living</option>
                             </select>
-                            {errors.category && <span className="text-red-500 text-sm">{errors.category}</span>}
+
                         </div>
 
                         {/* Duration */}
@@ -140,13 +105,13 @@ const AddNewChallenge = () => {
                             </label>
                             <input
                                 name="duration"
+                                defaultValue={challenge.duration}
                                 type="number"
                                 placeholder="Duration"
-                                value={formData.duration || ""}
-                                onChange={handleChange}
-                                className={`input input-bordered w-full ${errors.duration ? "input-error" : ""}`}
+                                required
+                                className={`input input-bordered w-full`}
                             />
-                            {errors.duration && <span className="text-red-500 text-sm">{errors.duration}</span>}
+
                         </div>
 
                         {/* Participants */}
@@ -157,12 +122,12 @@ const AddNewChallenge = () => {
                             <input
                                 name="participants"
                                 type="number"
+                                defaultValue={challenge.participants}
                                 placeholder="Number of Participants"
-                                value={formData.participants || ""}
-                                onChange={handleChange}
-                                className={`input input-bordered w-full ${errors.participants ? "input-error" : ""}`}
+
+                                className={`input input-bordered w-full `}
                             />
-                            {errors.participants && <span className="text-red-500 text-sm">{errors.participants}</span>}
+
                         </div>
 
                         {/* Image URL */}
@@ -173,11 +138,11 @@ const AddNewChallenge = () => {
                             <input
                                 name="imageUrl"
                                 placeholder="Image URL"
-                                value={formData.imageUrl || ""}
-                                onChange={handleChange}
-                                className={`input input-bordered w-full ${errors.imageUrl ? "input-error" : ""}`}
+                                defaultValue={challenge.imageUrl}
+                                required
+                                className={`input input-bordered w-full `}
                             />
-                            {errors.imageUrl && <span className="text-red-500 text-sm">{errors.imageUrl}</span>}
+
                         </div>
 
                         {/* Description */}
@@ -188,11 +153,11 @@ const AddNewChallenge = () => {
                             <textarea
                                 name="description"
                                 placeholder="Short Description"
-                                value={formData.description || ""}
-                                onChange={handleChange}
-                                className={`textarea textarea-bordered w-full ${errors.description ? "textarea-error" : ""}`}
+                                defaultValue={challenge.description}
+                                required
+                                className={`textarea textarea-bordered w-full `}
                             />
-                            {errors.description && <span className="text-red-500 text-sm">{errors.description}</span>}
+
                         </div>
 
                         {/* Target */}
@@ -203,11 +168,10 @@ const AddNewChallenge = () => {
                             <input
                                 name="target"
                                 placeholder="Target (e.g., Reduce plastic waste)"
-                                value={formData.target || ""}
-                                onChange={handleChange}
-                                className={`input input-bordered w-full ${errors.target ? "input-error" : ""}`}
+                                defaultValue={challenge.target}
+                                required
+                                className={`input input-bordered w-full`}
                             />
-                            {errors.target && <span className="text-red-500 text-sm">{errors.target}</span>}
                         </div>
 
                         {/* Impact Metric */}
@@ -217,12 +181,12 @@ const AddNewChallenge = () => {
                             </label>
                             <input
                                 name="impactMetric"
+                                defaultValue={challenge.impactMetric}
                                 placeholder="Impact Metric (e.g., kg plastic saved)"
-                                value={formData.impactMetric || ""}
-                                onChange={handleChange}
-                                className={`input input-bordered w-full ${errors.impactMetric ? "input-error" : ""}`}
+                                required
+                                className={`input input-bordered w-full`}
                             />
-                            {errors.impactMetric && <span className="text-red-500 text-sm">{errors.impactMetric}</span>}
+
                         </div>
 
                         {/* Created By */}
@@ -232,12 +196,12 @@ const AddNewChallenge = () => {
                             </label>
                             <input
                                 name="createdBy"
+                                defaultValue={challenge.createdBy}
                                 placeholder="Creator Email"
-                                value={formData.createdBy || ""}
-                                onChange={handleChange}
-                                className={`input input-bordered w-full ${errors.createdBy ? "input-error" : ""}`}
+                                required
+                                className={`input input-bordered w-full `}
                             />
-                            {errors.createdBy && <span className="text-red-500 text-sm">{errors.createdBy}</span>}
+
                         </div>
 
                         {/* Start Date */}
@@ -247,12 +211,12 @@ const AddNewChallenge = () => {
                             </label>
                             <input
                                 type="date"
+                                defaultValue={challenge.startDate}
                                 name="startDate"
-                                value={formData.startDate || ""}
-                                onChange={handleChange}
-                                className={`input input-bordered w-full ${errors.startDate ? "input-error" : ""}`}
+                                required
+                                className={`input input-bordered w-full `}
                             />
-                            {errors.startDate && <span className="text-red-500 text-sm">{errors.startDate}</span>}
+
                         </div>
 
                         {/* End Date */}
@@ -263,11 +227,10 @@ const AddNewChallenge = () => {
                             <input
                                 type="date"
                                 name="endDate"
-                                value={formData.endDate || ""}
-                                onChange={handleChange}
-                                className={`input input-bordered w-full ${errors.endDate ? "input-error" : ""}`}
+                                defaultValue={challenge.endDate}
+                                required
+                                className={`input input-bordered w-full `}
                             />
-                            {errors.endDate && <span className="text-red-500 text-sm">{errors.endDate}</span>}
                         </div>
                     </div>
 
@@ -278,4 +241,4 @@ const AddNewChallenge = () => {
     );
 };
 
-export default AddNewChallenge;
+export default UpdateChallenge;

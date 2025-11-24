@@ -9,6 +9,7 @@ import ForgotPassword from "../Pages/AuthPages/ForgotPassword";
 import GoogleLogIn from "../Pages/AuthPages/GoogleLogIn";
 import AddNewChallenge from "../Pages/Challenges/AddNewChallenge";
 import ChallengeDetails from "../Pages/Challenges/ChallengeDetails";
+import UpdateChallenge from "../Pages/Challenges/UpdateChallenge";
 
 const router = createBrowserRouter([
     {
@@ -22,15 +23,21 @@ const router = createBrowserRouter([
             {
                 path: "/challenges",
                 Component: Challenges,
-                loader: ()=> fetch('http://localhost:3000/get-challenges')
+                loader: () => fetch('http://localhost:3000/challenges')
             },
             {
-                path:"/addNewChallenge",
-                element:<AddNewChallenge/>
+                path: "/addNewChallenge",
+                element: <AddNewChallenge />
             },
             {
-                path:"/challengeDetails",
-                element:<ChallengeDetails/>
+                path: "/challengeDetails/:id",
+                element: <ChallengeDetails />,
+                loader: ({ params }) => fetch(`http://localhost:3000/challenges/${params.id}`)
+            },
+            {
+                path: "/updateChallenge/:id",
+                element: <UpdateChallenge />,
+                loader: ({ params }) => fetch(`http://localhost:3000/challenges/${params.id}`)
             },
             {
                 path: "/my-activities",

@@ -2,26 +2,32 @@ import React from "react";
 import { FaUsers, FaCalendarAlt, FaRecycle } from "react-icons/fa";
 import 'animate.css';
 import MyContainer from "../../components/Navbar/MyContainer";
+import { Link, useLoaderData } from "react-router";
 
 
 
 
 const ChallengeDetails = () => {
 
-    const challenge = {
-        _id: "123456",
-        title: "Plastic-Free July",
-        category: "Waste Reduction",
-        description: "Avoid single-use plastic for one month",
-        duration: 30,
-        target: "Reduce plastic waste",
-        participants: 120,
-        impactMetric: "kg plastic saved",
-        createdBy: "admin@ecotrack.com",
-        startDate: "2024-07-01",
-        endDate: "2024-07-31",
-        imageUrl: "https://example.com/image.jpg",
-    };
+    const data = useLoaderData()
+    const challenge = data.result;
+    console.log(challenge);
+
+
+    // const challenge = {
+    //     _id: "123456",
+    //     title: "Plastic-Free July",
+    //     category: "Waste Reduction",
+    //     description: "Avoid single-use plastic for one month",
+    //     duration: 30,
+    //     target: "Reduce plastic waste",
+    //     participants: 120,
+    //     impactMetric: "kg plastic saved",
+    //     createdBy: "admin@ecotrack.com",
+    //     startDate: "2024-07-01",
+    //     endDate: "2024-07-31",
+    //     imageUrl: "https://example.com/image.jpg",
+    // };
 
     return (
         <div>
@@ -90,6 +96,11 @@ const ChallengeDetails = () => {
                 <button className="btn btn-success w-full md:w-auto px-6 py-3 text-white font-semibold">
                     Join Challenge
                 </button>
+                <Link to={`/updateChallenge/${challenge._id}`}>
+                    <button className="btn btn-success w-full md:w-auto px-6 py-3 text-white font-semibold">
+                        Update Challenge
+                    </button>
+                </Link>
             </MyContainer>
         </div>
     );
