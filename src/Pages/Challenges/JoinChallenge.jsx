@@ -1,10 +1,11 @@
-import React, { use } from 'react';
+import React, { useContext } from 'react';
 import { AuthContext } from '../../context/AuthProvider';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 
-const JoinChallenge = ({ challengeId }) => {
-    const { user } = use(AuthContext)
+const JoinChallenge = ({ challengeId, joinModalRef }) => {
+    const { user } = useContext(AuthContext)
     console.log(user)
 
     const handleSubmit = (e) => {
@@ -27,7 +28,16 @@ const JoinChallenge = ({ challengeId }) => {
 
         axios.post('http://localhost:3000/join-challenge', joinData)
             .then(res => {
-                console.log(res);
+                if (res.data.insertedId) {
+                    joinModalRef.current.close();
+                    Swal.fire({
+                        
+                        icon: "success",
+                        title: "Joining Successful",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
             })
             .catch(error => {
                 console.log(error);

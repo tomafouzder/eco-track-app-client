@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FaUsers, FaCalendarAlt, FaRecycle } from "react-icons/fa";
 import 'animate.css';
 import MyContainer from "../../components/Navbar/MyContainer";
@@ -11,9 +11,18 @@ import JoinChallenge from "./JoinChallenge";
 const ChallengeDetails = () => {
     const data = useLoaderData()
     const challenge = data.result;
-    console.log(challenge);
-
+    const [joining, setJoining] = useState();
     const joinModalRef = useRef(null)
+
+    useEffect(() => {
+        fetch(`http://localhost:3000/challenges/join-challenge/${challenge._id}`)
+            .then(res => res.json())
+            .then(data => {
+                console.log("total joining people for this challenge", data)
+                setJoining(data);
+            })
+    }, [challenge._id])
+
     const handleJoinModalOpen = () => {
         joinModalRef.current.showModal()
     }
@@ -50,9 +59,7 @@ const ChallengeDetails = () => {
                 </div>
             </div>
 
-
-
-            <MyContainer className=" p-6 bg-white rounded-2xl shadow-lg border border-gray-200">
+            <MyContainer className="p-6 bg-white rounded-2xl shadow-lg border border-gray-200">
                 {/* Image */}
                 <div className="w-full h-64 overflow-hidden rounded-xl mb-6">
                     <img
@@ -112,24 +119,27 @@ const ChallengeDetails = () => {
                         Update Challenge
                     </button>
                 </Link>
+
+                {/*Join modal */}
+                <dialog
+                    ref={joinModalRef}
+                    className="modal modal-bottom sm:modal-middle">
+                    <div className="modal-box">
+                        <JoinChallenge
+                            challengeId={challenge._id}
+                            joinModalRef={joinModalRef}
+                        ></JoinChallenge>
+                    </div>
+                </dialog>
+
             </MyContainer>
 
-
-            {/*Join modal */}
-            <dialog
-                ref={joinModalRef}
-                className="modal modal-bottom sm:modal-middle">
-                <div className="modal-box">
-                  <JoinChallenge challengeId={challenge._id} ></JoinChallenge>
-                    <div className="modal-action">
-                        <form method="dialog">
-                            {/* ------------------ */}
-                            {/* --------------------- */}
-                            <button className="btn">Close</button>
-                        </form>
-                    </div>
+            {/* total joining people this challenge */}
+            <MyContainer>
+                <div>
+                    <h1 className="text-4xl ">Total Joining People In This Challenge: {joining.length}</h1>
                 </div>
-            </dialog>
+            </MyContainer>
         </div>
     );
 };
