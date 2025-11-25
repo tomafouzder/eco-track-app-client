@@ -161,7 +161,6 @@ const ChallengeDetails = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {/* row 1 */}
                             {
                                 joining.map((join, index) => <tr>
                                     <th>{index + 1} </th>
@@ -189,8 +188,6 @@ const ChallengeDetails = () => {
                                     </th>
                                 </tr>)
                             }
-
-
                         </tbody>
 
                     </table>
