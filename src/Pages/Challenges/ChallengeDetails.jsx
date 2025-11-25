@@ -4,6 +4,7 @@ import 'animate.css';
 import MyContainer from "../../components/Navbar/MyContainer";
 import { Link, useLoaderData } from "react-router";
 import JoinChallenge from "./JoinChallenge";
+import { ImCancelCircle } from "react-icons/im";
 
 
 
@@ -11,7 +12,7 @@ import JoinChallenge from "./JoinChallenge";
 const ChallengeDetails = () => {
     const data = useLoaderData()
     const challenge = data.result;
-    const [joining, setJoining] = useState();
+    const [joining, setJoining] = useState([]);
     const joinModalRef = useRef(null)
 
     useEffect(() => {
@@ -125,9 +126,17 @@ const ChallengeDetails = () => {
                     ref={joinModalRef}
                     className="modal modal-bottom sm:modal-middle">
                     <div className="modal-box">
+                        <form method="dialog" className="flex justify-end items-center">
+                            <button className="">
+                                <ImCancelCircle />
+                            </button>
+                        </form>
+
                         <JoinChallenge
                             challengeId={challenge._id}
                             joinModalRef={joinModalRef}
+                            joining={joining}
+                            setJoining={setJoining}
                         ></JoinChallenge>
                     </div>
                 </dialog>
@@ -137,7 +146,54 @@ const ChallengeDetails = () => {
             {/* total joining people this challenge */}
             <MyContainer>
                 <div>
-                    <h1 className="text-4xl ">Total Joining People In This Challenge: {joining.length}</h1>
+                    <h1 className="text-4xl ">Total Joining People In This Challenge:{joining.length} </h1>
+                </div>
+
+                <div className="overflow-x-auto">
+                    <table className="table">
+                        {/* head */}
+                        <thead>
+                            <tr>
+                                <th>SL No.</th>
+                                <th>Status</th>
+                                <th>Challenge Name</th>
+                                <th>Progress</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {/* row 1 */}
+                            {
+                                joining.map((join, index) => <tr>
+                                    <th>{index + 1} </th>
+                                    <td>
+                                        <div className="flex items-center gap-3">
+                                            <div className="">
+                                                <div className="mask mask-squircle h-12 w-12">
+                                                    <img
+                                                        src={join.userImage}   
+                                                        alt="User Image" />
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div className="font-bold">{join.
+                                                    userName}</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                       {join.status}
+                                    </td>
+                                    <td>{join.progress}</td>
+                                    <th>
+                                        <button className="btn btn-ghost btn-xs">details</button>
+                                    </th>
+                                </tr>)
+                            }
+
+
+                        </tbody>
+
+                    </table>
                 </div>
             </MyContainer>
         </div>
