@@ -10,10 +10,23 @@ const Home = () => {
     return (
         <div>
             <Hero />
-            <LiveChallenge />
 
-            <ActiveChallenge latestChallengePromise={latestChallengePromise}>    
+            <LiveChallenge />
+            {/* active challenge */}
+            <ActiveChallenge latestChallengePromise={latestChallengePromise}>
             </ActiveChallenge>
+
+            {/* Recent Tips*/}
+            <h3 className='text-4xl my-16'>Recent Tips</h3>
+
+            {/* Upcoming Events */}
+            <h3 className='text-4xl my-16'>Upcoming Events</h3>
+
+            {/* Why Go Green? */}
+            <h3 className='text-4xl my-16'>Why Go Green?</h3>
+
+            {/* How It Works  */}
+            <h3 className='text-4xl my-16'>How It Works </h3>
 
         </div>
     );

@@ -1,5 +1,5 @@
-import React, { use, useState } from 'react';
-import { Link } from 'react-router';
+import React, { use, useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router';
 import image from '../../assets/icons8-ecology-100.png'
 import bgImg from "../../assets/coolbackgrounds-particles-compute.png"
 import MyContainer from '../../components/Navbar/MyContainer';
@@ -8,10 +8,37 @@ import { AuthContext } from '../../context/AuthProvider';
 import GoogleLogIn from './GoogleLogIn';
 
 const Register = () => {
-    const { createUser, setUser } = use(AuthContext);
+    const { user, createUser, setUser, updateUserProfile } = use(AuthContext);
     const [show, setShow] = useState(false);
+    const [passwordError, setPasswordError] = useState("");
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (user) { navigate("/"); }
+    }, [user, navigate])
 
 
+    // Password Validation Function
+    const validatePassword = (password) => {
+        const uppercase = /[A-Z]/;
+        const lowercase = /[a-z]/;
+        const special = /[!@#$%^&*()_+\-={}[\]|:;"'<>,.?/]/;
+
+        if (password.length < 6) {
+            return "Password must be at least 6 characters long.";
+        }
+        if (!uppercase.test(password)) {
+            return "Password must contain at least 1 uppercase letter.";
+        }
+        if (!lowercase.test(password)) {
+            return "Password must contain at least 1 lowercase letter.";
+        }
+        if (!special.test(password)) {
+            return "Password must contain at least 1 special character.";
+        }
+
+        return "";
+    };
 
     const handleRegister = (e) => {
         e.preventDefault();
@@ -22,13 +49,30 @@ const Register = () => {
         const photo = form.photo.value;
         const password = form.password.value;
         console.log({ name, email, photo, password });
+
+        // Prevent submit if password invalid
+        const errorMsg = validatePassword(password);
+        if (errorMsg) {
+            setPasswordError(errorMsg);
+            return;
+        }
+
+
         createUser(email, password)
             .then((result) => {
                 const user = result.user;
-                setUser(user)
+                updateUserProfile({ displayName: name, photoURL: photo })
+                    .then(() => {
+                        setUser({ ...user, displayName: name, photoURL: photo });
+                        navigate("/");
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                        setUser(user);
+                    })
             })
             .catch((error) => {
-                const errorCode = error.code;
+                // const errorCode = error.code;
                 const errorMessage = error.message;
                 alert(errorMessage);
             });
@@ -92,16 +136,28 @@ const Register = () => {
                                             name='password'
                                             className="input bg-gray-400 "
                                             required
-                                            placeholder="Password" />
+                                            placeholder="Password"
+                                            onChange={(e) => {
+                                                const error = validatePassword(e.target.value);
+                                                setPasswordError(error);
+                                            }}
+                                        />
                                         <span onClick={() => setShow(!show)} className='absolute right-6 top-10 cursor-pointer z-50'>
                                             {show ? <FaEye /> : <FaEyeSlash />}
                                         </span>
+                                        {/* Inline Password Error */}
+                                        {passwordError && (
+                                            <p className="text-red-500 text-sm mt-1">{passwordError}</p>
+                                        )}
                                     </div>
 
                                     {/*register button */}
+
                                     <button
                                         type='submit'
                                         className="btn bg-gray-700 text-white text-lg font-bold mt-4">Register</button>
+
+
 
                                     <div className='text-sm font-semibold pt-1'>
                                         <p>Have an account? Please {' '}

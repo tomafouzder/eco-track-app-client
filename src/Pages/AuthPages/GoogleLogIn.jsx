@@ -1,9 +1,12 @@
 import React, { use } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { AuthContext } from '../../context/AuthProvider';
+import { useLocation, useNavigate } from 'react-router';
 
 const GoogleLogIn = () => {
     const { googleSignIn } = use(AuthContext);
+    const location = useLocation()
+    const navigate = useNavigate()
 
     const handleGoogleSignIn = () => {
         googleSignIn()
@@ -11,6 +14,7 @@ const GoogleLogIn = () => {
                 const user = result.user;
                 console.log(user);
                 alert('google sign in successful')
+                navigate(`${location.state ? location.state : "/"}`);
 
                 const newUser = {
                     name: user.displayName,

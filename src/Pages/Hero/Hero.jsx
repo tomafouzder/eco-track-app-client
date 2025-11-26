@@ -1,46 +1,87 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
+
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import { Link } from 'react-router';
+
 
 const Hero = () => {
+    const [challenges, setChallenges] = useState([]);
+    const [activeIndex, setActiveIndex] = useState(0)
+
+    useEffect(() => {
+        fetch('http://localhost:3000/challenges')
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                setChallenges(data);
+            })
+    }, [])
+
     return (
-        <div className="carousel w-full">
-            <div id="slide1" className="carousel-item relative w-full">
-                <img
-                    src="https://img.daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.webp"
-                    className="w-full" />
-                <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-                    <a href="#slide4" className="btn btn-circle">❮</a>
-                    <a href="#slide2" className="btn btn-circle">❯</a>
-                </div>
-            </div>
-            <div id="slide2" className="carousel-item relative w-full">
-                <img
-                    src="https://img.daisyui.com/images/stock/photo-1609621838510-5ad474b7d25d.webp"
-                    className="w-full" />
-                <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-                    <a href="#slide1" className="btn btn-circle">❮</a>
-                    <a href="#slide3" className="btn btn-circle">❯</a>
-                </div>
-            </div>
-            <div id="slide3" className="carousel-item relative w-full">
-                <img
-                    src="https://img.daisyui.com/images/stock/photo-1414694762283-acccc27bca85.webp"
-                    className="w-full" />
-                <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-                    <a href="#slide2" className="btn btn-circle">❮</a>
-                    <a href="#slide4" className="btn btn-circle">❯</a>
-                </div>
-            </div>
-            <div id="slide4" className="carousel-item relative w-full">
-                <img
-                    src="https://img.daisyui.com/images/stock/photo-1665553365602-b2fb8e5d1707.webp"
-                    className="w-full" />
-                <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-                    <a href="#slide3" className="btn btn-circle">❮</a>
-                    <a href="#slide1" className="btn btn-circle">❯</a>
-                </div>
-            </div>
+        <div className=" ">
+            <Swiper
+                spaceBetween={5}
+                centeredSlides={false}
+                autoplay={{
+                    delay: 6000,
+                    disableOnInteraction: false,
+                }}
+                pagination={{ clickable: true }}
+                navigation={true}
+                modules={[Autoplay, Pagination, Navigation]}
+                onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
+                className='mySwiper rounded-2xl lg:rounded-none shadow-2xl'
+
+            >
+
+                {challenges.map((slide, index) => (
+                    <SwiperSlide key={index}>
+                        <div className="relative w-full object-cover h-[600px]  overflow-hidden rounded-2xl lg:rounded-none">
+                            {/* Image full cover */}
+                            <img
+                                src={slide.imageUrl}
+                                alt={slide.title}
+                                className="w-full h-full object-cover"
+                            />
+
+                            {/* Text Overlay with Animation */}
+                            <div className='absolute inset-0 bg-black/10 flex items-center justify-center'>
+                                <div className={`absolute top-1/2 left-1/4 transform -translate-y-1/2   inset-0 bg-black/40  flex flex-col justify-center items-center  text-white text-center p-5
+                                
+                                ${activeIndex === index ? 'animate__animated animate__fadeInLeft  animate__delay-2s' : ''}
+                                `}>
+
+                                    <h2 className="text-2xl md:text-4xl uppercase font-bold ">
+                                        {slide.title}
+                                    </h2>
+                                    <p className="text-lg my-2 md:text-xl uppercase font-semibold" >
+                                        category : {slide.category}
+                                    </p>
+                                    <p className="text-lg my-2 md:text-2xl font-semibold">
+                                     Target Duration : {slide.duration}
+                                    </p>
+                                    <Link
+                                        to={`/challengeDetails/${slide._id}`}
+                                        className="btn btn-primary mt-4 px-6 py-2"
+                                    >
+                                        View Challenge
+                                    </Link>
+
+                                </div>
+                            </div>
+                        </div>
+                    </SwiperSlide>
+                ))}
+
+            </Swiper>
         </div>
     );
 };
 
 export default Hero;
+
+

@@ -11,6 +11,7 @@ import AddNewChallenge from "../Pages/Challenges/AddNewChallenge";
 import ChallengeDetails from "../Pages/Challenges/ChallengeDetails";
 import UpdateChallenge from "../Pages/Challenges/UpdateChallenge";
 import JoinChallenge from "../Pages/Challenges/JoinChallenge";
+import PrivateRoute from "../privateRoute/PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -32,7 +33,11 @@ const router = createBrowserRouter([
             },
             {
                 path: "/challengeDetails/:id",
-                element: <ChallengeDetails />,
+                element: (
+                    <PrivateRoute>
+                        <ChallengeDetails />
+                    </PrivateRoute>
+                ),
                 loader: ({ params }) => fetch(`http://localhost:3000/challenges/${params.id}`)
             },
             {

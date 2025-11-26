@@ -59,7 +59,7 @@ const ChallengeDetails = () => {
                     <h1 className="text-white flex items-center justify-center md:text-5xl text-4xl absolute top-1/2 left-1/4 transform -translate-y-1/2  inset-0 bg-black/40 animate__animated animate__fadeInLeft  animate__delay-2s font-bold">Challenge details : {challenge.title}</h1>
                 </div>
             </div>
-
+            {/* details */}
             <MyContainer className="p-6 bg-white rounded-2xl shadow-lg border border-gray-200">
                 {/* Image */}
                 <div className="w-full h-64 overflow-hidden rounded-xl mb-6">
@@ -143,6 +143,40 @@ const ChallengeDetails = () => {
 
             </MyContainer>
 
+            {/* Give me your tips and ideas */}
+            <MyContainer className="my-40">
+                <div className="hero bg-base-200 min-h-screen">
+                    <div className="hero-content flex-col lg:flex-row-reverse">
+                        <div className="text-center lg:text-left">
+                            <h1 className="text-5xl font-bold">Gives Your Tips And Ideas</h1>
+                            <p className="py-6">
+                                Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
+                                quasi. In deleniti eaque aut repudiandae et a id nisi.
+                            </p>
+                        </div>
+                        <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+                            <form className="card-body">
+                                <fieldset className="fieldset">
+                                    {/* AuthorName */}
+                                    <label className="label">AuthorName</label>
+                                    <input type="text" className="input" placeholder="authorName" />
+
+                                    {/* title */}
+                                    <label className="label">Content Title</label>
+                                    <input type="text" className="input" placeholder="content title" />
+
+                                    {/* Content */}
+                                    <label className="label">Content</label>
+                                    <textarea className="textarea" type="text" placeholder="write your content"></textarea>
+
+                                    <button className="btn btn-neutral mt-4">Share Your Content</button>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </MyContainer>
+
             {/* total joining people this challenge */}
             <MyContainer>
                 <div>
@@ -169,7 +203,7 @@ const ChallengeDetails = () => {
                                             <div className="">
                                                 <div className="mask mask-squircle h-12 w-12">
                                                     <img
-                                                        src={join.userImage}   
+                                                        src={join.userImage}
                                                         alt="User Image" />
                                                 </div>
                                             </div>
@@ -180,7 +214,7 @@ const ChallengeDetails = () => {
                                         </div>
                                     </td>
                                     <td>
-                                       {join.status}
+                                        {join.status}
                                     </td>
                                     <td>{join.progress}</td>
                                     <th>
@@ -193,6 +227,7 @@ const ChallengeDetails = () => {
                     </table>
                 </div>
             </MyContainer>
+
         </div>
     );
 };

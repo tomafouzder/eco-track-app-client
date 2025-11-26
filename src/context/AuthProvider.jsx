@@ -4,9 +4,11 @@ import {
     createUserWithEmailAndPassword, getAuth,
     GoogleAuthProvider,
     onAuthStateChanged,
+    sendPasswordResetEmail,
     signInWithEmailAndPassword,
     signInWithPopup,
-    signOut
+    signOut,
+    updateProfile
 } from "firebase/auth";
 
 
@@ -18,8 +20,8 @@ const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
-    const [loading, setLoading]=useState(true)
-   
+    const [loading, setLoading] = useState(true)
+
 
     const googleProvider = new GoogleAuthProvider();
 
@@ -39,6 +41,16 @@ const AuthProvider = ({ children }) => {
     const googleSignIn = () => {
         setLoading(true)
         return signInWithPopup(auth, googleProvider);
+    }
+
+    // update profile
+    const updateUserProfile = (updatedData) => {
+        return updateProfile(auth.currentUser, updatedData)
+    }
+
+    // reset password
+    const resetPassword = (email) => {
+        return sendPasswordResetEmail(auth, email)
     }
 
 
@@ -65,6 +77,8 @@ const AuthProvider = ({ children }) => {
         createUser,
         userSignIn,
         googleSignIn,
+        updateUserProfile,
+        resetPassword,
         userSignOut,
 
     }

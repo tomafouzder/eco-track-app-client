@@ -1,10 +1,9 @@
 import React, { use, useState } from 'react';
 import image from "../../assets/icons8-ecology-100.png"
 import bgImg from "../../assets/coolbackgrounds-particles-compute.png"
-import { Link } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import MyContainer from '../../components/Navbar/MyContainer';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-
 import { AuthContext } from '../../context/AuthProvider';
 import GoogleLogIn from './GoogleLogIn';
 
@@ -12,6 +11,10 @@ import GoogleLogIn from './GoogleLogIn';
 const Login = () => {
     const { setUser, userSignIn } = use(AuthContext)
     const [show, setShow] = useState(false);
+    const [error, setError] = useState("")
+    const location = useLocation();
+    const navigate = useNavigate();
+    console.log(location)
 
     const handleLogIn = (e) => {
         e.preventDefault();
@@ -22,13 +25,14 @@ const Login = () => {
         userSignIn(email, password)
             .then((result) => {
                 const user = result.user;
-                // setUser(user)
+                setUser(user)
                 console.log(user)
+                navigate(`${location.state ? location.state : "/"}`);
             })
             .catch((error) => {
                 const errorCode = error.code;
-                const errorMessage = error.message;
-                alert(errorCode, errorMessage);
+                // const errorMessage = error.message;
+                setError(errorCode)
             });
     }
 
@@ -84,6 +88,7 @@ const Login = () => {
                                     <div className='text-sm font-semibold pt-1 text-blue-500 '>
                                         <Link to="/forgot-password" className="link underline">Forgot password?</Link>
                                     </div>
+                                    {error && <p className='text-red-500'>{error}</p>}
 
                                     {/*register button */}
                                     <button
