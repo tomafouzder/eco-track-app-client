@@ -146,30 +146,43 @@ const ChallengeDetails = () => {
             {/* Give me your tips and ideas */}
             <MyContainer className="my-40">
                 <div className="hero bg-base-200 min-h-screen">
-                    <div className="hero-content flex-col lg:flex-row-reverse">
-                        <div className="text-center lg:text-left">
-                            <h1 className="text-5xl font-bold">Gives Your Tips And Ideas</h1>
+                    <div className=" flex-col lg:flex-row-reverse">
+                        <div className="text-center p-4 lg:text-left">
+                            <h1 className="text-5xl font-bold">Write Dwon Your Tips And Ideas</h1>
                             <p className="py-6">
-                                Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-                                quasi. In deleniti eaque aut repudiandae et a id nisi.
+                               Share your eco-friendly ideas to inspire meaningful action and help others make sustainable choices. When we exchange knowledge, small changes grow into powerful movements. Your creativity can spark real environmental impact, support a greener community, and motivate people everywhere to protect the planet for future generations.
                             </p>
                         </div>
-                        <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+                        <div className="card bg-base-100 w-full">
                             <form className="card-body">
                                 <fieldset className="fieldset">
+
+                                    <fieldset className="relative flex justify-center items-center md:justify-end p-4 md:bg-gray-100  rounded-lg">
+
+                                        <img
+                                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvys_qbdj--TGqit23T4tjze9FtHUBZUyxdw&s"
+                                            alt=""
+                                            className="w-28 md:w-40 md:absolute md:top-2 md:right-2 object-cover"
+                                        />
+
+                                    </fieldset>
+
+
                                     {/* AuthorName */}
-                                    <label className="label">AuthorName</label>
+                                    <label className="label text-lg font-semibold">AuthorName :</label>
                                     <input type="text" className="input" placeholder="authorName" />
 
                                     {/* title */}
-                                    <label className="label">Content Title</label>
+                                    <label className="label text-lg font-semibold">Content Title :</label>
                                     <input type="text" className="input" placeholder="content title" />
+                                    <div />
+
 
                                     {/* Content */}
-                                    <label className="label">Content</label>
-                                    <textarea className="textarea" type="text" placeholder="write your content"></textarea>
+                                    <label className="label text-lg font-semibold">Content :</label>
+                                    <textarea className="textarea w-full h-24 " type="text" placeholder="write your content"></textarea>
 
-                                    <button className="btn btn-neutral mt-4">Share Your Content</button>
+                                    <button className="btn btn-primary text-lg mt-4 ">Share Your Content</button>
                                 </fieldset>
                             </form>
                         </div>
