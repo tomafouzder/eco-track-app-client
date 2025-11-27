@@ -12,6 +12,7 @@ import ChallengeDetails from "../Pages/Challenges/ChallengeDetails";
 import UpdateChallenge from "../Pages/Challenges/UpdateChallenge";
 import JoinChallenge from "../Pages/Challenges/JoinChallenge";
 import PrivateRoute from "../privateRoute/PrivateRoute";
+import Tips from "../Pages/TipsAndEvent/Tips";
 
 const router = createBrowserRouter([
     {
@@ -52,6 +53,11 @@ const router = createBrowserRouter([
             {
                 path: "/my-activities",
                 element: <MyActivities />
+            },
+            {
+                path: "/tips",
+                element: <Tips />,
+                loader: () => fetch('http://localhost:3000/tips')
             },
             {
                 path: "/login",

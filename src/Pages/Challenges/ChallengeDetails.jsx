@@ -1,15 +1,18 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { FaUsers, FaCalendarAlt, FaRecycle } from "react-icons/fa";
 import 'animate.css';
 import MyContainer from "../../components/Navbar/MyContainer";
 import { Link, useLoaderData } from "react-router";
 import JoinChallenge from "./JoinChallenge";
 import { ImCancelCircle } from "react-icons/im";
+import { AuthContext } from "../../context/AuthProvider";
+import axios from "axios";
 
 
 
 
 const ChallengeDetails = () => {
+    const { user } = useContext(AuthContext)
     const data = useLoaderData()
     const challenge = data.result;
     const [joining, setJoining] = useState([]);
@@ -26,6 +29,39 @@ const ChallengeDetails = () => {
 
     const handleJoinModalOpen = () => {
         joinModalRef.current.showModal()
+    }
+
+    const handleSubmitForTips = (e) => {
+        e.preventDefault();
+
+        const form = e.target;
+        const authorName = form.authorName.value;
+        const title = form.title.value;
+        const content = form.content.value;
+        const author = user ? user.email : '';
+        const image = user ?user.photoURL : '';
+
+        const tipsData = {
+            title,
+            content,
+            category: challenge.category,
+            author,
+            authorName,
+            image,
+            upVotes: 0,
+            createdAt: new Date().toISOString()
+        };
+        console.log("Tips Sending :", tipsData);
+
+        axios.post('http://localhost:3000/tips', tipsData)
+            .then(res => {
+                console.log(res);
+                form.reset();
+            })
+            .catch(error => {
+                console.log(error);
+            })
+
     }
 
 
@@ -148,13 +184,14 @@ const ChallengeDetails = () => {
                 <div className="hero bg-base-200 min-h-screen">
                     <div className=" flex-col lg:flex-row-reverse">
                         <div className="text-center p-4 lg:text-left">
-                            <h1 className="text-5xl font-bold">Write Dwon Your Tips And Ideas</h1>
+                            <h1 className="text-5xl font-bold">Write Down Your Tips And Ideas</h1>
                             <p className="py-6">
-                               Share your eco-friendly ideas to inspire meaningful action and help others make sustainable choices. When we exchange knowledge, small changes grow into powerful movements. Your creativity can spark real environmental impact, support a greener community, and motivate people everywhere to protect the planet for future generations.
+                                Share your eco-friendly ideas to inspire meaningful action and help others make sustainable choices. When we exchange knowledge, small changes grow into powerful movements. Your creativity can spark real environmental impact, support a greener community, and motivate people everywhere to protect the planet for future generations.
                             </p>
                         </div>
                         <div className="card bg-base-100 w-full">
-                            <form className="card-body">
+                            <form onSubmit={handleSubmitForTips}
+                                className="card-body">
                                 <fieldset className="fieldset">
 
                                     <fieldset className="relative flex justify-center items-center md:justify-end p-4 md:bg-gray-100  rounded-lg">
@@ -170,19 +207,31 @@ const ChallengeDetails = () => {
 
                                     {/* AuthorName */}
                                     <label className="label text-lg font-semibold">AuthorName :</label>
-                                    <input type="text" className="input" placeholder="authorName" />
+                                    <input
+                                        type="text"
+                                        name="authorName"
+                                        className="input"
+                                        placeholder="author name" />
 
                                     {/* title */}
                                     <label className="label text-lg font-semibold">Content Title :</label>
-                                    <input type="text" className="input" placeholder="content title" />
+                                    <input type="text"
+                                        className="input"
+                                        name="title"
+                                        placeholder="content title" />
                                     <div />
-
 
                                     {/* Content */}
                                     <label className="label text-lg font-semibold">Content :</label>
-                                    <textarea className="textarea w-full h-24 " type="text" placeholder="write your content"></textarea>
+                                    <textarea
+                                        className="textarea w-full h-24 "
+                                        name="content"
+                                        type="text"
+                                        placeholder="write your content"></textarea>
 
-                                    <button className="btn btn-primary text-lg mt-4 ">Share Your Content</button>
+                                    <button
+                                        type="submit"
+                                        className="btn btn-primary text-lg mt-4 ">Share Your Content</button>
                                 </fieldset>
                             </form>
                         </div>
@@ -209,7 +258,7 @@ const ChallengeDetails = () => {
                         </thead>
                         <tbody>
                             {
-                                joining.map((join, index) => <tr>
+                                joining.map((join, index) => <tr key={index}>
                                     <th>{index + 1} </th>
                                     <td>
                                         <div className="flex items-center gap-3">

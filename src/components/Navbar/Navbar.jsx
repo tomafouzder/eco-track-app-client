@@ -63,12 +63,21 @@ const Navbar = () => {
                             <li>
                                 <MyLinks to={"/challenges"}>Challenges</MyLinks>
                             </li>
+                            {
+                                user && <>
+                                    <li>
+                                        <MyLinks to={"/my-activities"}>My Activities</MyLinks>
+                                    </li>
+                                    <li>
+                                        <MyLinks to={"/addNewChallenge"}>Add Challenge</MyLinks>
+                                    </li>
+                                </>
+                            }
+
                             <li>
-                                <MyLinks to={"/my-activities"}>My Activities</MyLinks>
+                                <MyLinks to={"/tips"}>Tips</MyLinks>
                             </li>
-                            <li>
-                                <MyLinks to={"/addNewChallenge"}>Add Challenge</MyLinks>
-                            </li>
+
                         </ul>
                     </div>
 
@@ -88,6 +97,7 @@ const Navbar = () => {
                         <li>
                             <MyLinks to={"/challenges"}>Challenges</MyLinks>
                         </li>
+
                         {
                             user && <>
                                 <li>
@@ -98,6 +108,10 @@ const Navbar = () => {
                                 </li>
                             </>
                         }
+                        <li>
+                            <MyLinks to={"/tips"}>Tips</MyLinks>
+                        </li>
+
 
                     </ul>
                 </div>
