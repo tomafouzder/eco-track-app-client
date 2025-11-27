@@ -54,49 +54,30 @@ const Tips = () => {
 
                 <div className='grid grid-cols-1 md:grid-cols-2  bg-amber-400 gap-6'>
                     {
-                        tips.map(tip => <div key={tip._id} className='mx-auto'>
+                        tips?.map(tip => <div key={tip._id} className='mx-auto'>
                             {/* Card */}
-                            <div className=" text-white bg-gray-800 p-6 rounded-2xl flex gap-5 items-center justify-center max-w-xl shadow-xl">
-                                {/* Left Image */}
-                                <div className="relative">
+                            <div className="text-white bg-gray-800 p-6 rounded-2xl flex flex-col items-center shadow-xl">
+                                <div className="relative w-32 h-32 mb-4">
                                     <img
                                         src={tip.image}
                                         alt="Profile"
-                                        className="w-52  object-cover rounded-full"
+                                        className="w-full h-full object-cover rounded-full"
                                     />
-                                    <span className="absolute bottom-2 left-2 bg-purple-600 text-white text-xs font-semibold px-2 py-1 rounded-lg">
+                                    <span className="absolute bottom-1 left-1 bg-purple-600 text-white text-xs font-semibold px-2 py-1 rounded-lg">
                                         {tip.category}
                                     </span>
                                 </div>
 
-                                {/* Right Content */}
-                                <div className="flex flex-col justify-between h-full">
-                                    <div>
-                                        <p className="text-xs font-semibold tracking-wide text-gray-400">
-                                         Votes :   {tip.upVotes}</p>
-                                        <h2 className="text-lg font-bold mt-1">{tip.authorName}</h2>
-                                        <p className="text-sm text-gray-300">{tip.title}</p>
-                                        <p className="text-sm text-gray-300">
-                                            Created At : {tip.createdAt}</p>
+                                <h3 className="text-lg font-bold">{tip.authorName}</h3>
+                                <p className="text-sm text-gray-300">{tip.title}</p>
+                                <p className="text-sm text-gray-400 line-clamp-1 mt-2">{tip.content}</p>
 
-                                        <p className="text-sm text-gray-400 mt-2 line-clamp-3">
-                                            {tip.content}...
-                                        </p>
-
-                                        {/* See More Button */}
-                                        <button
-                                            className="mt-2 text-yellow-400 text-sm font-semibold hover:underline"
-                                            onClick={() => setIsOpen(tip)}
-                                        >
-                                            See More
-                                        </button>
-                                    </div>
-
-                                    {/* Quote Icon
-                                    <div className="flex justify-end mt-3">
-                                        <span className="text-4xl text-gray-500 opacity-60">❞</span>
-                                    </div> */}
-                                </div>
+                                <button
+                                    className="mt-4 text-yellow-400 text-sm font-semibold hover:underline"
+                                    onClick={() => setIsOpen(tip)}
+                                >
+                                    See More
+                                </button>
                             </div>
 
                             {/* Modal */}
@@ -115,7 +96,7 @@ const Tips = () => {
                                         <p className="text-sm text-gray-600 mb-4">{isOpen.title} | Votes :   {isOpen.upVotes}</p>
 
                                         <p className="text-gray-700">
-                                              {isOpen.content}
+                                            {isOpen.content}
                                         </p>
                                     </div>
                                 </div>

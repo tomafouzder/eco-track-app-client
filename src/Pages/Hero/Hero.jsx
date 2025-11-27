@@ -40,7 +40,7 @@ const Hero = () => {
 
                 {challenges.map((slide, index) => (
                     <SwiperSlide key={index}>
-                        <div className="relative w-full object-cover h-[600px]  overflow-hidden rounded-2xl lg:rounded-none">
+                        <div className="relative w-full object-cover h-[500px]  overflow-hidden rounded-2xl lg:rounded-none">
                             {/* Image full cover */}
                             <img
                                 src={slide.imageUrl}

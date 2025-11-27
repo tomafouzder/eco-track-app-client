@@ -22,9 +22,9 @@ const ChallengeCard = ({ challenge }) => {
                     </figure>
 
                     {/* Body */}
-                    <div className="mt-4 flex flex-col flex-grow ">
+                    <div className="mt-4 flex flex-col flex-grow justify-between">
                         <h2 className="text-2xl font-bold text-green-800">{challenge.title}</h2>
-                        <p className="text-gray-700 mt-2 text-sm flex-grow">
+                        <p className="text-gray-700 mt-2 text-sm line-clamp-3 min-h-[60px]">
                             {challenge.description
                             }
                         </p>

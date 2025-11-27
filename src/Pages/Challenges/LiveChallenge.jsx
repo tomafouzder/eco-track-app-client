@@ -1,6 +1,7 @@
 import React from 'react';
 import MyContainer from '../../components/Navbar/MyContainer';
 import bgImg from '../../assets/svg-2.png'
+import bgImg1 from '../../assets/133ada09-264f-4045-b13a-4e900e705b78-xyz.svg -1.png'
 import iconImg1 from '../../assets/icons8-challenge-100.png'
 import iconImg2 from '../../assets/icons8-participation-100.png'
 import iconImg3 from '../../assets/icons8-co2-reduction-100.png'
