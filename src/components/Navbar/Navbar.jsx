@@ -77,6 +77,9 @@ const Navbar = () => {
                             <li>
                                 <MyLinks to={"/tips"}>Tips</MyLinks>
                             </li>
+                            <li>
+                                <MyLinks to={"/allEvent"}>Events</MyLinks>
+                            </li>
 
                         </ul>
                     </div>
@@ -110,6 +113,9 @@ const Navbar = () => {
                         }
                         <li>
                             <MyLinks to={"/tips"}>Tips</MyLinks>
+                        </li>
+                        <li>
+                            <MyLinks to={"/allEvent"}>Events</MyLinks>
                         </li>
 
 
@@ -161,7 +167,7 @@ const Navbar = () => {
                                 onClick={handelLogOut}
                                 className="btn btn-primary text-white font-bold text-lg hover:bg-gray-500">LogOut</button>
                             :
-                            <Link to="/login" className="btn btn-primarytext-white font-bold text-lg hover:bg-gray-500">Login</Link>
+                            <Link to="/login" className="btn btn-primary text-white font-bold text-lg hover:bg-gray-500">Login</Link>
                         }
                     </div>
 

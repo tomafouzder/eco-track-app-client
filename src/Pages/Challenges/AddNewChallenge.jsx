@@ -2,6 +2,7 @@ import { use, useState } from "react";
 import MyContainer from "../../components/Navbar/MyContainer";
 import axios from "axios";
 import { AuthContext } from "../../context/AuthProvider";
+import AddEvent from "../TipsAndEvent/AddEvent";
 
 const AddNewChallenge = () => {
     const { user } = use(AuthContext)
@@ -47,7 +48,7 @@ const AddNewChallenge = () => {
             createdBy: e.target.createdBy.value,
             startDate: e.target.startDate.value,
             endDate: e.target.endDate.value,
-        } 
+        }
 
         axios.post('http://localhost:3000/challenges', formData)
             .then(res => {
@@ -274,6 +275,11 @@ const AddNewChallenge = () => {
                     <button className="btn btn-success w-full mt-4">Add Challenge</button>
                 </form>
             </MyContainer>
+
+            {/* add event  */}
+            <div className="my-24">
+                <AddEvent></AddEvent>
+            </div>
         </div>
     );
 };

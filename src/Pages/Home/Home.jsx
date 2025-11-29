@@ -4,6 +4,7 @@ import LiveChallenge from '../Challenges/LiveChallenge';
 import ActiveChallenge from '../Challenges/ActiveChallenge';
 
 import ResentTips from '../TipsAndEvent/ResentTips';
+import UpComingEvent from '../TipsAndEvent/UpComingEvent';
 
 const latestChallengePromise = fetch('http://localhost:3000/active-challenges').then(res => res.json())
 
@@ -25,6 +26,7 @@ const Home = () => {
 
             {/* Upcoming Events */}
             <h3 className='text-4xl my-16'>Upcoming Events</h3>
+            <UpComingEvent></UpComingEvent>
 
             {/* Why Go Green? */}
             <h3 className='text-4xl my-16'>Why Go Green?</h3>
