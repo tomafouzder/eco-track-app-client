@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import React  from 'react';
 import MyContainer from '../../components/Navbar/MyContainer';
 import axios from 'axios';
 import { AuthContext } from '../../context/AuthProvider';
 
 const AddEvent = () => {
-    const {user}=useContext(AuthContext)
+
 
 
     const handleSubmitForEvent = (e) => {

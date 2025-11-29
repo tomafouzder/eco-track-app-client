@@ -92,8 +92,8 @@ const Navbar = () => {
                     </div>
                 </div>
 
-                <div className="navbar-center hidden lg:flex">
-                    <ul className="menu  menu-horizontal gap-1 text-white px-1">
+                <div className="navbar-center hidden lg:flex items-center">
+                    <ul className="menu menu-horizontal ">
                         <li>
                             <MyLinks to={"/"}>Home</MyLinks>
                         </li>
