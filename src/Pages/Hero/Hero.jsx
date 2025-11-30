@@ -62,7 +62,7 @@ const Hero = () => {
                                         category : {slide.category}
                                     </p>
                                     <p className="text-lg my-2 md:text-2xl font-semibold">
-                                     Target Duration : {slide.duration}
+                                        Target Duration : {slide.duration}
                                     </p>
                                     <Link
                                         to={`/challengeDetails/${slide._id}`}
@@ -75,9 +75,11 @@ const Hero = () => {
                             </div>
                         </div>
                     </SwiperSlide>
-                ))}
 
+                ))}
             </Swiper>
+
+
         </div>
     );
 };

@@ -40,7 +40,7 @@ const ResentTips = ({ resentTipsData }) => {
                 >
                     {tips?.map((tip) => (
                         <SwiperSlide key={tip._id} className="flex  justify-center items-center">
-                            <Link to="/tips" className="text-white p-6 flex flex-col items-center bg-gray-500 shadow-xl max-w-sm ">
+                            <div className="text-white p-6 flex flex-col items-center bg-gray-500 shadow-xl max-w-sm ">
                                 <div className="relative w-32 h-32 mb-4">
                                     <img
                                         src={tip.image}
@@ -63,7 +63,7 @@ const ResentTips = ({ resentTipsData }) => {
                                     See More
                                 </Link>
 
-                            </Link>
+                            </div>
                         </SwiperSlide>
                     ))}
                 </Swiper>

@@ -4,6 +4,8 @@ import { AuthContext } from '../../context/AuthProvider';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 
+
+
 const MyActivities = () => {
 
     const { user } = useContext(AuthContext);
