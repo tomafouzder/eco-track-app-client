@@ -23,7 +23,7 @@ const Navbar = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const handelLogOut = () => {
+    const handleLogOut = () => {
         userSignOut()
             .then(() => {
                 alert(' Sign-out successful.')
@@ -80,6 +80,15 @@ const Navbar = () => {
                             <li>
                                 <MyLinks to={"/allEvent"}>Events</MyLinks>
                             </li>
+                             <li className=''>
+                            {
+                                user ?
+                                    <button onClick={handleLogOut} className="hover:underline">
+                                        LogOut</button>
+                                    :
+                                    <MyLinks to="/login">Login</MyLinks>
+                            }
+                        </li>
 
                         </ul>
                     </div>
@@ -164,7 +173,7 @@ const Navbar = () => {
 
                         {user ?
                             <button
-                                onClick={handelLogOut}
+                                onClick={handleLogOut}
                                 className="btn btn-primary text-white font-bold text-lg hover:bg-gray-500">LogOut</button>
                             :
                             <Link to="/login" className="btn btn-primary text-white font-bold text-lg hover:bg-gray-500">Login</Link>

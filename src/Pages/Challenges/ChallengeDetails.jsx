@@ -9,8 +9,6 @@ import { AuthContext } from "../../context/AuthProvider";
 import axios from "axios";
 
 
-
-
 const ChallengeDetails = () => {
     const { user } = useContext(AuthContext)
     const data = useLoaderData()
@@ -39,7 +37,7 @@ const ChallengeDetails = () => {
         const title = form.title.value;
         const content = form.content.value;
         const author = user ? user.email : '';
-        const image = user ?user.photoURL : '';
+        const image = user ? user.photoURL : '';
 
         const tipsData = {
             title,
@@ -150,12 +148,16 @@ const ChallengeDetails = () => {
                 </button>
 
 
+                {
+                    user?.email == challenge.
+                        createdBy ? <Link to={`/updateChallenge/${challenge._id}`}>
+                        <button className="btn btn-success w-full md:w-auto px-6 py-3 text-white font-semibold">
+                            Update Challenge
+                        </button>
+                    </Link>
+                        : " "
+                }
 
-                <Link to={`/updateChallenge/${challenge._id}`}>
-                    <button className="btn btn-success w-full md:w-auto px-6 py-3 text-white font-semibold">
-                        Update Challenge
-                    </button>
-                </Link>
 
                 {/*Join modal */}
                 <dialog
