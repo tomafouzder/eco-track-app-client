@@ -50,7 +50,11 @@ const AddNewChallenge = () => {
             endDate: e.target.endDate.value,
         }
 
-        axios.post('http://localhost:3000/challenges', formData)
+        axios.post('http://localhost:3000/challenges', formData ,{
+             headers: {
+                authorization: `Bearer ${user.accessToken}`
+            }
+        })
             .then(res => {
                 console.log(res);
             })

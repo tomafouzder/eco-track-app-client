@@ -1,12 +1,37 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import MyContainer from '../../components/Navbar/MyContainer';
-import { useLoaderData } from 'react-router';
+import { useParams } from 'react-router';
 import axios from 'axios';
+import { AuthContext } from '../../context/AuthProvider';
 
 const UpdateChallenge = () => {
-    const data = useLoaderData()
-    const challenge = data.result;
+    const { user } = useContext(AuthContext)
+    const { id } = useParams();
+    const [challenge, setChallenge] = useState(null);
+    const [loading, setLoading] = useState(true);
     console.log(challenge);
+
+    useEffect(() => {
+        if (!id) return;
+        fetch(`http://localhost:3000/challenges/${id}`, {
+            headers: {
+                authorization: `Bearer ${user.accessToken}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success && data.result) {
+                    setChallenge(data.result);
+                    setLoading(false)
+                } else {
+                    console.log("Middleware blocked or no data", data);
+                }
+            })
+            .catch(err => console.log(err));
+
+
+    }, [id])
+
 
     //  handleSubmit and new data update collection:
     const handleSubmit = (e) => {
@@ -25,7 +50,11 @@ const UpdateChallenge = () => {
             endDate: e.target.endDate.value,
         }
 
-        axios.put(`http://localhost:3000/challenges/${challenge._id}`, formData)
+        axios.put(`http://localhost:3000/challenges/${challenge._id}`, formData, {
+            headers: {
+                authorization: `Bearer ${user.accessToken}`
+            }
+        })
             .then(res => {
                 console.log(res);
             })
@@ -35,7 +64,7 @@ const UpdateChallenge = () => {
     };
 
 
-
+    if (loading) return <div>Loading challenge...</div>;
     return (
         <div>
             <div className="relative w-full h-[500px] overflow-hidden">

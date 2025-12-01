@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { FaUsers, FaCalendarAlt, FaRecycle } from "react-icons/fa";
 import 'animate.css';
 import MyContainer from "../../components/Navbar/MyContainer";
-import { Link, useLoaderData } from "react-router";
+import { Link, useParams } from "react-router";
 import JoinChallenge from "./JoinChallenge";
 import { ImCancelCircle } from "react-icons/im";
 import { AuthContext } from "../../context/AuthProvider";
@@ -11,19 +11,44 @@ import axios from "axios";
 
 const ChallengeDetails = () => {
     const { user } = useContext(AuthContext)
-    const data = useLoaderData()
-    const challenge = data.result;
+    const { id } = useParams();
+    const [challenge, setChallenge] = useState(null);
+    const [loading, setLoading] = useState(true);
     const [joining, setJoining] = useState([]);
     const joinModalRef = useRef(null)
 
     useEffect(() => {
+        if (!id) return;
+        fetch(`http://localhost:3000/challenges/${id}`, {
+            headers: {
+                authorization: `Bearer ${user.accessToken}`
+            }
+        }).then(res => res.json())
+            .then(data => {
+                if (data.success && data.result) {
+                    setChallenge(data.result);
+                    setLoading(false)
+                } else {
+                    console.log("Middleware blocked or no data", data);
+                }
+            })
+            .catch(err => console.log(err));
+
+
+    }, [id])
+
+    useEffect(() => {
+
+        if (!challenge?._id) return;
+
         fetch(`http://localhost:3000/challenges/join-challenge/${challenge._id}`)
             .then(res => res.json())
             .then(data => {
                 console.log("total joining people for this challenge", data)
                 setJoining(data);
             })
-    }, [challenge._id])
+            .catch(err => console.log(err));
+    }, [challenge?._id])
 
     const handleJoinModalOpen = () => {
         joinModalRef.current.showModal()
@@ -61,23 +86,7 @@ const ChallengeDetails = () => {
             })
 
     }
-
-
-    // const challenge = {
-    //     _id: "123456",
-    //     title: "Plastic-Free July",
-    //     category: "Waste Reduction",
-    //     description: "Avoid single-use plastic for one month",
-    //     duration: 30,
-    //     target: "Reduce plastic waste",
-    //     participants: 120,
-    //     impactMetric: "kg plastic saved",
-    //     createdBy: "admin@ecotrack.com",
-    //     startDate: "2024-07-01",
-    //     endDate: "2024-07-31",
-    //     imageUrl: "https://example.com/image.jpg",
-    // };
-
+    if (loading) return <div>Loading challenge...</div>;
     return (
         <div>
 
