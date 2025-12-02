@@ -34,13 +34,13 @@ const Hero = () => {
                 navigation={true}
                 modules={[Autoplay, Pagination, Navigation]}
                 onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
-                className='mySwiper rounded-2xl lg:rounded-none shadow-2xl'
+                className='mySwiper '
 
             >
 
                 {challenges.map((slide, index) => (
                     <SwiperSlide key={index}>
-                        <div className="relative w-full object-cover h-[500px]  overflow-hidden rounded-2xl lg:rounded-none">
+                        <div className="relative w-full object-cover h-[550px]  overflow-hidden rounded-2xl lg:rounded-none">
                             {/* Image full cover */}
                             <img
                                 src={slide.imageUrl}

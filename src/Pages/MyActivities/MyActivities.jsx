@@ -3,6 +3,7 @@ import MyContainer from '../../components/Navbar/MyContainer';
 import { AuthContext } from '../../context/AuthProvider';
 import Swal from 'sweetalert2';
 import axios from 'axios';
+import MyChallenges from './MyChallenges';
 
 
 
@@ -13,14 +14,18 @@ const MyActivities = () => {
 
     useEffect(() => {
         if (user?.email) {
-            fetch(`http://localhost:3000/join-challenge?email=${user.email}`)
+            fetch(`http://localhost:3000/join-challenge?email=${user.email}`,{
+                headers: {
+                authorization: `Bearer ${user.accessToken}`
+            }
+            })
                 .then(res => res.json())
                 .then(data => {
                     console.log(data);
                     setJoins(data)
                 })
         }
-    }, [user?.email])
+    }, [user])
 
 
     const handleRemoveJoin = (_id) => {
@@ -76,6 +81,10 @@ const MyActivities = () => {
             </div>
 
             <MyContainer>
+                <MyChallenges/>
+            </MyContainer>
+
+            <MyContainer>
                 <h3 className='text-7xl text-center my-24'>My Activities : {joins.length}</h3>
 
                 <div className="overflow-x-auto">
@@ -92,7 +101,7 @@ const MyActivities = () => {
                         </thead>
                         <tbody>
                             {
-                                joins.map((join, index) => <tr>
+                                joins.map((join, index) => <tr key={join._id}>
                                     <th>{index + 1} </th>
                                     <td>
                                         <div className="flex items-center gap-3">

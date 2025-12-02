@@ -121,3 +121,4 @@ const JoinChallenge = ({ challengeId, joinModalRef, joining, setJoining }) => {
 export default JoinChallenge;
 
 
+

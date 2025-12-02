@@ -167,6 +167,15 @@ const ChallengeDetails = () => {
                         : " "
                 }
 
+                {
+                    user?.email == challenge.
+                        createdBy ?
+                        <button className="btn btn-success w-full md:w-auto px-6 py-3 text-white font-semibold">
+                            Delete
+                        </button>
+                        : " "
+                }
+
 
                 {/*Join modal */}
                 <dialog

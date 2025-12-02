@@ -14,6 +14,7 @@ import JoinChallenge from "../Pages/Challenges/JoinChallenge";
 import PrivateRoute from "../privateRoute/PrivateRoute";
 import Tips from "../Pages/TipsAndEvent/Tips";
 import AllEvent from "../Pages/TipsAndEvent/AllEvent";
+import MyChallenges from "../Pages/MyActivities/MyChallenges";
 
 const router = createBrowserRouter([
     {
@@ -22,16 +23,20 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element:<Home/>
+                element: <Home />
             },
             {
                 path: "/challenges",
-                Component: Challenges,
+                element: <Challenges />,
                 loader: () => fetch('http://localhost:3000/challenges')
             },
             {
                 path: "/addNewChallenge",
-                element: <AddNewChallenge />
+                element: (
+                    <PrivateRoute>
+                        <AddNewChallenge />
+                    </PrivateRoute>
+                ),
             },
             {
                 path: "/challengeDetails/:id",
@@ -48,17 +53,37 @@ const router = createBrowserRouter([
             },
             {
                 path: "/updateChallenge/:id",
-                element: <UpdateChallenge />,
+                element: (
+                    <PrivateRoute>
+                        <UpdateChallenge />
+                    </PrivateRoute>
+                ),
                 // loader: ({ params }) => fetch(`http://localhost:3000/challenges/${params.id}`)
             },
             {
                 path: "/joinChallenge/:id",
-                element: <JoinChallenge />
+                element: (
+                    <PrivateRoute>
+                        <JoinChallenge />
+                    </PrivateRoute>
+                ),
             },
             {
                 path: "/my-activities",
-                element: <MyActivities />
+                element: (
+                    <PrivateRoute>
+                        <MyActivities />
+                    </PrivateRoute>
+                ),
             },
+            // {
+            //     path: "/my-challenge",
+            //     element: (
+            //         <PrivateRoute>
+            //             <MyChallenges />
+            //         </PrivateRoute>
+            //     ),
+            // },
             {
                 path: "/tips",
                 element: <Tips />,

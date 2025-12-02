@@ -3,6 +3,7 @@ import MyContainer from "../../components/Navbar/MyContainer";
 import axios from "axios";
 import { AuthContext } from "../../context/AuthProvider";
 import AddEvent from "../TipsAndEvent/AddEvent";
+import toast from "react-hot-toast";
 
 const AddNewChallenge = () => {
     const { user } = use(AuthContext)
@@ -50,13 +51,14 @@ const AddNewChallenge = () => {
             endDate: e.target.endDate.value,
         }
 
-        axios.post('http://localhost:3000/challenges', formData ,{
-             headers: {
+        axios.post('http://localhost:3000/challenges', formData, {
+            headers: {
                 authorization: `Bearer ${user.accessToken}`
             }
         })
             .then(res => {
                 console.log(res);
+                toast.success("Successfully added")
             })
             .catch(error => {
                 console.log(error);

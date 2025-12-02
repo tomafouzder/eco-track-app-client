@@ -7,12 +7,8 @@ import iconImg3 from '../../assets/icons8-co2-reduction-100.png'
 
 const LiveChallenge = () => {
     return (
-        <div className='relative' style={{
-            backgroundImage: `url(${bgImg})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-        }}>
-            <div className="backdrop-blur-sm bg-white/10 min-h-full w-full">
+        <div>
+            
                 <MyContainer >
 
                     <h2 className='text-5xl uppercase mt-36 text-gray-800 font-bold text-center'>Live Counting</h2>
@@ -20,7 +16,7 @@ const LiveChallenge = () => {
 
                     <div className='grid  grid-cols-1 px-4 md:px-0 text-gray-700 pt-24 md:grid-cols-2 lg:grid-cols-3 gap-1'>
                         <div className=" bg-white hover:text-white hover:bg-slate-800 ">
-                            <div className="card-body   items-center text-center">
+                            <div className="card-body border  items-center text-center">
                                 <img src={iconImg1} alt="" />
                                 <h2 className="card-title font-bold text-2xl">Active Challenge</h2>
                                 <p className=" font-bold text-3xl">0</p>
@@ -28,7 +24,7 @@ const LiveChallenge = () => {
                         </div>
 
                         <div className=" bg-white hover:text-white hover:bg-slate-800">
-                            <div className="card-body items-center text-center">
+                            <div className="card-body border items-center text-center">
                                 <img src={iconImg2} alt="" />
                                 <h2 className="card-title font-bold text-2xl">Total Participant</h2>
                                 <p className=" font-bold text-3xl">0</p>
@@ -36,7 +32,7 @@ const LiveChallenge = () => {
                         </div>
 
                         <div className=" bg-white  hover:text-white hover:bg-slate-800">
-                            <div className="card-body items-center text-center">
+                            <div className="card-body border items-center text-center">
                                 <img src={iconImg3} alt="" />
                                 <h2 className="card-title  font-bold text-2xl">CO2 Saved</h2>
                                 <p className=" font-bold text-3xl">0</p>
@@ -67,7 +63,7 @@ const LiveChallenge = () => {
                     </div>
 
                 </MyContainer>
-            </div>
+        
 
         </div>
     );
