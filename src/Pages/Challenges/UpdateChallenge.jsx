@@ -39,8 +39,8 @@ const UpdateChallenge = () => {
         const formData = {
             title: e.target.title.value,
             category: e.target.category.value,
-            duration: e.target.duration.value,
-            participants: e.target.participants.value,
+            duration: parseInt (e.target.duration.value),
+            participants: parseInt (e.target.participants.value),
             imageUrl: e.target.imageUrl.value,
             description: e.target.description.value,
             target: e.target.target.value,

@@ -35,7 +35,7 @@ const ChallengeCard = ({ challenge }) => {
                                 <FaClock /> {challenge.duration} days
                             </div>
                             <div className="flex items-center gap-1">
-                                <FaUsers /> {challenge.participants} joined
+                                <FaUsers /> {challenge.participants} participant
                             </div>
                         </div>
 

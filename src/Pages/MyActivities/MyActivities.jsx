@@ -53,6 +53,7 @@ const MyActivities = () => {
 
                             const remainingData = joins.filter(join => join._id !== _id);
                             setJoins(remainingData)
+                           
                         }
                     })
                     .catch(error => {

@@ -15,6 +15,7 @@ const ChallengeDetails = () => {
     const [challenge, setChallenge] = useState(null);
     const [loading, setLoading] = useState(true);
     const [joining, setJoining] = useState([]);
+    const [refetch, setRefetch]= useState(false)
     const joinModalRef = useRef(null)
 
     useEffect(() => {
@@ -35,16 +36,15 @@ const ChallengeDetails = () => {
             .catch(err => console.log(err));
 
 
-    }, [id])
+    }, [id , refetch])
 
     useEffect(() => {
 
         if (!challenge?._id) return;
-
         fetch(`http://localhost:3000/challenges/join-challenge/${challenge._id}`)
             .then(res => res.json())
             .then(data => {
-                console.log("total joining people for this challenge", data)
+                // console.log("total joining people for this challenge", data)
                 setJoining(data);
             })
             .catch(err => console.log(err));
@@ -169,10 +169,11 @@ const ChallengeDetails = () => {
 
                 {
                     user?.email == challenge.
-                        createdBy ?
+                        createdBy ? 
                         <button className="btn btn-success w-full md:w-auto px-6 py-3 text-white font-semibold">
-                            Delete
+                            Update Challenge
                         </button>
+                    
                         : " "
                 }
 
@@ -193,6 +194,7 @@ const ChallengeDetails = () => {
                             joinModalRef={joinModalRef}
                             joining={joining}
                             setJoining={setJoining}
+                            setRefetch={setRefetch}
                         ></JoinChallenge>
                     </div>
                 </dialog>

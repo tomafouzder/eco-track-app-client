@@ -4,16 +4,18 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 
 
-const JoinChallenge = ({ challengeId, joinModalRef, joining, setJoining }) => {
+
+
+const JoinChallenge = ({ challengeId, joinModalRef, joining, setJoining, setRefetch }) => {
     const { user } = useContext(AuthContext)
-    console.log(user)
+    // console.log(user)
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const userName = e.target.userName.value
         const userId = e.target.userId.value;
         const status = e.target.status.value;
-        const progress = e.target.progress.value;
+        const progress = parseInt(e.target.progress.value) || 0 ;
 
         console.log(userId, challengeId, status, progress,)
 
@@ -30,20 +32,29 @@ const JoinChallenge = ({ challengeId, joinModalRef, joining, setJoining }) => {
         axios.post('http://localhost:3000/join-challenge', joinData)
             .then(res => {
                 const data = res.data;
+                console.log(data)
                 if (data.insertedId) {
                     joinModalRef.current.close();
-                    Swal.fire({
-                        icon: "success",
-                        title: "Joining Successful",
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
+                     Swal.fire({
+  
+  icon: "success",
+  title: "Your work has been saved",
+  showConfirmButton: false,
+  timer: 1500
+});
                     // join new user to the state
                     joinData._id = data.insertedId;
                     const newJoins = [...joining, joinData]
                     newJoins.sort((a, b) => b.progress - a.progress)
+                    console.log (newJoins)
                     setJoining(newJoins);
+                    setRefetch(prev => ({
+                        ...prev,
+                        participants: prev.participants + 1
+                    }));
 
+                }else{
+                    console.log("it error")
                 }
             })
             .catch(error => {
