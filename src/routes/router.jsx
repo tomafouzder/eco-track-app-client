@@ -45,11 +45,6 @@ const router = createBrowserRouter([
                         <ChallengeDetails />
                     </PrivateRoute>
                 ),
-                // loader: ({ params }) => fetch(`http://localhost:3000/challenges/${params.id}`,{
-                //     headers:{
-                //         authorization:"hello"
-                //     }
-                // })
             },
             {
                 path: "/updateChallenge/:id",
@@ -58,7 +53,6 @@ const router = createBrowserRouter([
                         <UpdateChallenge />
                     </PrivateRoute>
                 ),
-                // loader: ({ params }) => fetch(`http://localhost:3000/challenges/${params.id}`)
             },
             {
                 path: "/joinChallenge/:id",
@@ -76,14 +70,6 @@ const router = createBrowserRouter([
                     </PrivateRoute>
                 ),
             },
-            // {
-            //     path: "/my-challenge",
-            //     element: (
-            //         <PrivateRoute>
-            //             <MyChallenges />
-            //         </PrivateRoute>
-            //     ),
-            // },
             {
                 path: "/tips",
                 element: <Tips />,

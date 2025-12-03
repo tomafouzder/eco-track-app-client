@@ -1,11 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLoaderData } from 'react-router';
 import ChallengeCard from './ChallengeCard';
 import MyContainer from '../../components/Navbar/MyContainer';
 
 const Challenges = () => {
-    const data = useLoaderData()
-    console.log(data);
+    const data = useLoaderData();
+    const [challenges, setChallenges] = useState(data)
+    const [loading, setLoading] = useState(false)
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+        const searchCategory = e.target.category.value;
+        setLoading(true)
+        fetch(`http://localhost:3000/search?search=${searchCategory}`)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                setChallenges(data)
+                setLoading(false)
+            })
+    }
+
+    if (loading) {
+        return <div>spinner...</div>
+    }
+
     return (
         <div>
             <div className="relative w-full h-[500px] overflow-hidden">
@@ -22,10 +41,40 @@ const Challenges = () => {
             </div>
 
             <MyContainer>
-                <h1 className='text-center mt-10 font-bold text-4xl'>All Challenge</h1>
-                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-4 p-4 md:p-0 my-10'>
+                <div className=' mt-24 text-center'>
+                    <div className='p-2'>
+                        <h1 className='text-4xl font-bold'>All Tips By Our Participant</h1>
+                        <p>
+                            Track your progress regularly to stay motivated and aware of your achievements. Small efforts each day can grow into meaningful improvements for both your lifestyle and the environment.
+                        </p>
+                    </div>
+                    {/* Category */}
+                    <form onSubmit={handleSearch} className="flex items-center gap-4 justify-center">
+                        <select
+                            name="category"
+                            className="select select-bordered rounded-full "
+                            required
+                        >
+                            <option value="" >Select Category</option>
+                            <option>Waste Reduction</option>
+                            <option>Energy Conservation</option>
+                            <option>Water Conservation</option>
+                            <option>Sustainable Transport</option>
+                            <option>Green Living</option>
+                        </select>
+                        <button
+                            className='btn btn-primary rounded-full'
+                            type='submit'
+                        >{loading ? "Searching..." : "Search"}</button>
+                    </form>
+
+                </div>
+
+
+
+                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 p-4 md:p-0 my-10'>
                     {
-                        data.map(challenge => <ChallengeCard key={challenge._id} challenge={challenge} />)
+                        challenges.map(challenge => <ChallengeCard key={challenge._id} challenge={challenge} />)
                     }
                 </div>
             </MyContainer>

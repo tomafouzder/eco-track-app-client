@@ -7,23 +7,29 @@ import iconImg3 from '../../assets/icons8-co2-reduction-100.png'
 
 const LiveChallenge = () => {
     return (
-        <div>
-            
+        <div> 
                 <MyContainer >
+                     {/* <figure className='flex justify-center items-center'>
+                        <img src="https://media.istockphoto.com/id/844905134/vector/green-city-on-earth-world-environment-and-sustainable-development-concept-vector-illustration.jpg?s=2048x2048&w=is&k=20&c=XCtFnCINHICjcSangEM71gLK6yUNI1SjmG_lUR2i07M=" alt="" />
+                    </figure> */}
 
-                    <h2 className='text-5xl uppercase mt-36 text-gray-800 font-bold text-center'>Live Counting</h2>
-                    <p className='mt-10 md:mt-4 text-2xl text-gray-700 font-semibold text-center'>We are ECO Tracker, Our Mission is save water, animals and Environment our activities are taken around the world.</p>
+                    <h2 className='text-5xl uppercase mt-36 text-green-800 font-extrabold text-center'>Live Counting</h2>
+                    <p className='mt-10 md:mt-4 text-xl text-gray-700 font-semibold text-center'>We are ECO Tracker, Our Mission is save water, animals and Environment our activities are taken around the world.</p>
+                    <figure className='flex justify-center items-center'>
+                        <img src="https://media.istockphoto.com/id/478466748/vector/sustainable-city.jpg?s=1024x1024&w=is&k=20&c=fxkN6Q9rcp32h5gWvMc5gL_AsatyBVUPkTsj8EfNmnk=" alt="" />
+                    </figure>
 
-                    <div className='grid  grid-cols-1 px-4 md:px-0 text-gray-700 pt-24 md:grid-cols-2 lg:grid-cols-3 gap-1'>
-                        <div className=" bg-white hover:text-white hover:bg-slate-800 ">
+                    <div className='grid  grid-cols-1 px-4 md:px-0 text-gray-700 pt-24 md:grid-cols-2 lg:grid-cols-3 gap-1 ' >
+                        
+                        <div className="  text-white bg-slate-800 ">
                             <div className="card-body border  items-center text-center">
-                                <img src={iconImg1} alt="" />
+                                <img src={iconImg1} alt=""  />
                                 <h2 className="card-title font-bold text-2xl">Active Challenge</h2>
                                 <p className=" font-bold text-3xl">0</p>
                             </div>
                         </div>
 
-                        <div className=" bg-white hover:text-white hover:bg-slate-800">
+                        <div className="  text-white bg-slate-800">
                             <div className="card-body border items-center text-center">
                                 <img src={iconImg2} alt="" />
                                 <h2 className="card-title font-bold text-2xl">Total Participant</h2>
@@ -31,7 +37,7 @@ const LiveChallenge = () => {
                             </div>
                         </div>
 
-                        <div className=" bg-white  hover:text-white hover:bg-slate-800">
+                        <div className="   text-white bg-slate-800">
                             <div className="card-body border items-center text-center">
                                 <img src={iconImg3} alt="" />
                                 <h2 className="card-title  font-bold text-2xl">CO2 Saved</h2>
@@ -43,6 +49,7 @@ const LiveChallenge = () => {
                 </MyContainer>
 
                 <MyContainer>
+                    
                     <div className='pt-0 md:pt-32  bg-white gap-10  grid grid-cols-1 md:grid-cols-2'>
                         <div className=" rounded-tl-2xl p-4 overflow-hidden">
                             <video
