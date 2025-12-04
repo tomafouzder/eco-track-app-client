@@ -10,8 +10,8 @@ const UpComingEvent = ({ upComingEventPromise }) => {
 
     if (!Array.isArray(events)) return null;
 
-    const bigEvent = events[0];            // 1st → Big Card
-    const smallEvents = events.slice(1);   // Others → Small Cards
+    const bigEvent = events[0];            
+    const smallEvents = events.slice(1);   
 
     return (
         <div
@@ -39,7 +39,7 @@ const UpComingEvent = ({ upComingEventPromise }) => {
                 <div className="grid md:grid-cols-2 gap-8">
                     {
                         bigEvent && (
-                            <div className="border border-green-900 rounded-lg shadow-lg overflow-hidden backdrop-blur">
+                            <div className="border p-5 md:p-0 border-green-900 rounded-lg shadow-lg overflow-hidden backdrop-blur">
                                 <img
                                     className="w-full h-80 object-cover"
                                     src={bigEvent.imageUrl}
@@ -73,16 +73,16 @@ const UpComingEvent = ({ upComingEventPromise }) => {
                             </div>
                         )
                     }
-                    {/* LEFT BIG CARD */}
+                  
 
 
                     {/* RIGHT SMALL CARDS */}
                     <div className="flex flex-col gap-6">
 
                         {
-                            smallEvents.map(event => <div key={event._id} className="border border-green-900 rounded-lg shadow-lg p-5 flex backdrop-blur">
+                            smallEvents.map(event => <div key={event._id} className="border border-green-900 rounded-lg shadow-lg p-5 flex flex-col md:flex-row backdrop-blur">
                                 <img
-                                    className="w-36 h-36 object-cover rounded"
+                                    className="md:w-36 md:h-36 w-full h-56  object-cover rounded"
                                     src={event.imageUrl}
                                     alt="recycle"
                                 />

@@ -2,7 +2,7 @@ import React from 'react';
 
 const MyContainer = ({ className, children }) => {
     return (
-        <div className={`${className} container mx-auto `}>
+        <div className={`${className} max-w-6xl mx-auto `}>
             {children}
         </div>
     );

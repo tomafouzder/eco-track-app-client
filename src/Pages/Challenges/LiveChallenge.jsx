@@ -9,7 +9,7 @@ const LiveChallenge = () => {
         <div> 
                 <MyContainer >
 
-                    <h2 className='text-5xl uppercase mt-36 text-green-600 font-extrabold text-center'>Live Counting</h2>
+                    <h2 className='md:text-5xl text-3xl px-2  uppercase mt-36 text-green-600 font-extrabold text-center'>Live Counting</h2>
                     <p className='mt-10 md:mt-4 text-xl text-gray-700 font-semibold text-center'>We are ECO Tracker, Our Mission is save water, animals and Environment our activities are taken around the world.</p>
                     <figure className='flex justify-center items-center'>
                         <img src="https://media.istockphoto.com/id/478466748/vector/sustainable-city.jpg?s=1024x1024&w=is&k=20&c=fxkN6Q9rcp32h5gWvMc5gL_AsatyBVUPkTsj8EfNmnk=" alt="" />
@@ -57,7 +57,7 @@ const LiveChallenge = () => {
                             />
 
                         </div>
-                        <div className='px-2 md:px-0 '>
+                        <div className='px-4 md:-px-2 md:px-0 '>
                             <p className='text-3xl font-semibold text-green-700 py-4'>About Eco Track</p>
                             <h1 className='text-4xl py-6  font-extrabold text-gray-800 '>Join a Community Making Real Environmental Change</h1>
 

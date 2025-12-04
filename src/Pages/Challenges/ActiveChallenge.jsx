@@ -11,21 +11,21 @@ const ActiveChallenge = ({ latestChallengePromise }) => {
 
 
             <MyContainer>
-                <h1 className='text-center text-5xl uppercase mt-16 text-green-600  font-extrabold '>Active Challenge</h1>
-                <p className='py-8  md:pb-24  text-lg text-gray-800 font-semibold text-center border-b-2 border-gray-500 '>
-                    A recent challenge highlights exciting eco-friendly activities designed to inspire positive environmental action. Each challenge encourages participants to adopt sustainable habits, reduce waste, save energy, or engage in community clean-ups. These challenges are created by users and updated regularly so everyone can explore fresh opportunities to make an impact. They showcase goals, timelines, participation counts, and progress updates. By joining, users can track their actions, stay motivated, and contribute to a greener community. The recent challenge section helps people discover trending activities, learn new eco-tips, and stay connected with others who share the same passion for protecting the planet.
+                <h1 className='text-center md:text-5xl text-3xl px-2  uppercase mt-16 text-green-600  font-extrabold '>Active Challenge</h1>
+                <p className='py-8 px-4 md-px-0  md:pb-24  text-lg text-gray-800 font-semibold text-center border-b-2 border-gray-500 '>
+                    A recent challenge highlights exciting eco-friendly activities designed to inspire positive environmental action. Each challenge encourages participants to adopt sustainable habits, reduce waste, save energy, or engage in community clean-ups. These challenges are created by users and updated regularly so everyone can explore fresh opportunities to make an impact. They showcase goals, timelines, participation counts, and progress updates. By joining, users can track their actions, stay motivated, and contribute to a greener community.
                 </p>
-                <div className=' flex justify-between items-center mt-6'>
-                    <h1 className='text-4xl   font-extrabold text-gray-800 '>Resent Challenges Updated :</h1>
+                <div className=' flex flex-col md:flex-row justify-between items-center gap-6 md:gap-0 mt-6'>
+                    <h1 className='md:text-4xl text-3xl px-2  font-extrabold text-gray-800 '>Resent Challenges Updated :</h1>
                     <Link to="/challenges"  >
-                        <button className=" button btn btn-wide py-2 bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold rounded-xl shadow-lg hover:scale-[1.02] transition transform duration-300">
+                        <button className=" button  btn btn-wide py-2 bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold rounded-xl shadow-lg hover:scale-[1.02] transition transform duration-300">
                             See all  Challenges
                         </button>
                     </Link>
                 </div>
 
 
-                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 p-4 md:p-0  my-10'>
+                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 p-6 md:p-0  my-10'>
                     {
                         challenges.map(challenge => <ChallengeCard key={challenge._id} challenge={challenge} />)
                     }

@@ -5,6 +5,7 @@ import ActiveChallenge from '../Challenges/ActiveChallenge';
 
 import ResentTips from '../TipsAndEvent/ResentTips';
 import UpComingEvent from '../TipsAndEvent/UpComingEvent';
+import WhyGoGreen from '../WhyGreen/WhyGoGreen';
 
 const latestChallengePromise = fetch('http://localhost:3000/active-challenges').then(res => res.json())
 
@@ -31,12 +32,10 @@ const Home = () => {
             <UpComingEvent upComingEventPromise={upComingEventPromise}></UpComingEvent>
 
             {/* Recent Tips*/}
-            <ResentTips resentTipsData={resentTipsData}></ResentTips>
-
-           
+            <ResentTips resentTipsData={resentTipsData}></ResentTips>      
 
             {/* Why Go Green? */}
-            <h3 className='text-4xl my-16'>Why Go Green?</h3>
+            <WhyGoGreen/>
 
             {/* How It Works  */}
             <h3 className='text-4xl my-16'>How It Works </h3>
