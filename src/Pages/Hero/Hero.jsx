@@ -40,7 +40,7 @@ const Hero = () => {
 
                 {challenges.map((slide, index) => (
                     <SwiperSlide key={index}>
-                        <div className="relative w-full object-cover h-[550px]  overflow-hidden rounded-2xl lg:rounded-none">
+                        <div className="relative w-full object-cover h-[550px]  overflow-hidden ">
                             {/* Image full cover */}
                             <img
                                 src={slide.imageUrl}
@@ -55,7 +55,7 @@ const Hero = () => {
                                 ${activeIndex === index ? 'animate__animated animate__fadeInLeft  animate__delay-2s' : ''}
                                 `}>
 
-                                    <h2 className="md:text-7xl text-5xl uppercase font-bold">
+                                    <h2 className="md:text-7xl text-3xl uppercase font-bold">
                                         {slide.title}
                                     </h2>
                                     <p className="text-xl my-2 md:text-2xl uppercase font-semibold" >

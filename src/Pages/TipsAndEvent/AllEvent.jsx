@@ -10,16 +10,15 @@ const AllEvent = () => {
 
     return (
         <div>
-
-            <div
-                className="relative py-16 h-[550px] bg-center bg-cover"
-                style={{
-                    backgroundImage: "url('https://media.gettyimages.com/id/1383393717/photo/grandmother-with-granddaughter-picking-peppers-in-garden-together.jpg?s=1024x1024&w=gi&k=20&c=O6N4SgG8yZWbMT0tcNGFcn-FcGK8_sHQ--6SxcqpB9I=')",
-                }}
-            >
-                <div className="absolute inset-0 bg-black/10"></div>
-
-                <div className="relative z-10 flex items-center justify-start h-full">
+             <div className="relative w-full h-[550px] overflow-hidden">
+                <video
+                    src="https://media.istockphoto.com/id/2202052577/video/business-team-collaborating-on-eco-friendly-project-promoting-sustainability-growth-with.mp4?s=mp4-640x640-is&k=20&c=HoIPlQm5iL3jEONet-RMgi3V_BTx5P55PksBFrMuvsk="
+                    autoPlay
+                    loop
+                    muted
+                    className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-black/5 flex items-center justify-center">
                     <h1 className="text-white flex items-center justify-center md:text-7xl text-5xl absolute top-1/2 left-1/4 transform -translate-y-1/2  inset-0 bg-black/20 animate__animated animate__fadeInLeft  font-extrabold">All Events</h1>
                 </div>
             </div>
@@ -28,10 +27,10 @@ const AllEvent = () => {
 
             <div className="max-w-6xl mx-auto px-4">
 
-                <MyContainer className="mt-24">
+                <MyContainer className="my-24">
 
                     <div className=" mb-24  text-center">
-                        <h2 className="text-3xl text-gray-700  md:text-5xl font-bold">
+                        <h2 className="md:text-5xl text-3xl uppercase text-green-600 font-extrabold text-center">
                             All Events
                         </h2>
                         <p className="text-lg pt-10 font-semibold text-gray-500 ">

@@ -80,28 +80,30 @@ const AddNewChallenge = () => {
     };
 
     return (
-        <div>
-            <div className="relative w-full h-[500px] overflow-hidden">
+        <div className="bg-gray-100">
+            <div className="relative w-full h-[550px] overflow-hidden">
                 <video
-                    src="https://media.istockphoto.com/id/1268227434/video/young-female-gardener-making-a-hole-and-planting-a-vegetable-plant-in-the-garden.mp4?s=mp4-640x640-is&k=20&c=ha9onOGVSlZxmxG3ooIePgRM573aRq9nw9Mk_eUVbhI="
+                    src="https://media.istockphoto.com/id/1448245572/video/in-the-hands-of-trees-growing-seedlings.mp4?s=mp4-640x640-is&k=20&c=2UOGdcDCDwMC63s-nhOAY_RDrxCc2bVn_ubHj-WCW3Q="
                     autoPlay
                     loop
                     muted
                     className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-black/5 flex items-center justify-center">
-                    <h1 className="text-white md:text-5xl text-4xl font-bold bg-black/40 p-4 animate__animated animate__fadeInLeft animate__delay-2s">
-                        Add New Challenge
-                    </h1>
+                    <h1 className="text-white flex items-center justify-center md:text-7xl text-5xl absolute top-1/2 left-1/4 transform -translate-y-1/2  inset-0 bg-black/20 animate__animated animate__fadeInLeft  font-extrabold">Add The New Challenges</h1>
                 </div>
             </div>
 
             <MyContainer className="min-h-screen p-6">
+                <h3 className='md:text-5xl text-3xl px-2 my-12  uppercase text-green-600 font-extrabold text-center'>Add the new challenges and Create Your Community Event </h3>
+                <p className="text-lg font-semibold opacity-75 pb-16 border-b-2">
+                    Eco Tracer encourages participants to track their daily environmental actions, reduce waste, conserve energy, and adopt sustainable habits, creating long-term awareness and promoting a cleaner, healthier planet through consistent mindful choices.
+                </p>
                 <form
                     onSubmit={handleSubmit}
-                    className="max-w-3xl mx-auto bg-white rounded-3xl shadow-2xl p-8 space-y-6"
+                    className="max-w-3xl mx-auto bg-green-50 rounded-3xl  p-8 space-y-6"
                 >
-                    <h2 className="text-4xl font-bold text-green-700 text-center mb-6">Add Challenge</h2>
+                    <h2 className="text-4xl  font-extrabold text-gray-800  text-center mb-6">Add Challenge</h2>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {/* Title */}
@@ -278,14 +280,18 @@ const AddNewChallenge = () => {
                         </div>
                     </div>
 
-                    <button className="btn btn-success w-full mt-4">Add Challenge</button>
+                    <button className="mt-6 button w-full py-2 bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold rounded-xl shadow-lg hover:scale-[1.02] transition transform duration-300">Add Challenge</button>
                 </form>
             </MyContainer>
 
             {/* add event  */}
-            <div className="my-24">
+            <MyContainer className="py-24">
+                <h2 className="md:text-5xl text-3xl px-2 my-12  uppercase text-green-600 font-extrabold text-center">Create Event:</h2>
+                <p className="text-lg font-semibold opacity-75 pb-16 border-b-2">
+                    A community event brings people together to share ideas, support local activities, build connections, and create positive impact through teamwork, cultural exchange, learning opportunities, and meaningful participation that strengthens neighborhood unity and collaboration
+                </p>
                 <AddEvent></AddEvent>
-            </div>
+            </MyContainer>
         </div>
     );
 };

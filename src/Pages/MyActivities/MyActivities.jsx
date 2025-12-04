@@ -77,17 +77,18 @@ const MyActivities = () => {
                     className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-black/5 flex items-center justify-center">
-                    <h1 className="text-white flex items-center justify-center md:text-5xl text-4xl absolute top-1/2 left-1/4 transform -translate-y-1/2  inset-0 bg-black/40 animate__animated animate__fadeInLeft  animate__delay-2s font-bold">My Activities</h1>
+                    <h1 className="text-white flex items-center justify-center md:text-7xl text-5xl absolute top-1/2 left-1/4 transform -translate-y-1/2  inset-0 bg-black/20 animate__animated animate__fadeInLeft  font-extrabold">My Activities</h1>
                 </div>
             </div>
 
             <MyContainer>
-                <h1 className='md:text-5xl text-3xl px-2 py-12 md:mt-24 md:mb-16  uppercase text-green-600 font-extrabold text-center border-b-2'>The Challenges I created</h1>
+                <h1 className='md:text-5xl text-3xl px-2 py-24  uppercase text-green-600 font-extrabold text-center'>My Activities</h1>
+                <h1 className='text-4xl border-b-2 font-extrabold text-gray-800  px-2 pb-12 md-0 md:mb-16 '>The Challenges I created :</h1>
                 <MyChallenges />
             </MyContainer>
 
             <MyContainer>
-                <h3 className='md:text-5xl text-3xl px-2 py-12 md:mt-32 md:mb-16  uppercase text-green-600 font-extrabold text-center border-b-2'>My Activities : {joins.length}</h3>
+                <h3 className='text-4xl border-b-2 font-extrabold text-gray-800 px-2 py-12 md:mt-24 md:mb-16'>Challenges I have participated in : {joins.length}</h3>
 
                 <div className="overflow-x-auto bg-green-100">
                     <table className="table">

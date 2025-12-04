@@ -46,13 +46,13 @@ const AddEvent = () => {
 
     return (
         <div>
-            <MyContainer className="my-40">
-                <div className="hero bg-base-200 min-h-screen">
+            <MyContainer className="mt-24">
+                <div className="hero bg-green-100 min-h-screen">
                     <div className="flex-col lg:flex-row-reverse">
 
                         {/* LEFT TEXT */}
                         <div className="text-center p-4 lg:text-left">
-                            <h1 className="text-5xl font-bold">Create Your Community Event</h1>
+                            <h1 className="text-4xl  font-extrabold text-gray-800 ">Create Your Community Event</h1>
                             <p className="py-6">
                                 Share your community clean-up event details to inspire teamwork and
                                 help people take meaningful action. Together we can build a cleaner,
@@ -61,12 +61,12 @@ const AddEvent = () => {
                         </div>
 
                         {/* RIGHT FORM CARD */}
-                        <div className="card bg-base-100 w-full">
+                        <div className="card bg-green-50 w-full">
                             <form onSubmit={handleSubmitForEvent} className="card-body">
                                 <fieldset className="fieldset">
 
                                     {/* BANNER IMAGE */}
-                                    <fieldset className="relative flex justify-center items-center md:justify-end p-4 md:bg-gray-100 rounded-lg">
+                                    <fieldset className="relative flex justify-center items-center md:justify-end p-4 md:bg-green-100 rounded-lg">
                                         <img
                                             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvys_qbdj--TGqit23T4tjze9FtHUBZUyxdw&s"
                                             alt=""
