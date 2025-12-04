@@ -1,6 +1,5 @@
 import React from 'react';
 import MyContainer from '../../components/Navbar/MyContainer';
-import bgImg from '../../assets/svg-2.png'
 import iconImg1 from '../../assets/icons8-challenge-100.png'
 import iconImg2 from '../../assets/icons8-participation-100.png'
 import iconImg3 from '../../assets/icons8-co2-reduction-100.png'
@@ -9,11 +8,8 @@ const LiveChallenge = () => {
     return (
         <div> 
                 <MyContainer >
-                     {/* <figure className='flex justify-center items-center'>
-                        <img src="https://media.istockphoto.com/id/844905134/vector/green-city-on-earth-world-environment-and-sustainable-development-concept-vector-illustration.jpg?s=2048x2048&w=is&k=20&c=XCtFnCINHICjcSangEM71gLK6yUNI1SjmG_lUR2i07M=" alt="" />
-                    </figure> */}
 
-                    <h2 className='text-5xl uppercase mt-36 text-green-800 font-extrabold text-center'>Live Counting</h2>
+                    <h2 className='text-5xl uppercase mt-36 text-green-600 font-extrabold text-center'>Live Counting</h2>
                     <p className='mt-10 md:mt-4 text-xl text-gray-700 font-semibold text-center'>We are ECO Tracker, Our Mission is save water, animals and Environment our activities are taken around the world.</p>
                     <figure className='flex justify-center items-center'>
                         <img src="https://media.istockphoto.com/id/478466748/vector/sustainable-city.jpg?s=1024x1024&w=is&k=20&c=fxkN6Q9rcp32h5gWvMc5gL_AsatyBVUPkTsj8EfNmnk=" alt="" />
@@ -53,7 +49,7 @@ const LiveChallenge = () => {
                     <div className='pt-0 md:pt-32  bg-white gap-10  grid grid-cols-1 md:grid-cols-2'>
                         <div className=" rounded-tl-2xl p-4 overflow-hidden">
                             <video
-                                src="https://media.istockphoto.com/id/1587462714/video/ecology-icon-concept-esg-environment-society-and-governance-saving-the-planet-in-the-hands-of.mp4?s=mp4-640x640-is&k=20&c=vYmfXBE4K_C-OSEsbkDs2xwLcSEQ9E_Skm3ZKjngSGA="
+                                src="https://media.istockphoto.com/id/2192082263/video/volunteer-advocating-for-environmental-protection-with-a-save-the-world-sign-outdoors.mp4?s=mp4-640x640-is&k=20&c=VdvkFUFB2CI4HYRSOgXNCcYgbXbeoQ2ZXNiQeyXtT6Y="
                                 autoPlay
                                 loop
                                 muted

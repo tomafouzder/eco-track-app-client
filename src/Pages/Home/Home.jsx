@@ -26,12 +26,14 @@ const Home = () => {
             <ActiveChallenge latestChallengePromise={latestChallengePromise}>
             </ActiveChallenge>
 
+             {/* Upcoming Events */}
+
+            <UpComingEvent upComingEventPromise={upComingEventPromise}></UpComingEvent>
+
             {/* Recent Tips*/}
             <ResentTips resentTipsData={resentTipsData}></ResentTips>
 
-            {/* Upcoming Events */}
-
-            <UpComingEvent upComingEventPromise={upComingEventPromise}></UpComingEvent>
+           
 
             {/* Why Go Green? */}
             <h3 className='text-4xl my-16'>Why Go Green?</h3>

@@ -55,10 +55,10 @@ const Hero = () => {
                                 ${activeIndex === index ? 'animate__animated animate__fadeInLeft  animate__delay-2s' : ''}
                                 `}>
 
-                                    <h2 className="text-2xl md:text-4xl uppercase font-bold ">
+                                    <h2 className="md:text-7xl text-5xl uppercase font-bold">
                                         {slide.title}
                                     </h2>
-                                    <p className="text-lg my-2 md:text-xl uppercase font-semibold" >
+                                    <p className="text-xl my-2 md:text-2xl uppercase font-semibold" >
                                         category : {slide.category}
                                     </p>
                                     <p className="text-lg my-2 md:text-2xl font-semibold">

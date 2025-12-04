@@ -12,7 +12,7 @@ const AllEvent = () => {
         <div>
 
             <div
-                className="relative py-16 h-[450px] bg-center bg-cover"
+                className="relative py-16 h-[550px] bg-center bg-cover"
                 style={{
                     backgroundImage: "url('https://media.gettyimages.com/id/1383393717/photo/grandmother-with-granddaughter-picking-peppers-in-garden-together.jpg?s=1024x1024&w=gi&k=20&c=O6N4SgG8yZWbMT0tcNGFcn-FcGK8_sHQ--6SxcqpB9I=')",
                 }}

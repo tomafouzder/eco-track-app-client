@@ -50,12 +50,12 @@ const Navbar = () => {
                         </div>
                         <ul
                             tabIndex="-1"
-                            className="menu menu-sm dropdown-content text-white rounded-box z-1 mt-2 w-52 p-4 shadow"
-                            style={{
-                                backgroundImage: `url(${bgImg})`,
-                                backgroundSize: "cover",
-                                backgroundPosition: "center",
-                            }}
+                            className="menu menu-sm dropdown-content bg-gray-950 text-white rounded-box z-1 mt-2 w-52 p-4 shadow"
+                            // style={{
+                            //     backgroundImage: `url(${bgImg})`,
+                            //     backgroundSize: "cover",
+                            //     backgroundPosition: "center",
+                            // }}
                         >
                             <li>
                                 <MyLinks to={"/"}>Home</MyLinks>

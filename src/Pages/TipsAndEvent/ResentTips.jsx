@@ -16,11 +16,7 @@ const ResentTips = ({ resentTipsData }) => {
 
     return (
         <div
-            style={{
-                backgroundImage: `url(${bgImg})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-            }}
+        
         >
             <MyContainer className="my-12">
                 <h2 className="text-3xl font-bold mb-6 text-center">Recent Tips</h2>
@@ -40,7 +36,7 @@ const ResentTips = ({ resentTipsData }) => {
                 >
                     {tips?.map((tip) => (
                         <SwiperSlide key={tip._id} className="flex  justify-center items-center">
-                            <div className="text-white p-6 flex flex-col items-center bg-gray-500 shadow-xl max-w-sm ">
+                            <div className="text-white p-6 flex flex-col items-center  shadow-xl max-w-sm ">
                                 <div className="relative w-32 h-32 mb-4">
                                     <img
                                         src={tip.image}

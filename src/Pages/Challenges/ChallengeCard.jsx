@@ -16,7 +16,7 @@ const ChallengeCard = ({ challenge }) => {
                     </div>
 
                     {/* Image */}
-                    <figure className="h-52 p-1 overflow-hidden shadow-inner">
+                    <figure className="h-56 overflow-hidden shadow-inner">
                         <img src={challenge.imageUrl} alt={challenge.title} className="h-full w-full object-cover transition-transform duration-500 hover:scale-105" />
                     </figure>
 

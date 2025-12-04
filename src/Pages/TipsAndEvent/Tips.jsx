@@ -11,52 +11,37 @@ const Tips = () => {
 
 
     return (
-        <div>
-            <div className="relative w-full h-[500px] overflow-hidden">
-                <video
-                    src="https://media.istockphoto.com/id/1268227434/video/young-female-gardener-making-a-hole-and-planting-a-vegetable-plant-in-the-garden.mp4?s=mp4-640x640-is&k=20&c=ha9onOGVSlZxmxG3ooIePgRM573aRq9nw9Mk_eUVbhI="
-                    autoPlay
-                    loop
-                    muted
-                    className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-black/5 flex items-center justify-center">
-                    <h1 className="text-white md:text-5xl text-4xl font-bold bg-black/40 p-4 animate__animated animate__fadeInLeft animate__delay-2s">
-                        Tips
+        <div className=''>
+            <div className="relative py-16 h-[550px] bg-center bg-cover"
+                style={{
+                    backgroundImage: "url('https://gramotech.net/html/ecova/images/h2-slide1.jpg')",
+                }}
+            >
+                <div className="absolute inset-0 bg-black/10"></div>
+                <div className="relative z-10 flex items-center justify-start h-full">
+                    <h1 className="text-white flex items-center justify-center md:text-7xl text-5xl absolute top-1/2 left-1/4 transform -translate-y-1/2  inset-0 bg-black/20 animate__animated animate__fadeInLeft  font-extrabold">
+                       All Tips By Our Participant
                     </h1>
                 </div>
             </div>
+
             <MyContainer>
-                <div className='grid grid-cols-1 md:grid-cols-2 items-center gap-10 mt-24'>
+                <div className='text-center mt-24'>
                     <div className='p-2'>
-                        <h1 className='text-4xl font-bold'>All Tips By Our Participant</h1>
-                        <p>
+                        <h1 className=' text-5xl py-10 pd:my-4  uppercase text-green-600 font-extrabold text-center'>All Tips By Our Participant</h1>
+                        <p className='text-xl pb-18 text-gray-700 font-semibold text-center'>
                             Track your progress regularly to stay motivated and aware of your achievements. Small efforts each day can grow into meaningful improvements for both your lifestyle and the environment.
                         </p>
                     </div>
-                    {/* Category */}
-                    <div className="">
-                        <select
-                            name="category"
-                            className="select select-bordered w-full"
-                        >
-                            <option value="">Select Category</option>
-                            <option>Waste Reduction</option>
-                            <option>Energy Conservation</option>
-                            <option>Water Conservation</option>
-                            <option>Sustainable Transport</option>
-                            <option>Green Living</option>
-                        </select>
-
-                    </div>
+                  
 
                 </div>
 
-                <div className='grid grid-cols-1 md:grid-cols-2  bg-amber-400 gap-6'>
+                <div className='grid grid-cols-1 md:grid-cols-2  gap-6'>
                     {
                         tips?.map(tip => <div key={tip._id} className='mx-auto'>
                             {/* Card */}
-                            <div className="text-white bg-gray-800 p-6 rounded-2xl flex flex-col items-center shadow-xl">
+                            <div className="text-white bg-gray-200 p-6 rounded-2xl flex flex-col items-center shadow-xl">
                                 <div className="relative w-32 h-32 mb-4">
                                     <img
                                         src={tip.image}

@@ -27,16 +27,16 @@ const Challenges = () => {
 
     return (
         <div>
-            <div className="relative w-full h-[500px] overflow-hidden">
+            <div className="relative w-full h-[550px] overflow-hidden">
                 <video
-                    src="https://media.istockphoto.com/id/1268227434/video/young-female-gardener-making-a-hole-and-planting-a-vegetable-plant-in-the-garden.mp4?s=mp4-640x640-is&k=20&c=ha9onOGVSlZxmxG3ooIePgRM573aRq9nw9Mk_eUVbhI="
+                    src="https://media.istockphoto.com/id/2223500867/video/plastic-is-not-fantastic-a-group-of-volunteers-in-matching-outfits-cleans-the-park-of-garbage.mp4?s=mp4-640x640-is&k=20&c=pSx2iiPZVQKX22QdM53IRcv3Rdyw3ObhsNvF4KSe9lI="
                     autoPlay
                     loop
                     muted
                     className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-black/5 flex items-center justify-center">
-                    <h1 className="text-white flex items-center justify-center md:text-5xl text-4xl absolute top-1/2 left-1/4 transform -translate-y-1/2  inset-0 bg-black/40 animate__animated animate__fadeInLeft  animate__delay-2s font-bold">All Challenge</h1>
+                    <h1 className="text-white flex items-center justify-center md:text-7xl text-5xl absolute top-1/2 left-1/4 transform -translate-y-1/2  inset-0 bg-black/20 animate__animated animate__fadeInLeft  font-extrabold">All Challenges</h1>
                 </div>
             </div>
 
