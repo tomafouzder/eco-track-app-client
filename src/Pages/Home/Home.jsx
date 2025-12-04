@@ -6,6 +6,7 @@ import ActiveChallenge from '../Challenges/ActiveChallenge';
 import ResentTips from '../TipsAndEvent/ResentTips';
 import UpComingEvent from '../TipsAndEvent/UpComingEvent';
 import WhyGoGreen from '../WhyGreen/WhyGoGreen';
+import HowItWorks from '../WhyGreen/HowItWorks';
 
 const latestChallengePromise = fetch('http://localhost:3000/active-challenges').then(res => res.json())
 
@@ -38,7 +39,7 @@ const Home = () => {
             <WhyGoGreen/>
 
             {/* How It Works  */}
-            <h3 className='text-4xl my-16'>How It Works </h3>
+            <HowItWorks/>
 
         </div>
     );

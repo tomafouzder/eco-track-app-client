@@ -25,7 +25,7 @@ const ResentTips = ({ resentTipsData }) => {
 
 
             <MyContainer className="my-10">
-                <h2 className="md:text-5xl text-3xl px-2 mb-12  uppercase text-gray-950 font-extrabold text-center">Recent Tips</h2>
+                <h2 className="md:text-5xl text-3xl px-2  mb-12 py-4 bg-white  uppercase text-green-500 font-extrabold text-center shadow-2xl">Recent Tips</h2>
 
                 <Swiper
                     slidesPerView={1}

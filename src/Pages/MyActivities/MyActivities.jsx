@@ -14,10 +14,10 @@ const MyActivities = () => {
 
     useEffect(() => {
         if (user?.email) {
-            fetch(`http://localhost:3000/join-challenge?email=${user.email}`,{
+            fetch(`http://localhost:3000/join-challenge?email=${user.email}`, {
                 headers: {
-                authorization: `Bearer ${user.accessToken}`
-            }
+                    authorization: `Bearer ${user.accessToken}`
+                }
             })
                 .then(res => res.json())
                 .then(data => {
@@ -53,7 +53,7 @@ const MyActivities = () => {
 
                             const remainingData = joins.filter(join => join._id !== _id);
                             setJoins(remainingData)
-                           
+
                         }
                     })
                     .catch(error => {
@@ -67,8 +67,8 @@ const MyActivities = () => {
     }
 
     return (
-        <div>
-            <div className="relative w-full h-[500px] overflow-hidden">
+        <div className='bg-gray-100 pb-24'>
+            <div className="relative w-full h-[550px] overflow-hidden">
                 <video
                     src="https://media.istockphoto.com/id/1268227434/video/young-female-gardener-making-a-hole-and-planting-a-vegetable-plant-in-the-garden.mp4?s=mp4-640x640-is&k=20&c=ha9onOGVSlZxmxG3ooIePgRM573aRq9nw9Mk_eUVbhI="
                     autoPlay
@@ -82,21 +82,22 @@ const MyActivities = () => {
             </div>
 
             <MyContainer>
-                <MyChallenges/>
+                <h1 className='md:text-5xl text-3xl px-2 py-12 md:mt-24 md:mb-16  uppercase text-green-600 font-extrabold text-center border-b-2'>The Challenges I created</h1>
+                <MyChallenges />
             </MyContainer>
 
             <MyContainer>
-                <h3 className='text-7xl text-center my-24'>My Activities : {joins.length}</h3>
+                <h3 className='md:text-5xl text-3xl px-2 py-12 md:mt-32 md:mb-16  uppercase text-green-600 font-extrabold text-center border-b-2'>My Activities : {joins.length}</h3>
 
-                <div className="overflow-x-auto">
+                <div className="overflow-x-auto bg-green-100">
                     <table className="table">
                         {/* head */}
                         <thead>
                             <tr>
                                 <th>SL No.</th>
                                 <th>Participant Name</th>
-                                <th>Status</th>
-                                <th>Progress</th>
+                                <th className="hidden md:table-cell">Status</th>
+                                <th className="hidden md:table-cell">Progress</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -119,7 +120,7 @@ const MyActivities = () => {
                                             </div>
                                         </div>
                                     </td>
-                                    <td>
+                                    <td className="hidden md:table-cell">
                                         {join.status === "Ongoing" ?
                                             <div className="badge badge-warning">{join.status}</div>
                                             :
@@ -128,7 +129,7 @@ const MyActivities = () => {
                                         }
 
                                     </td>
-                                    <td>{join.progress}</td>
+                                    <td className="hidden md:table-cell">{join.progress}</td>
                                     <th>
                                         <button
                                             onClick={() => handleRemoveJoin(join._id)}
