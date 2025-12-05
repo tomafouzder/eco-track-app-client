@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import MyContainer from '../../components/Navbar/MyContainer';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import axios from 'axios';
 import { AuthContext } from '../../context/AuthProvider';
 import Swal from 'sweetalert2';
@@ -10,6 +10,7 @@ const UpdateChallenge = () => {
     const { id } = useParams();
     const [challenge, setChallenge] = useState(null);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
     console.log(challenge);
 
     useEffect(() => {
@@ -67,6 +68,7 @@ const UpdateChallenge = () => {
                     timer: 1500
                 });
                 console.log(res);
+                navigate(`/challengeDetails/${challenge._id}`)
             })
             .catch(error => {
                 console.log(error);
@@ -77,7 +79,7 @@ const UpdateChallenge = () => {
     if (loading) return <div>Loading challenge...</div>;
     return (
         <div>
-             <div className="relative w-full h-[550px] overflow-hidden">
+            <div className="relative w-full h-[550px] overflow-hidden">
                 <video
                     src="https://media.istockphoto.com/id/2191660851/video/sapling-growing.mp4?s=mp4-640x640-is&k=20&c=KDtJA_tfOSjWWPvj9JlI8CWE0K9wzgl2L9nXaGOqYrw="
                     autoPlay
@@ -109,6 +111,7 @@ const UpdateChallenge = () => {
                                 placeholder="Challenge Title"
                                 type='text'
                                 required
+                                readOnly
                                 className={`input input-bordered w-full`}
                             />
 
@@ -159,6 +162,7 @@ const UpdateChallenge = () => {
                             <input
                                 name="participants"
                                 type="number"
+                                readOnly
                                 defaultValue={challenge.participants}
                                 placeholder="Number of Participants"
 
@@ -233,6 +237,7 @@ const UpdateChallenge = () => {
                             </label>
                             <input
                                 name="createdBy"
+                                readOnly
                                 defaultValue={challenge.createdBy}
                                 placeholder="Creator Email"
                                 required

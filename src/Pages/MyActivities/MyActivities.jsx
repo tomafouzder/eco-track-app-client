@@ -4,6 +4,9 @@ import { AuthContext } from '../../context/AuthProvider';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import MyChallenges from './MyChallenges';
+import { ImCancelCircle } from 'react-icons/im';
+import { AiOutlineClose } from 'react-icons/ai';
+import { useNavigate } from 'react-router';
 
 
 
@@ -11,6 +14,8 @@ const MyActivities = () => {
 
     const { user } = useContext(AuthContext);
     const [joins, setJoins] = useState([]);
+    const [isOpen, setIsOpen] = useState(null);
+    const [refetch, setRefetch] = useState(false)
 
     useEffect(() => {
         if (user?.email) {
@@ -25,7 +30,38 @@ const MyActivities = () => {
                     setJoins(data)
                 })
         }
-    }, [user])
+    }, [user, refetch])
+
+
+    const handleUpdateSubmit = (e) => {
+        e.preventDefault();
+        const formData = {
+            status: e.target.status.value,
+            progress: e.target.progress.value,
+
+        }
+
+        axios.put(`http://localhost:3000/join-challenge/${isOpen._id}`, formData,
+            {
+                headers: {
+                    authorization: `Bearer ${user.accessToken}`
+                }
+            })
+            .then(res => {
+                Swal.fire({
+
+                    icon: "success",
+                    title: "Your work has been saved",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                console.log(res);
+                setRefetch(!refetch)
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    };
 
 
     const handleRemoveJoin = (_id) => {
@@ -98,17 +134,18 @@ const MyActivities = () => {
                         {/* head */}
                         <thead>
                             <tr>
-                                <th>SL No.</th>
-                                <th>Participant Name</th>
+                                <th className="hidden md:table-cell">SL No.</th>
+                                <th >Participant Name</th>
                                 <th className="hidden md:table-cell">Status</th>
-                                <th className="hidden md:table-cell">Progress</th>
-                                <th>Action</th>
+                                <th >Progress</th>
+                                <th>Update</th>
+                                <th className="hidden md:table-cell">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             {
                                 joins.map((join, index) => <tr key={join._id}>
-                                    <th>{index + 1} </th>
+                                    <th className="hidden md:table-cell">{index + 1} </th>
                                     <td>
                                         <div className="flex items-center gap-3">
                                             <div className="">
@@ -133,8 +170,13 @@ const MyActivities = () => {
                                         }
 
                                     </td>
-                                    <td className="hidden md:table-cell">{join.progress}</td>
+                                    <td >{join.progress}</td>
                                     <th>
+                                        <button
+                                            onClick={() => setIsOpen(join)}
+                                            className="btn btn-outline btn-xs">Update</button>
+                                    </th>
+                                    <th className="hidden md:table-cell">
                                         <button
                                             onClick={() => handleRemoveJoin(join._id)}
                                             className="btn btn-outline btn-xs">Remove</button>
@@ -142,8 +184,70 @@ const MyActivities = () => {
                                 </tr>)
                             }
                         </tbody>
-
                     </table>
+
+                    {isOpen && (
+                        <div className="modal  modal-open">
+                            <div className="modal-box relative">
+                                {/* Close Icon */}
+                                <button
+                                    className="absolute top-3 right-3 text-gray-400 "
+                                    onClick={() => setIsOpen(null)}
+                                >
+                                    <AiOutlineClose size={24} />
+                                </button>
+
+
+                                <div>
+                                    <h2 className="text-3xl font-bold text-center ">
+                                        Update Challenge
+                                    </h2>
+
+                                    <form
+                                        onSubmit={handleUpdateSubmit}
+                                        className="space-y-4">
+
+                                        {/* status */}
+                                        <div>
+                                            <label className="block font-medium mb-1">Status</label>
+                                            <select
+                                                name='status'
+                                                className="select select-bordered w-full">
+                                                <option>Not Started</option>
+                                                <option>Ongoing</option>
+                                                <option>Finished</option>
+                                            </select>
+                                        </div>
+
+                                        {/* progress */}
+                                        <div>
+                                            <label className="block font-medium mb-1">Progress (%)</label>
+                                            <input
+                                                name='progress'
+                                                defaultValue={isOpen.progress}
+                                                type="number"
+                                                placeholder="0"
+                                                className="input input-bordered w-full"
+                                            />
+                                        </div>
+
+
+                                        {/* Submit button */}
+                                        <button
+                                            type="submit"
+                                            className="btn btn-success w-full text-white"
+                                        >
+                                            Update Challenge
+                                        </button>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    )}
+
+
+
                 </div>
             </MyContainer>
 

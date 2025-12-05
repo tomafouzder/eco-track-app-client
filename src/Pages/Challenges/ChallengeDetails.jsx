@@ -121,9 +121,6 @@ const ChallengeDetails = () => {
                                 icon: "success"
                             });
                             navigate("/my-activities")
-
-                            // const remainingData = challenge.filter(challenge => challenge._id !== _id);
-                            // setChallenge(remainingData)
                         }
                         else { console.log(" error") }
                     })
@@ -232,7 +229,7 @@ const ChallengeDetails = () => {
                                 <button
                                     onClick={handleJoinModalOpen}
                                     className="button px-6 w-full py-2 bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold rounded-full  shadow-lg hover:scale-[1.02] transition transform duration-300">
-                                    Join Challenge
+                                    Join
                                 </button>
                             </div>
 
@@ -360,20 +357,20 @@ const ChallengeDetails = () => {
                         {/* head */}
                         <thead>
                             <tr>
-                                <th>SL No.</th>
+                                <th className="hidden md:table-cell">SL No.</th>
                                 <th>Participant Name</th>
                                 <th>Status</th>
-                                <th className="hidden md:table-cell">Progress</th>
+                                <th >Progress</th>
                             </tr>
                         </thead>
                         <tbody>
                             {
                                 joining.map((join, index) => <tr key={join._id}>
-                                    <th>{index + 1} </th>
+                                    <th className="hidden md:table-cell">{index + 1} </th>
                                     <td>
                                         <div className="flex items-center gap-3">
                                             <div className="">
-                                                <div className="mask mask-squircle h-12 w-12">
+                                                <div className="mask hidden md:table-cell mask-squircle h-12 w-12">
                                                     <img
                                                         src={join.userImage}
                                                         alt="User Image" />
@@ -394,7 +391,7 @@ const ChallengeDetails = () => {
                                         }
 
                                     </td>
-                                    <td className="hidden md:table-cell">{join.progress}</td>
+                                    <td >{join.progress}</td>
                                 </tr>)
                             }
                         </tbody>

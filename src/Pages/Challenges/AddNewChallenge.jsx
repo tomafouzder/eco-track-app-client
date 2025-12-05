@@ -3,7 +3,8 @@ import MyContainer from "../../components/Navbar/MyContainer";
 import axios from "axios";
 import { AuthContext } from "../../context/AuthProvider";
 import AddEvent from "../TipsAndEvent/AddEvent";
-import toast from "react-hot-toast";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router";
 
 const AddNewChallenge = () => {
     const { user } = use(AuthContext)
@@ -11,6 +12,7 @@ const AddNewChallenge = () => {
     const [formData, setFormData] = useState({});
     const [errors, setErrors] = useState({});
     const [challenges, setChallenges] = useState([]);
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -58,7 +60,8 @@ const AddNewChallenge = () => {
         })
             .then(res => {
                 console.log(res);
-                toast.success("Successfully added")
+                if (validateForm()) return;
+
             })
             .catch(error => {
                 console.log(error);
@@ -66,7 +69,9 @@ const AddNewChallenge = () => {
 
 
 
-        if (!validateForm()) return;
+
+
+
 
         const newChallenge = {
             ...formData,
@@ -77,6 +82,8 @@ const AddNewChallenge = () => {
         setChallenges([newChallenge, ...challenges]);
         setFormData({});
         setErrors({});
+
+        navigate(`/challenges`)
     };
 
     return (
