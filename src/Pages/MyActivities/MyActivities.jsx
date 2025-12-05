@@ -40,7 +40,11 @@ const MyActivities = () => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                axios.delete(`http://localhost:3000/join-challenge/${_id}`)
+                axios.delete(`http://localhost:3000/join-challenge/${_id}`, {
+                    headers: {
+                        authorization: `Bearer ${user.accessToken}`
+                    }
+                })
                     .then(res => {
                         const data = res.data;
                         if (data.deletedCount) {
@@ -53,7 +57,6 @@ const MyActivities = () => {
 
                             const remainingData = joins.filter(join => join._id !== _id);
                             setJoins(remainingData)
-
                         }
                     })
                     .catch(error => {
@@ -88,7 +91,7 @@ const MyActivities = () => {
             </MyContainer>
 
             <MyContainer>
-                <h3 className='text-4xl border-b-2 font-extrabold text-gray-800 px-2 py-12 md:mt-24 md:mb-16'>Challenges I have participated in : {joins.length}</h3>
+                <h3 className='text-4xl border-b-2 font-extrabold text-gray-800 px-2 py-12 md:mt-24 md:mb-16'>Challenges I have participated in : {joins.length || 0}</h3>
 
                 <div className="overflow-x-auto bg-green-100">
                     <table className="table">

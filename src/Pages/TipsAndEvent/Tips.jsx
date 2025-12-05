@@ -11,8 +11,8 @@ const Tips = () => {
 
 
     return (
-        <div className=''>
-             <div className="relative w-full h-[550px] overflow-hidden">
+        <div className='bg-gray-700 pb-24'>
+            <div className="relative w-full h-[550px] overflow-hidden">
                 <video
                     src="https://media.istockphoto.com/id/1306471871/video/wind-turbines-in-the-ocean.mp4?s=mp4-640x640-is&k=20&c=E4t_e8WhjNhsAGr8o62C-Mafp4xZHz4KBi3vsV2Fi4M="
                     autoPlay
@@ -26,29 +26,27 @@ const Tips = () => {
             </div>
 
             <MyContainer>
-                <div className='text-center mt-24'>
-                    <div className='p-2'>
-                        <h1 className=' text-5xl py-10 pd:my-4  uppercase text-green-600 font-extrabold text-center'>All Tips By Our Participant</h1>
-                        <p className='text-xl pb-18 text-gray-700 font-semibold text-center'>
-                            Track your progress regularly to stay motivated and aware of your achievements. Small efforts each day can grow into meaningful improvements for both your lifestyle and the environment.
+                <div className='text-center pb-16 mt-24'>
+                    <div className='p-6 md:p-0'>
+                        <h1 className='md:text-5xl text-3xl uppercase text-white font-extrabold text-center'>All Tips </h1>
+                        <p className='text-gray-200 my-6'>
+                           “Share Your Tips” encourages participants to exchange simple, practical ideas that make everyday life easier, healthier, and more sustainable. From study hacks to eco-friendly habits, this feature helps everyone learn from real experiences. By sharing knowledge, the community grows stronger, more creative, and better equipped to solve common challenges together
                         </p>
                     </div>
-                  
-
                 </div>
 
                 <div className='grid grid-cols-1 md:grid-cols-2  gap-6'>
                     {
-                        tips?.map(tip => <div key={tip._id} className='mx-auto'>
+                        tips?.map(tip => <div key={tip._id} className='mx-auto px-2 md:px-0'>
                             {/* Card */}
-                            <div className="text-white bg-gray-200 p-6 rounded-2xl flex flex-col items-center shadow-xl">
+                            <div className="text-white bg-gray-800 p-6 rounded-2xl flex flex-col items-center shadow-xl">
                                 <div className="relative w-32 h-32 mb-4">
                                     <img
                                         src={tip.image}
                                         alt="Profile"
                                         className="w-full h-full object-cover rounded-full"
                                     />
-                                    <span className="absolute bottom-1 left-1 bg-purple-600 text-white text-xs font-semibold px-2 py-1 rounded-lg">
+                                    <span className="absolute bottom-1 left-1 bg-green-600 text-white text-xs font-semibold px-2 py-1 rounded-lg">
                                         {tip.category}
                                     </span>
                                 </div>
@@ -58,7 +56,7 @@ const Tips = () => {
                                 <p className="text-sm text-gray-400 line-clamp-1 mt-2">{tip.content}</p>
 
                                 <button
-                                    className="mt-4 text-yellow-400 text-sm font-semibold hover:underline"
+                                    className="mt-4 text-blue-400 text-sm font-semibold hover:underline"
                                     onClick={() => setIsOpen(tip)}
                                 >
                                     See More
@@ -68,19 +66,19 @@ const Tips = () => {
                             {/* Modal */}
                             {isOpen && (
                                 <div className="modal  modal-open">
-                                    <div className="modal-box relative">
+                                    <div className="modal-box bg-gray-700 text-white relative">
                                         {/* Close Icon */}
                                         <button
-                                            className="absolute top-3 right-3 text-gray-400 hover:text-gray-700"
+                                            className="absolute top-3 right-3 text-gray-400 "
                                             onClick={() => setIsOpen(null)}
                                         >
                                             <AiOutlineClose size={24} />
                                         </button>
 
-                                        <h3 className="font-bold text-lg mb-2">{isOpen.authorName}</h3>
-                                        <p className="text-sm text-gray-600 mb-4">{isOpen.title} | Votes :   {isOpen.upVotes}</p>
+                                        <h3 className="font-bold text-white text-xl mb-2">Author Name : {isOpen.authorName}</h3>
+                                        <p className="text-lg text-gray-100 mb-4">{isOpen.title} | Votes :   {isOpen.upVotes}</p>
 
-                                        <p className="text-gray-700">
+                                        <p className="text-gray-100 text-lg ">
                                             {isOpen.content}
                                         </p>
                                     </div>

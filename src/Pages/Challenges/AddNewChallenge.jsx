@@ -285,9 +285,9 @@ const AddNewChallenge = () => {
             </MyContainer>
 
             {/* add event  */}
-            <MyContainer className="py-24">
+            <MyContainer className="py-24 px-2 md:px-0">
                 <h2 className="md:text-5xl text-3xl px-2 my-12  uppercase text-green-600 font-extrabold text-center">Create Event:</h2>
-                <p className="text-lg font-semibold opacity-75 pb-16 border-b-2">
+                <p className="text-lg font-semibold text-center opacity-75 pb-16 border-b-2">
                     A community event brings people together to share ideas, support local activities, build connections, and create positive impact through teamwork, cultural exchange, learning opportunities, and meaningful participation that strengthens neighborhood unity and collaboration
                 </p>
                 <AddEvent></AddEvent>

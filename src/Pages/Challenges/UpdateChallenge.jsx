@@ -3,6 +3,7 @@ import MyContainer from '../../components/Navbar/MyContainer';
 import { useParams } from 'react-router';
 import axios from 'axios';
 import { AuthContext } from '../../context/AuthProvider';
+import Swal from 'sweetalert2';
 
 const UpdateChallenge = () => {
     const { user } = useContext(AuthContext)
@@ -20,7 +21,9 @@ const UpdateChallenge = () => {
         })
             .then(res => res.json())
             .then(data => {
+
                 if (data.success && data.result) {
+
                     setChallenge(data.result);
                     setLoading(false)
                 } else {
@@ -30,7 +33,7 @@ const UpdateChallenge = () => {
             .catch(err => console.log(err));
 
 
-    }, [id])
+    }, [user, id])
 
 
     //  handleSubmit and new data update collection:
@@ -39,8 +42,8 @@ const UpdateChallenge = () => {
         const formData = {
             title: e.target.title.value,
             category: e.target.category.value,
-            duration: parseInt (e.target.duration.value),
-            participants: parseInt (e.target.participants.value),
+            duration: parseInt(e.target.duration.value),
+            participants: parseInt(e.target.participants.value),
             imageUrl: e.target.imageUrl.value,
             description: e.target.description.value,
             target: e.target.target.value,
@@ -56,6 +59,13 @@ const UpdateChallenge = () => {
             }
         })
             .then(res => {
+                Swal.fire({
+
+                    icon: "success",
+                    title: "Your work has been saved",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
                 console.log(res);
             })
             .catch(error => {
@@ -67,18 +77,16 @@ const UpdateChallenge = () => {
     if (loading) return <div>Loading challenge...</div>;
     return (
         <div>
-            <div className="relative w-full h-[500px] overflow-hidden">
+             <div className="relative w-full h-[550px] overflow-hidden">
                 <video
-                    src="https://media.istockphoto.com/id/1268227434/video/young-female-gardener-making-a-hole-and-planting-a-vegetable-plant-in-the-garden.mp4?s=mp4-640x640-is&k=20&c=ha9onOGVSlZxmxG3ooIePgRM573aRq9nw9Mk_eUVbhI="
+                    src="https://media.istockphoto.com/id/2191660851/video/sapling-growing.mp4?s=mp4-640x640-is&k=20&c=KDtJA_tfOSjWWPvj9JlI8CWE0K9wzgl2L9nXaGOqYrw="
                     autoPlay
                     loop
                     muted
                     className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-black/5 flex items-center justify-center">
-                    <h1 className="text-white md:text-5xl text-4xl font-bold bg-black/40 p-4 animate__animated animate__fadeInLeft animate__delay-2s">
-                        Add New Challenge
-                    </h1>
+                    <h1 className="text-white flex items-center justify-center md:text-7xl text-5xl absolute top-1/2 left-1/4 transform -translate-y-1/2  inset-0 bg-black/20 animate__animated animate__fadeInLeft  font-extrabold">All Challenges</h1>
                 </div>
             </div>
 

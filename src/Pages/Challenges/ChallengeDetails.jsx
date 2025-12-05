@@ -2,11 +2,14 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { FaUsers, FaCalendarAlt, FaRecycle } from "react-icons/fa";
 import 'animate.css';
 import MyContainer from "../../components/Navbar/MyContainer";
-import { Link, useParams } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
 import JoinChallenge from "./JoinChallenge";
 import { ImCancelCircle } from "react-icons/im";
 import { AuthContext } from "../../context/AuthProvider";
 import axios from "axios";
+import { FiClock } from "react-icons/fi";
+import Swal from 'sweetalert2';
+
 
 
 const ChallengeDetails = () => {
@@ -15,8 +18,10 @@ const ChallengeDetails = () => {
     const [challenge, setChallenge] = useState(null);
     const [loading, setLoading] = useState(true);
     const [joining, setJoining] = useState([]);
-    const [refetch, setRefetch]= useState(false)
+    const [refetch, setRefetch] = useState(false)
     const joinModalRef = useRef(null)
+    const navigate = useNavigate();
+
 
     useEffect(() => {
         if (!id) return;
@@ -36,19 +41,22 @@ const ChallengeDetails = () => {
             .catch(err => console.log(err));
 
 
-    }, [id , refetch])
+    }, [id, user, refetch])
 
     useEffect(() => {
 
         if (!challenge?._id) return;
-        fetch(`http://localhost:3000/challenges/join-challenge/${challenge._id}`)
+        fetch(`http://localhost:3000/challenges/join-challenge/${challenge._id}`, {
+            headers: {
+                authorization: `Bearer ${user.accessToken}`
+            }
+        })
             .then(res => res.json())
             .then(data => {
-                // console.log("total joining people for this challenge", data)
                 setJoining(data);
             })
             .catch(err => console.log(err));
-    }, [challenge?._id])
+    }, [challenge?._id, user])
 
     const handleJoinModalOpen = () => {
         joinModalRef.current.showModal()
@@ -86,123 +94,205 @@ const ChallengeDetails = () => {
             })
 
     }
-    if (loading) return <div>Loading challenge...</div>;
-    return (
-        <div>
 
-            <div className="relative w-full h-[500px] overflow-hidden">
+    const handleDelete = (_id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                axios.delete(`http://localhost:3000/challenges/${_id}`,{
+                    headers: {
+                        authorization: `Bearer ${user.accessToken}`
+                    }
+                })
+                    .then(res => {
+                        const data = res.data;
+                        if (data.deletedCount) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success"
+                            });
+                            navigate("/my-activities")
+
+                            // const remainingData = challenge.filter(challenge => challenge._id !== _id);
+                            // setChallenge(remainingData)
+                        }
+                        else { console.log(" error") }
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+
+
+            }
+        });
+
+    }
+    if (loading) return <div>Loading challenge...</div>;
+
+    return (
+        <div className="bg-gray-100">
+
+             <div className="relative w-full h-[550px] overflow-hidden">
                 <video
-                    src="https://media.istockphoto.com/id/1268227434/video/young-female-gardener-making-a-hole-and-planting-a-vegetable-plant-in-the-garden.mp4?s=mp4-640x640-is&k=20&c=ha9onOGVSlZxmxG3ooIePgRM573aRq9nw9Mk_eUVbhI="
+                    src="https://media.istockphoto.com/id/2199515129/video/poster-highlighting-tree-planting-movement-for-a-sustainable-future.mp4?s=mp4-640x640-is&k=20&c=pGL01g6d7vbPPTp0o_eCiBXqxHqa7yFG4-GoMZoYccs="
                     autoPlay
                     loop
                     muted
                     className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-black/5 flex items-center justify-center">
-                    <h1 className="text-white flex items-center justify-center md:text-5xl text-4xl absolute top-1/2 left-1/4 transform -translate-y-1/2  inset-0 bg-black/40 animate__animated animate__fadeInLeft  animate__delay-2s font-bold">Challenge details : {challenge.title}</h1>
+                    <h1 className="text-white flex items-center justify-center md:text-7xl text-5xl absolute top-1/2 left-1/4 transform -translate-y-1/2  inset-0 bg-black/20 animate__animated animate__fadeInLeft  font-extrabold">All Challenges</h1>
                 </div>
             </div>
             {/* details */}
-            <MyContainer className="p-6 bg-white rounded-2xl shadow-lg border border-gray-200">
-                {/* Image */}
-                <div className="w-full h-64 overflow-hidden rounded-xl mb-6">
-                    <img
-                        src={challenge.imageUrl}
-                        alt={challenge.title}
-                        className="w-full h-full object-cover"
-                    />
-                </div>
+            <MyContainer className="px-2 md:px-0 ">
+                <h3 className='md:text-5xl text-3xl px-2 my-12 md:mt-24 md:mb-16  uppercase text-green-600 font-extrabold text-center'>Challenge Details </h3>
 
-                {/* Title & Category */}
-                <div className="mb-4">
-                    <h2 className="text-3xl font-bold text-gray-800">{challenge.title}</h2>
-                    <span className="inline-block mt-1 px-3 py-1 bg-green-100 text-green-800 text-sm rounded-full">
-                        {challenge.category}
-                    </span>
-                </div>
+                <div className="border border-green-900 bg-white md:border-none  shadow-lg overflow-hidden backdrop-blur mt-24 flex flex-col h-full">
 
-                {/* Description */}
-                <p className="text-gray-700 mb-4">{challenge.description}</p>
+                    <div className="relative p-1">
+                        <img
+                            className="w-full h-96 object-cover"
+                            src={challenge.imageUrl}
+                            alt="event"
+                        />
 
-                {/* Details */}
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6 text-gray-600">
-                    <div className="flex items-center space-x-2">
-                        <FaCalendarAlt className="text-green-500" />
-                        <span>
-                            {challenge.startDate} - {challenge.endDate}
+                        <span className="absolute bottom-1 left-1 bg-green-500 text-white text-sm font-semibold flex items-center gap-2 px-2 py-1 rounded-lg">
+                            <FaUsers />
+                            Current Participants : {challenge.participants}
+                        </span>
+                        <span className="absolute bottom-1 right-1 bg-green-500 text-white text-sm font-semibold px-2 py-1 rounded-lg">
+                            Category :  {challenge.category}
                         </span>
                     </div>
-                    <div className="flex items-center space-x-2">
-                        <FaUsers className="text-green-500" />
-                        <span>{challenge.participants} Participants</span>
+
+                    {/* card body */}
+                    <div className="p-6 text-gray-900 flex-1 flex flex-col justify-between">
+                        <div className="text-center">
+                            <h2 className="text-3xl mt-2  font-bold text-gray-800">{challenge.title}</h2>
+
+                            <div className="flex items-center border-gray-200 border-b-2 opacity-90 justify-center py-2 mb-4 space-x-2">
+                                <FaRecycle className="text-green-500" />
+                                <span >Impact: {challenge.impactMetric}</span>
+                            </div>
+
+                            <p className="text-gray-700  mb-8">{challenge.description}</p>
+                        </div>
+
+                        <div className="flex justify-between items-center p-4  mt-2">
+                            <div className="">
+                                <h3 className="font-bold text-xl text-gray-800 mb-1">Target</h3>
+                                <p className="text-gray-600 font-semibold">{challenge.target}</p>
+                            </div>
+                            <div className="">
+                                <h3 className="font-bold text-xl text-gray-800 mb-1">Duration</h3>
+                                <p className="text-gray-600 font-semibold">Days : {challenge.duration}</p>
+                            </div>
+                        </div>
+
+                        {/* Footer */}
+                        <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-blue-500 border-gray-300 border p-4 mt-auto">
+
+                            <div className="">
+                                <p className="flex items-center gap-1 pb-2">
+                                    <FiClock />
+                                    Created At :{challenge.createdAt}
+                                </p>
+                                <p className="flex items-center gap-1">
+                                    <FiClock />
+                                    UpdatedAt :{challenge.updatedAt}
+                                </p>
+                            </div>
+
+                            <div className="">
+                                <p className="flex items-center gap-2 pb-2">
+                                    <FiClock />
+                                    Started On :{challenge.startDate}
+                                </p>
+                                <p className="flex items-center gap-2">
+                                    <FiClock />
+                                    EndDate : {challenge.endDate}
+                                </p>
+                            </div>
+                        </div>
+
+
+                        {/* Button */}
+                        <div className="flex justify-between items-center mt-8 ">
+                            <div>
+                                <button
+                                    onClick={handleJoinModalOpen}
+                                    className="button px-6 w-full py-2 bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold rounded-full  shadow-lg hover:scale-[1.02] transition transform duration-300">
+                                    Join Challenge
+                                </button>
+                            </div>
+
+                            <div className="flex items-center gap-2">
+                                {/* update button */}
+                                {
+                                    user?.email == challenge.
+                                        createdBy ? <button
+                                            className="button px-6 w-full py-2 bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold rounded-full  shadow-lg hover:scale-[1.02] transition transform duration-300"
+                                        >
+                                        <Link to={`/updateChallenge/${challenge._id}`}>
+                                            Update
+                                        </Link>
+                                    </button>
+
+                                        : " "
+                                }
+
+                                {/* Delete button */}
+                                {
+                                    user?.email == challenge.
+                                        createdBy ?
+                                        <button
+                                            onClick={() => handleDelete(challenge._id)}
+                                            className="button px-6 w-full py-2 bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold rounded-full  shadow-lg hover:scale-[1.02] transition transform duration-300">
+                                            Delete
+                                        </button>
+
+                                        : " "
+                                }
+                            </div>
+                        </div>
                     </div>
-                    <div className="flex items-center space-x-2">
-                        <FaRecycle className="text-green-500" />
-                        <span>Impact: {challenge.impactMetric}</span>
-                    </div>
+
+                    {/*Join modal */}
+                    <dialog
+                        ref={joinModalRef}
+                        className="modal modal-bottom sm:modal-middle">
+                        <div className="modal-box">
+                            <form method="dialog" className="flex justify-end items-center">
+                                <button className="">
+                                    <ImCancelCircle />
+                                </button>
+                            </form>
+
+                            <JoinChallenge
+                                challengeId={challenge._id}
+                                joinModalRef={joinModalRef}
+                                joining={joining}
+                                setJoining={setJoining}
+                                setRefetch={setRefetch}
+                            ></JoinChallenge>
+                        </div>
+                    </dialog>
+
                 </div>
-
-                {/* Target */}
-                <div className="mb-6">
-                    <h3 className="font-semibold text-gray-800 mb-1">Target</h3>
-                    <p className="text-gray-700">{challenge.target}</p>
-                </div>
-
-                {/* Join Button */}
-
-                <button
-                    onClick={handleJoinModalOpen}
-                    className="btn btn-success w-full md:w-auto px-6 py-3 text-white font-semibold">
-                    Join Challenge
-                </button>
-
-
-                {
-                    user?.email == challenge.
-                        createdBy ? <Link to={`/updateChallenge/${challenge._id}`}>
-                        <button className="btn btn-success w-full md:w-auto px-6 py-3 text-white font-semibold">
-                            Update Challenge
-                        </button>
-                    </Link>
-                        : " "
-                }
-
-                {
-                    user?.email == challenge.
-                        createdBy ? 
-                        <button className="btn btn-success w-full md:w-auto px-6 py-3 text-white font-semibold">
-                            Update Challenge
-                        </button>
-                    
-                        : " "
-                }
-
-
-                {/*Join modal */}
-                <dialog
-                    ref={joinModalRef}
-                    className="modal modal-bottom sm:modal-middle">
-                    <div className="modal-box">
-                        <form method="dialog" className="flex justify-end items-center">
-                            <button className="">
-                                <ImCancelCircle />
-                            </button>
-                        </form>
-
-                        <JoinChallenge
-                            challengeId={challenge._id}
-                            joinModalRef={joinModalRef}
-                            joining={joining}
-                            setJoining={setJoining}
-                            setRefetch={setRefetch}
-                        ></JoinChallenge>
-                    </div>
-                </dialog>
-
             </MyContainer>
 
             {/* Give me your tips and ideas */}
-            <MyContainer className="my-40">
+            <MyContainer className="my-40 ">
                 <div className="hero bg-base-200 min-h-screen">
                     <div className=" flex-col lg:flex-row-reverse">
                         <div className="text-center p-4 lg:text-left">
@@ -263,24 +353,22 @@ const ChallengeDetails = () => {
 
             {/* total joining people this challenge */}
             <MyContainer>
-                <div>
-                    <h1 className="text-4xl ">Total Joining People In This Challenge:{joining.length} </h1>
-                </div>
+                <h3 className='text-4xl border-b-2 font-extrabold text-gray-800 px-2 py-12 md:mt-24 md:mb-16'>Total Joining People In This Challenge : {joining.length}</h3>
 
-                <div className="overflow-x-auto">
+                <div className="overflow-x-auto bg-green-100">
                     <table className="table">
                         {/* head */}
                         <thead>
                             <tr>
                                 <th>SL No.</th>
+                                <th>Participant Name</th>
                                 <th>Status</th>
-                                <th>Challenge Name</th>
-                                <th>Progress</th>
+                                <th className="hidden md:table-cell">Progress</th>
                             </tr>
                         </thead>
                         <tbody>
                             {
-                                joining.map((join, index) => <tr key={index}>
+                                joining.map((join, index) => <tr key={join._id}>
                                     <th>{index + 1} </th>
                                     <td>
                                         <div className="flex items-center gap-3">
@@ -297,13 +385,16 @@ const ChallengeDetails = () => {
                                             </div>
                                         </div>
                                     </td>
-                                    <td>
-                                        {join.status}
+                                    <td className="">
+                                        {join.status === "Ongoing" ?
+                                            <div className="badge badge-warning">{join.status}</div>
+                                            :
+                                            <div className="badge badge-success">{join.status}</div>
+
+                                        }
+
                                     </td>
-                                    <td>{join.progress}</td>
-                                    <th>
-                                        <button className="btn btn-ghost btn-xs">details</button>
-                                    </th>
+                                    <td className="hidden md:table-cell">{join.progress}</td>
                                 </tr>)
                             }
                         </tbody>
@@ -311,7 +402,6 @@ const ChallengeDetails = () => {
                     </table>
                 </div>
             </MyContainer>
-
         </div>
     );
 };
