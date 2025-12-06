@@ -2,13 +2,14 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { FaUsers, FaCalendarAlt, FaRecycle } from "react-icons/fa";
 import 'animate.css';
 import MyContainer from "../../components/Navbar/MyContainer";
-import { Link, useNavigate, useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import JoinChallenge from "./JoinChallenge";
 import { ImCancelCircle } from "react-icons/im";
 import { AuthContext } from "../../context/AuthProvider";
 import axios from "axios";
 import { FiClock } from "react-icons/fi";
 import Swal from 'sweetalert2';
+import Loading from "../../components/Loading/Loading";
 
 
 
@@ -20,7 +21,6 @@ const ChallengeDetails = () => {
     const [joining, setJoining] = useState([]);
     const [refetch, setRefetch] = useState(false)
     const joinModalRef = useRef(null)
-    const navigate = useNavigate();
 
 
     useEffect(() => {
@@ -107,7 +107,7 @@ const ChallengeDetails = () => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                axios.delete(`http://localhost:3000/challenges/${_id}`,{
+                axios.delete(`http://localhost:3000/challenges/${_id}`, {
                     headers: {
                         authorization: `Bearer ${user.accessToken}`
                     }
@@ -120,7 +120,6 @@ const ChallengeDetails = () => {
                                 text: "Your file has been deleted.",
                                 icon: "success"
                             });
-                            navigate("/my-activities")
                         }
                         else { console.log(" error") }
                     })
@@ -133,12 +132,12 @@ const ChallengeDetails = () => {
         });
 
     }
-    if (loading) return <div>Loading challenge...</div>;
+    if (loading) return <Loading />;
 
     return (
         <div className="bg-gray-100">
 
-             <div className="relative w-full h-[550px] overflow-hidden">
+            <div className="relative w-full h-[550px] overflow-hidden">
                 <video
                     src="https://media.istockphoto.com/id/2199515129/video/poster-highlighting-tree-planting-movement-for-a-sustainable-future.mp4?s=mp4-640x640-is&k=20&c=pGL01g6d7vbPPTp0o_eCiBXqxHqa7yFG4-GoMZoYccs="
                     autoPlay
@@ -150,6 +149,7 @@ const ChallengeDetails = () => {
                     <h1 className="text-white flex items-center justify-center md:text-7xl text-5xl absolute top-1/2 left-1/4 transform -translate-y-1/2  inset-0 bg-black/20 animate__animated animate__fadeInLeft  font-extrabold">All Challenges</h1>
                 </div>
             </div>
+            
             {/* details */}
             <MyContainer className="px-2 md:px-0 ">
                 <h3 className='md:text-5xl text-3xl px-2 my-12 md:mt-24 md:mb-16  uppercase text-green-600 font-extrabold text-center'>Challenge Details </h3>

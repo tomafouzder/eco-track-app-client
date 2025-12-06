@@ -1,4 +1,4 @@
-import { use, useState } from "react";
+import {  useContext, useState } from "react";
 import MyContainer from "../../components/Navbar/MyContainer";
 import axios from "axios";
 import { AuthContext } from "../../context/AuthProvider";
@@ -7,8 +7,7 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
 
 const AddNewChallenge = () => {
-    const { user } = use(AuthContext)
-    console.log(user);
+    const { user } = useContext(AuthContext)
     const [formData, setFormData] = useState({});
     const [errors, setErrors] = useState({});
     const [challenges, setChallenges] = useState([]);
@@ -28,7 +27,6 @@ const AddNewChallenge = () => {
         if (!formData.imageUrl) newErrors.imageUrl = "Image URL is required";
         if (!formData.target) newErrors.target = "Target is required";
         if (!formData.impactMetric) newErrors.impactMetric = "Impact metric is required";
-        if (!formData.createdBy) newErrors.createdBy = "Creator email is required";
         if (!formData.startDate) newErrors.startDate = "Start date is required";
         if (!formData.endDate) newErrors.endDate = "End date is required";
 
@@ -39,7 +37,17 @@ const AddNewChallenge = () => {
     // handleSubmit and new data collection : 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const formData = {
+
+        if (!validateForm()) {
+            Swal.fire({
+                icon: "error",
+                title: "Please...",
+                text: "Fill up all requirement!",
+            });
+            return;
+        }
+
+        const submittedData = {
             title: e.target.title.value,
             category: e.target.category.value,
             duration: parseInt(e.target.duration.value),
@@ -48,33 +56,35 @@ const AddNewChallenge = () => {
             description: e.target.description.value,
             target: e.target.target.value,
             impactMetric: e.target.impactMetric.value,
-            createdBy: e.target.createdBy.value,
+            createdBy: user?.email,
             startDate: e.target.startDate.value,
             endDate: e.target.endDate.value,
         }
 
-        axios.post('http://localhost:3000/challenges', formData, {
+        axios.post('http://localhost:3000/challenges', submittedData, {
             headers: {
                 authorization: `Bearer ${user.accessToken}`
             }
         })
             .then(res => {
                 console.log(res);
-                if (validateForm()) return;
 
+                Swal.fire({
+                    icon: "success",
+                    title: "Challenge Added!",
+                    timer: 1500,
+                    showConfirmButton: false,
+                });
+
+                navigate("/challenges");
             })
             .catch(error => {
                 console.log(error);
             })
 
 
-
-
-
-
-
         const newChallenge = {
-            ...formData,
+            ...submittedData,
             createdAt: new Date(),
             updatedAt: new Date(),
         };
@@ -82,8 +92,6 @@ const AddNewChallenge = () => {
         setChallenges([newChallenge, ...challenges]);
         setFormData({});
         setErrors({});
-
-        navigate(`/challenges`)
     };
 
     return (
@@ -249,11 +257,11 @@ const AddNewChallenge = () => {
                             <input
                                 name="createdBy"
                                 placeholder="Creator Email"
-                                value={formData.createdBy || ""}
-                                onChange={handleChange}
-                                className={`input input-bordered w-full ${errors.createdBy ? "input-error" : ""}`}
+                                value={user?.email || ""}
+                                readOnly
+                                className="input input-bordered w-full"
                             />
-                            {errors.createdBy && <span className="text-red-500 text-sm">{errors.createdBy}</span>}
+                          
                         </div>
 
                         {/* Start Date */}

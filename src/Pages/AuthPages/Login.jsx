@@ -1,6 +1,5 @@
 import React, { use, useState } from 'react';
 import image from "../../assets/icons8-ecology-100.png"
-import bgImg from "../../assets/coolbackgrounds-particles-compute.png"
 import { Link, useLocation, useNavigate } from 'react-router';
 import MyContainer from '../../components/Navbar/MyContainer';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
@@ -31,22 +30,15 @@ const Login = () => {
             })
             .catch((error) => {
                 const errorCode = error.code;
-                // const errorMessage = error.message;
                 setError(errorCode)
             });
     }
 
 
     return (
-        <div
-            style={{
-                backgroundImage: `url(${bgImg})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-            }}
-        >
+        <div className='bg-gray-600' >
 
-            <MyContainer className="hero text-white min-h-screen ">
+            <MyContainer className="hero text-white py-24 min-h-screen shadow-2xl ">
                 <div className="hero-content  flex-col lg:flex-row gap-30">
                     <div className="text-center lg:text-left">
                         <figure className='flex items-center  justify-center'>
@@ -85,7 +77,7 @@ const Login = () => {
                                     </div>
 
                                     {/* forgot password */}
-                                    <div className='text-sm font-semibold pt-1 text-blue-500 '>
+                                    <div className='text-sm font-semibold pt-1 text-blue-400 '>
                                         <Link to="/forgot-password" className="link underline">Forgot password?</Link>
                                     </div>
                                     {error && <p className='text-red-500'>{error}</p>}
@@ -99,7 +91,7 @@ const Login = () => {
 
                                     <div className='text-sm font-semibold pt-1'>
                                         <p>Don't have an account? Please {' '}
-                                            <Link to="/register" className='  text-sm font-bold text-blue-500 underline'>Register</Link>
+                                            <Link to="/register" className='  text-sm font-bold text-blue-400 underline'>Register</Link>
                                         </p>
                                     </div>
 

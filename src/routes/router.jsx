@@ -14,12 +14,13 @@ import JoinChallenge from "../Pages/Challenges/JoinChallenge";
 import PrivateRoute from "../privateRoute/PrivateRoute";
 import Tips from "../Pages/TipsAndEvent/Tips";
 import AllEvent from "../Pages/TipsAndEvent/AllEvent";
-import MyChallenges from "../Pages/MyActivities/MyChallenges";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
     {
         path: "/",
-        Component: MainLayouts,
+        element: <MainLayouts />,
+        errorElement: <ErrorPage />,
         children: [
             {
                 index: true,
@@ -28,7 +29,6 @@ const router = createBrowserRouter([
             {
                 path: "/challenges",
                 element: <Challenges />,
-                loader: () => fetch('http://localhost:3000/challenges')
             },
             {
                 path: "/addNewChallenge",
@@ -73,12 +73,10 @@ const router = createBrowserRouter([
             {
                 path: "/tips",
                 element: <Tips />,
-                loader: () => fetch('http://localhost:3000/tips')
             },
             {
                 path: "/allEvent",
                 element: <AllEvent></AllEvent>,
-                loader: () => fetch('http://localhost:3000/events')
             },
             {
                 path: "/login",

@@ -1,28 +1,44 @@
-import React, { useState } from 'react';
-import { useLoaderData } from 'react-router';
+import React, { useEffect, useState } from 'react';
 import ChallengeCard from './ChallengeCard';
 import MyContainer from '../../components/Navbar/MyContainer';
+import Loading from '../../components/Loading/Loading';
 
 const Challenges = () => {
-    const data = useLoaderData();
-    const [challenges, setChallenges] = useState(data)
-    const [loading, setLoading] = useState(false)
+
+    const [challenges, setChallenges] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [searching, setSearching] = useState(false);
+
+    useEffect(() => {
+
+        fetch('http://localhost:3000/challenges')
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                setChallenges(data)
+                setLoading(false);
+            })
+            .catch(() => setLoading(false));
+
+    }, [])
 
     const handleSearch = (e) => {
         e.preventDefault();
         const searchCategory = e.target.category.value;
-        setLoading(true)
+        setSearching(true);
+
         fetch(`http://localhost:3000/search?search=${searchCategory}`)
             .then(res => res.json())
             .then(data => {
                 console.log(data)
                 setChallenges(data)
-                setLoading(false)
+                setSearching(false);
             })
+            .catch(() => setSearching(false));
     }
 
     if (loading) {
-        return <div>spinner...</div>
+        return <Loading />
     }
 
     return (
@@ -65,7 +81,7 @@ const Challenges = () => {
                         <button
                             className='btn btn-primary rounded-full'
                             type='submit'
-                        >{loading ? "Searching..." : "Search"}</button>
+                        >{searching ? "Searching..." : "Search"}</button>
                     </form>
 
                 </div>

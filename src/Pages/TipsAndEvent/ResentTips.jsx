@@ -1,16 +1,29 @@
-import React, { use } from 'react';
+import React, {  useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
-
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import MyContainer from '../../components/Navbar/MyContainer';
 import { Link } from 'react-router';
+import imgIcon from "../../assets/icons8-profile.gif"
 
 
-const ResentTips = ({ resentTipsData }) => {
-    const tips = use(resentTipsData)
+const ResentTips = () => {
+     const [tips , setTips] = useState([]);
+    
+    
+        useEffect(() => {
+    
+            fetch("http://localhost:3000/resent-tips")
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    setTips(data)
+    
+                })
+    
+        }, [])
 
 
     return (
@@ -37,7 +50,7 @@ const ResentTips = ({ resentTipsData }) => {
                     navigation
                     pagination={{ clickable: true }}
                     autoplay={{ delay: 4000 }}
-                    loop={true}
+                     loop={tips.length > 2}
                     modules={[Navigation, Pagination, Autoplay]}
                 >
                     {tips?.map((tip) => (
@@ -45,7 +58,7 @@ const ResentTips = ({ resentTipsData }) => {
                             <div className=" bg-white p-6 flex flex-col items-center  shadow-xl max-w-sm ">
                                 <div className="relative w-42 h-42 mb-4">
                                     <img
-                                        src={tip.image}
+                                        src={tip.image || imgIcon}
                                         alt="Profile"
                                         className="w-full h-full object-cover rounded-full"
                                     />

@@ -43,7 +43,7 @@ const Hero = () => {
                         <div className="relative w-full object-cover h-[550px]  overflow-hidden ">
                             {/* Image full cover */}
                             <img
-                                src={slide.imageUrl}
+                                src={slide.imageUrl || null }
                                 alt={slide.title}
                                 className="w-full h-full object-cover"
                             />

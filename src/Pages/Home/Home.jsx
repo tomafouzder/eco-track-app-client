@@ -8,14 +8,6 @@ import UpComingEvent from '../TipsAndEvent/UpComingEvent';
 import WhyGoGreen from '../WhyGreen/WhyGoGreen';
 import HowItWorks from '../WhyGreen/HowItWorks';
 
-const latestChallengePromise = fetch('http://localhost:3000/active-challenges').then(res => res.json())
-
-
-const resentTipsData = fetch("http://localhost:3000/resent-tips").then(res => res.json())
-
-
-const upComingEventPromise = fetch("http://localhost:3000/upcoming-events")
-.then(res => res.json())
 
 const Home = () => {
 
@@ -25,15 +17,15 @@ const Home = () => {
 
             <LiveChallenge />
             {/* active challenge */}
-            <ActiveChallenge latestChallengePromise={latestChallengePromise}>
+            <ActiveChallenge >
             </ActiveChallenge>
 
              {/* Upcoming Events */}
 
-            <UpComingEvent upComingEventPromise={upComingEventPromise}></UpComingEvent>
+            <UpComingEvent></UpComingEvent>
 
             {/* Recent Tips*/}
-            <ResentTips resentTipsData={resentTipsData}></ResentTips>      
+            <ResentTips ></ResentTips>      
 
             {/* Why Go Green? */}
             <WhyGoGreen/>

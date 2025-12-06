@@ -1,15 +1,26 @@
-import React, { use } from 'react';
+import React, { useEffect, useState } from 'react';
 import MyContainer from '../../components/Navbar/MyContainer';
 import ChallengeCard from './ChallengeCard';
 import { Link } from 'react-router';
 
-const ActiveChallenge = ({ latestChallengePromise }) => {
-    const challenges = use(latestChallengePromise)
-    console.log(challenges);
+const ActiveChallenge = () => {
+    const [challenges, setChallenges] = useState([]);
+
+
+    useEffect(() => {
+
+        fetch('http://localhost:3000/active-challenges')
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                setChallenges(data)
+
+            })
+
+    }, [])
+
     return (
         <div className=" py-16 bg-gray-100 ">
-
-
             <MyContainer>
                 <h1 className='text-center md:text-5xl text-3xl px-2  uppercase mt-16 text-green-600  font-extrabold '>Active Challenge</h1>
                 <p className='py-8 px-4 md-px-0  md:pb-24  text-lg text-gray-800 font-semibold text-center border-b-2 border-gray-500 '>

@@ -34,14 +34,9 @@ const Navbar = () => {
 
     return (
         <div
-            className={`navbar shadow-sm fixed top-0 left-0 w-full -z-50 transition-all duration-300`}
-            style={{
-                backgroundImage: scrolled ? `url(${bgImg})` : 'none',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-            }}
+            className={`navbar shadow-sm fixed top-0 left-0 w-full -z-50 transition-all duration-300  ${scrolled ? "bg-gray-900" : "bg-transparent"}`}
+            
         >
-
             <MyContainer className="navbar">
                 <div className="navbar-start gap-16 md:gap-6">
                     <div className="dropdown">

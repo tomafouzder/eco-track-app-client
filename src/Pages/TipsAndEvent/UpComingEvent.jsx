@@ -1,12 +1,25 @@
-import React, { use } from "react";
+import React, { use, useEffect, useState } from "react";
 import { FiClock } from "react-icons/fi";
 import { GoLocation } from "react-icons/go";
 import { Link } from "react-router";
 import MyContainer from "../../components/Navbar/MyContainer";
 
-const UpComingEvent = ({ upComingEventPromise }) => {
-    const events = use(upComingEventPromise)
-    console.log(events)
+const UpComingEvent = () => {
+   
+     const [events , setEvents] = useState([]);
+        
+        
+            useEffect(() => {
+        
+               fetch("http://localhost:3000/upcoming-events")
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        setEvents(data)
+        
+                    })
+        
+            }, [])
 
     if (!Array.isArray(events)) return null;
 

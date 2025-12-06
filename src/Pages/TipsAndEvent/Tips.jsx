@@ -1,14 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MyContainer from '../../components/Navbar/MyContainer';
 import { AiOutlineClose } from "react-icons/ai";
-import { useLoaderData } from 'react-router';
+import Loading from '../../components/Loading/Loading';
+import imgIcon from "../../assets/icons8-profile.gif"
+
 
 const Tips = () => {
-    const tips = useLoaderData()
-    console.log(tips);
-
     const [isOpen, setIsOpen] = useState(null);
+     const [tips , setTips] = useState([]);
+     const [loading, setLoading] = useState(true);
+     
+            useEffect(() => {
+        
+             fetch('http://localhost:3000/tips')
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        setTips(data)
+                         setLoading(false);
+        
+                    })
+        
+            }, [])
 
+if (loading) return <Loading />
 
     return (
         <div className='bg-gray-700 pb-24'>
@@ -42,7 +57,7 @@ const Tips = () => {
                             <div className="text-white bg-gray-800 p-6 rounded-2xl flex flex-col items-center shadow-xl">
                                 <div className="relative w-32 h-32 mb-4">
                                     <img
-                                        src={tip.image}
+                                        src={tip.image || imgIcon}
                                         alt="Profile"
                                         className="w-full h-full object-cover rounded-full"
                                     />

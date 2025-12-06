@@ -82,14 +82,9 @@ const Register = () => {
 
 
     return (
-        <div
-            style={{
-                backgroundImage: `url(${bgImg})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-            }}
-        >
-            <MyContainer className="hero text-white min-h-screen">
+        <div className='bg-gray-600'>
+          
+            <MyContainer className="hero text-white py-24 min-h-screen  shadow-2xl">
                 <div className="hero-content flex-col lg:flex-row-reverse gap-30">
                     <div className="text-center lg:text-left">
                         <figure className='flex items-center  justify-center'>

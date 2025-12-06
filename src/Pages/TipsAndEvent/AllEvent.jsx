@@ -1,16 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FiClock } from "react-icons/fi";
 import { GoLocation } from "react-icons/go";
-import { useLoaderData } from "react-router";
 import MyContainer from "../../components/Navbar/MyContainer";
+import Loading from "../../components/Loading/Loading";
 
 const AllEvent = () => {
-    const events = useLoaderData()
-    console.log(events)
+
+
+    const [events, setEvents] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+
+        fetch('http://localhost:3000/events')
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                setEvents(data)
+                setLoading(false);
+
+            })
+
+    }, [])
+
+    if (loading) return <Loading />
 
     return (
         <div>
-             <div className="relative w-full h-[550px] overflow-hidden">
+            <div className="relative w-full h-[550px] overflow-hidden">
                 <video
                     src="https://media.istockphoto.com/id/2202052577/video/business-team-collaborating-on-eco-friendly-project-promoting-sustainability-growth-with.mp4?s=mp4-640x640-is&k=20&c=HoIPlQm5iL3jEONet-RMgi3V_BTx5P55PksBFrMuvsk="
                     autoPlay

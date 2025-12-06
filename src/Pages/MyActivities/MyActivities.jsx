@@ -4,9 +4,8 @@ import { AuthContext } from '../../context/AuthProvider';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import MyChallenges from './MyChallenges';
-import { ImCancelCircle } from 'react-icons/im';
 import { AiOutlineClose } from 'react-icons/ai';
-import { useNavigate } from 'react-router';
+import Loading from '../../components/Loading/Loading';
 
 
 
@@ -16,7 +15,7 @@ const MyActivities = () => {
     const [joins, setJoins] = useState([]);
     const [isOpen, setIsOpen] = useState(null);
     const [refetch, setRefetch] = useState(false)
-
+   const [loading, setLoading] = useState(true);
     useEffect(() => {
         if (user?.email) {
             fetch(`http://localhost:3000/join-challenge?email=${user.email}`, {
@@ -28,6 +27,7 @@ const MyActivities = () => {
                 .then(data => {
                     console.log(data);
                     setJoins(data)
+                    setLoading(false)
                 })
         }
     }, [user, refetch])
@@ -104,7 +104,7 @@ const MyActivities = () => {
         });
 
     }
-
+if (loading) return <Loading />;
     return (
         <div className='bg-gray-100 pb-24'>
             <div className="relative w-full h-[550px] overflow-hidden">

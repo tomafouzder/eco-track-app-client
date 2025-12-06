@@ -29,7 +29,11 @@ const JoinChallenge = ({ challengeId, joinModalRef, joining, setJoining, setRefe
             createdAt: new Date()
         }
 
-        axios.post('http://localhost:3000/join-challenge', joinData)
+        axios.post('http://localhost:3000/join-challenge', joinData, {
+            headers: {
+                authorization: `Bearer ${user.accessToken}`
+            }
+        })
             .then(res => {
                 const data = res.data;
                 console.log(data)
