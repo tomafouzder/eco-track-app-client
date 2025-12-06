@@ -2,6 +2,7 @@ import React, { use } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { AuthContext } from '../../context/AuthProvider';
 import { useLocation, useNavigate } from 'react-router';
+import axios from 'axios';
 
 const GoogleLogIn = () => {
     const { googleSignIn } = use(AuthContext);
@@ -22,18 +23,19 @@ const GoogleLogIn = () => {
                     image: user.photoURL
                 }
 
-                // create user in the database
-                fetch('http://localhost:3000/users', {
-                    method: 'POST',
+                axios.post("http://localhost:3000/users", newUser, {
                     headers: {
-                        'content-type': 'application/json'
-                    },
-                    body: JSON.stringify(newUser)
+                        authorization: `Bearer ${user.accessToken}`,
+                        "content-type": "application/json"
+                    }
                 })
-                    .then(res => res.json())
-                    .then(data => {
-                        console.log("data after user save", data)
+                    .then(res => {
+                        console.log("User saved:", res.data);
                     })
+                    .catch(err => {
+                        console.log(err);
+                    });
+
 
             })
             .catch((err) => {

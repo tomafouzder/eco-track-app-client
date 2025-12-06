@@ -2,7 +2,6 @@ import React, { use, useEffect, useState } from 'react';
 import MyContainer from './MyContainer';
 import MyLinks from './MyLinks';
 import { Link } from 'react-router';
-import bgImg from "../../assets/coolbackgrounds-particles-compute.png"
 import icon from "../../assets/icons8-ecosystem-64.png"
 import profileIcon from "../../assets/icons8-profile.gif"
 import { AuthContext } from '../../context/AuthProvider';
@@ -46,11 +45,6 @@ const Navbar = () => {
                         <ul
                             tabIndex="-1"
                             className="menu menu-sm dropdown-content bg-gray-950 text-white rounded-box z-1 mt-2 w-52 p-4 shadow"
-                            // style={{
-                            //     backgroundImage: `url(${bgImg})`,
-                            //     backgroundSize: "cover",
-                            //     backgroundPosition: "center",
-                            // }}
                         >
                             <li>
                                 <MyLinks to={"/"}>Home</MyLinks>
@@ -91,8 +85,8 @@ const Navbar = () => {
 
                     <div className='flex justify-center items-center gap-2'>
                         <img src={icon} alt="Icon" />
-                        <a className="text-2xl md:text-4xl font-bold text-white ">
-                            <span className='text-green-500'>Eco</span>Track</a>
+                        <p className="text-2xl md:text-4xl font-bold text-white ">
+                            <span className='text-green-500'>Eco</span>Track</p>
                     </div>
                 </div>
 

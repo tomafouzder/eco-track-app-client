@@ -14,7 +14,9 @@ const Footer = () => {
                         {/* <h6 className="footer-title">Services</h6> */}
                         <div className=" flex justify-center items-center ">
                             <img className="w-36 rounded-full" src={iconImg} alt="" />
-                            <p className=" text-white font-bold text-5xl">EcoTrack
+                            <p className=" text-white font-bold text-5xl">
+                                <span className='text-green-500'>Eco</span>
+                                Track
                                 <span className="text-xl text-green-500 font-bold"> Community</span>
                             </p>
                         </div>
