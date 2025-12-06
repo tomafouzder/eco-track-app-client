@@ -30,20 +30,15 @@ const ForgotPassword = () => {
     }
     return (
         <div >
-            <div className="relative w-full h-[500px] overflow-hidden">
-                <video
-                    src="https://media.istockphoto.com/id/1268227434/video/young-female-gardener-making-a-hole-and-planting-a-vegetable-plant-in-the-garden.mp4?s=mp4-640x640-is&k=20&c=ha9onOGVSlZxmxG3ooIePgRM573aRq9nw9Mk_eUVbhI="
-                    autoPlay
-                    loop
-                    muted
+            <div className="relative w-full h-[100px] overflow-hidden">
+                <img
+                    src="https://as1.ftcdn.net/jpg/15/35/95/88/1000_F_1535958824_azpDsX96TtRpzJqquCJwQPriXXYa5j9X.jpg"
                     className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-black/5 flex items-center justify-center">
-                    <h1 className="text-white flex items-center justify-center md:text-5xl text-4xl absolute top-1/2 left-1/4 transform -translate-y-1/2  inset-0 bg-black/40 animate__animated animate__fadeInLeft  animate__delay-2s font-bold">All Challenge</h1>
-                </div>
+                
             </div>
 
-            <MyContainer className="py-24 ">
+            <MyContainer className="pt-4 pb-24 ">
                 <div className="card w-full mx-auto  max-w-sm shrink-0 shadow-2xl">
                     <form onSubmit={handleForgetPassword} className="card-body text-center">
                         <figure className='flex justify-center items-center'>
@@ -67,7 +62,7 @@ const ForgotPassword = () => {
                             >Sent Reset Code</button>
 
                             <Link to="/login"
-                                className='text-lg font-bold text-blue-700 pt-2'
+                                className='text-lg font-bold text-blue-700 pt-2 underline'
                             >Back to Login </Link>
                         </fieldset>
                     </form>

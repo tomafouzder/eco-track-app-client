@@ -27,7 +27,7 @@ const AllEvent = () => {
 
     return (
         <div>
-            <div className="relative w-full h-[550px] overflow-hidden">
+            <div className="relative w-full h-[450px] overflow-hidden">
                 <video
                     src="https://media.istockphoto.com/id/2202052577/video/business-team-collaborating-on-eco-friendly-project-promoting-sustainability-growth-with.mp4?s=mp4-640x640-is&k=20&c=HoIPlQm5iL3jEONet-RMgi3V_BTx5P55PksBFrMuvsk="
                     autoPlay

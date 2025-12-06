@@ -27,7 +27,7 @@ if (loading) return <Loading />
 
     return (
         <div className='bg-gray-700 pb-24'>
-            <div className="relative w-full h-[550px] overflow-hidden">
+            <div className="relative w-full h-[450px] overflow-hidden">
                 <video
                     src="https://media.istockphoto.com/id/1306471871/video/wind-turbines-in-the-ocean.mp4?s=mp4-640x640-is&k=20&c=E4t_e8WhjNhsAGr8o62C-Mafp4xZHz4KBi3vsV2Fi4M="
                     autoPlay
@@ -36,7 +36,7 @@ if (loading) return <Loading />
                     className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-black/5 flex items-center justify-center">
-                    <h1 className="text-white flex items-center justify-center md:text-7xl text-5xl absolute top-1/2 left-1/4 transform -translate-y-1/2  inset-0 bg-black/20 animate__animated animate__fadeInLeft  font-extrabold">All Tips By Our Participant</h1>
+                    <h1 className="text-white flex items-center justify-center md:text-7xl text-5xl absolute top-1/2 left-1/4 transform -translate-y-1/2  inset-0 bg-black/20 animate__animated animate__fadeInLeft  font-extrabold">All Tips </h1>
                 </div>
             </div>
 

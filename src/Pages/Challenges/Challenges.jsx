@@ -43,7 +43,7 @@ const Challenges = () => {
 
     return (
         <div className='bg-gray-100 pb-24'>
-            <div className="relative w-full h-[550px] overflow-hidden">
+            <div className="relative w-full h-[450px] overflow-hidden">
                 <video
                     src="https://media.istockphoto.com/id/2223500867/video/plastic-is-not-fantastic-a-group-of-volunteers-in-matching-outfits-cleans-the-park-of-garbage.mp4?s=mp4-640x640-is&k=20&c=pSx2iiPZVQKX22QdM53IRcv3Rdyw3ObhsNvF4KSe9lI="
                     autoPlay

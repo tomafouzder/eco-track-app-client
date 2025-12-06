@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { FaUsers, FaCalendarAlt, FaRecycle } from "react-icons/fa";
 import 'animate.css';
 import MyContainer from "../../components/Navbar/MyContainer";
-import { Link, useParams } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
 import JoinChallenge from "./JoinChallenge";
 import { ImCancelCircle } from "react-icons/im";
 import { AuthContext } from "../../context/AuthProvider";
@@ -21,6 +21,7 @@ const ChallengeDetails = () => {
     const [joining, setJoining] = useState([]);
     const [refetch, setRefetch] = useState(false)
     const joinModalRef = useRef(null)
+    const navigate =useNavigate()
 
 
     useEffect(() => {
@@ -120,6 +121,7 @@ const ChallengeDetails = () => {
                                 text: "Your file has been deleted.",
                                 icon: "success"
                             });
+                            navigate("/challenges")
                         }
                         else { console.log(" error") }
                     })
@@ -137,7 +139,7 @@ const ChallengeDetails = () => {
     return (
         <div className="bg-gray-100">
 
-            <div className="relative w-full h-[550px] overflow-hidden">
+            <div className="relative w-full h-[450px] overflow-hidden">
                 <video
                     src="https://media.istockphoto.com/id/2199515129/video/poster-highlighting-tree-planting-movement-for-a-sustainable-future.mp4?s=mp4-640x640-is&k=20&c=pGL01g6d7vbPPTp0o_eCiBXqxHqa7yFG4-GoMZoYccs="
                     autoPlay
@@ -146,7 +148,7 @@ const ChallengeDetails = () => {
                     className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-black/5 flex items-center justify-center">
-                    <h1 className="text-white flex items-center justify-center md:text-7xl text-5xl absolute top-1/2 left-1/4 transform -translate-y-1/2  inset-0 bg-black/20 animate__animated animate__fadeInLeft  font-extrabold">All Challenges</h1>
+                    <h1 className="text-white flex items-center justify-center md:text-7xl text-5xl absolute top-1/2 left-1/4 transform -translate-y-1/2  inset-0 bg-black/20 animate__animated animate__fadeInLeft  font-extrabold">Challenge Details </h1>
                 </div>
             </div>
             

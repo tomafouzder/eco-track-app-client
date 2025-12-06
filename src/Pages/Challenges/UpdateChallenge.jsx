@@ -79,7 +79,7 @@ const UpdateChallenge = () => {
     if (loading) return <div>Loading challenge...</div>;
     return (
         <div>
-            <div className="relative w-full h-[550px] overflow-hidden">
+            <div className="relative w-full h-[450px] overflow-hidden">
                 <video
                     src="https://media.istockphoto.com/id/2191660851/video/sapling-growing.mp4?s=mp4-640x640-is&k=20&c=KDtJA_tfOSjWWPvj9JlI8CWE0K9wzgl2L9nXaGOqYrw="
                     autoPlay
@@ -88,7 +88,7 @@ const UpdateChallenge = () => {
                     className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-black/5 flex items-center justify-center">
-                    <h1 className="text-white flex items-center justify-center md:text-7xl text-5xl absolute top-1/2 left-1/4 transform -translate-y-1/2  inset-0 bg-black/20 animate__animated animate__fadeInLeft  font-extrabold">All Challenges</h1>
+                    <h1 className="text-white flex items-center justify-center md:text-7xl text-5xl absolute top-1/2 left-1/4 transform -translate-y-1/2  inset-0 bg-black/20 animate__animated animate__fadeInLeft  font-extrabold">Update Challenges</h1>
                 </div>
             </div>
 
@@ -162,7 +162,6 @@ const UpdateChallenge = () => {
                             <input
                                 name="participants"
                                 type="number"
-                                readOnly
                                 defaultValue={challenge.participants}
                                 placeholder="Number of Participants"
 
@@ -276,7 +275,7 @@ const UpdateChallenge = () => {
                         </div>
                     </div>
 
-                    <button className="btn btn-success w-full mt-4">Add Challenge</button>
+                    <button className="btn btn-success w-full mt-4">Update Challenge</button>
                 </form>
             </MyContainer>
         </div>

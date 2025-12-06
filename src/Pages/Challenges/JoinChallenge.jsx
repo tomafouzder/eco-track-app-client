@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 
 const JoinChallenge = ({ challengeId, joinModalRef, joining, setJoining, setRefetch }) => {
     const { user } = useContext(AuthContext)
-    // console.log(user)
+    
 
     const handleSubmit = (e) => {
         e.preventDefault();

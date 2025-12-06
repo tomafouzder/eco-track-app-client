@@ -96,7 +96,7 @@ const AddNewChallenge = () => {
 
     return (
         <div className="bg-gray-100">
-            <div className="relative w-full h-[550px] overflow-hidden">
+            <div className="relative w-full h-[450px] overflow-hidden">
                 <video
                     src="https://media.istockphoto.com/id/1448245572/video/in-the-hands-of-trees-growing-seedlings.mp4?s=mp4-640x640-is&k=20&c=2UOGdcDCDwMC63s-nhOAY_RDrxCc2bVn_ubHj-WCW3Q="
                     autoPlay
