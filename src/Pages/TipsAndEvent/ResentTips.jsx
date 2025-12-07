@@ -15,10 +15,10 @@ const ResentTips = () => {
     
         useEffect(() => {
     
-            fetch("http://localhost:3000/resent-tips")
+            fetch("https://eco-track-app-server.vercel.app/resent-tips")
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data);
+                
                     setTips(data)
     
                 })

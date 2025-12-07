@@ -26,7 +26,7 @@ const ChallengeDetails = () => {
 
     useEffect(() => {
         if (!id) return;
-        fetch(`http://localhost:3000/challenges/${id}`, {
+        fetch(`https://eco-track-app-server.vercel.app/challenges/${id}`, {
             headers: {
                 authorization: `Bearer ${user.accessToken}`
             }
@@ -35,9 +35,7 @@ const ChallengeDetails = () => {
                 if (data.success && data.result) {
                     setChallenge(data.result);
                     setLoading(false)
-                } else {
-                    console.log("Middleware blocked or no data", data);
-                }
+                } 
             })
             .catch(err => console.log(err));
 
@@ -47,7 +45,7 @@ const ChallengeDetails = () => {
     useEffect(() => {
 
         if (!challenge?._id) return;
-        fetch(`http://localhost:3000/challenges/join-challenge/${challenge._id}`, {
+        fetch(`https://eco-track-app-server.vercel.app/challenges/join-challenge/${challenge._id}`, {
             headers: {
                 authorization: `Bearer ${user.accessToken}`
             }
@@ -83,9 +81,9 @@ const ChallengeDetails = () => {
             upVotes: 0,
             createdAt: new Date().toISOString()
         };
-        console.log("Tips Sending :", tipsData);
+       
 
-        axios.post('http://localhost:3000/tips', tipsData)
+        axios.post('https://eco-track-app-server.vercel.app/tips', tipsData)
             .then(res => {
                 console.log(res);
                 form.reset();
@@ -108,7 +106,7 @@ const ChallengeDetails = () => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                axios.delete(`http://localhost:3000/challenges/${_id}`, {
+                axios.delete(`https://eco-track-app-server.vercel.app/challenges/${_id}`, {
                     headers: {
                         authorization: `Bearer ${user.accessToken}`
                     }
@@ -123,7 +121,7 @@ const ChallengeDetails = () => {
                             });
                             navigate("/challenges")
                         }
-                        else { console.log(" error") }
+                       
                     })
                     .catch(error => {
                         console.log(error);
@@ -393,7 +391,7 @@ const ChallengeDetails = () => {
                                         }
 
                                     </td>
-                                    <td >{join.progress}</td>
+                                    <td >{join.progress || 0}%</td>
                                 </tr>)
                             }
                         </tbody>

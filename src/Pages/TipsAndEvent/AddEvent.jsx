@@ -29,9 +29,9 @@ const AddEvent = () => {
             maxParticipants: 0,
             currentParticipants: 0,
         };
-        console.log("events Sending :", eventData);
 
-        axios.post('http://localhost:3000/events', eventData)
+
+        axios.post('https://eco-track-app-server.vercel.app/events', eventData)
             .then(res => {
                 console.log(res);
                 form.reset();

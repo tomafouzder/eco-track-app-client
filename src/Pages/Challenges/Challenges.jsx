@@ -11,10 +11,10 @@ const Challenges = () => {
 
     useEffect(() => {
 
-        fetch('http://localhost:3000/challenges')
+        fetch('https://eco-track-app-server.vercel.app/challenges')
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+            
                 setChallenges(data)
                 setLoading(false);
             })
@@ -27,10 +27,10 @@ const Challenges = () => {
         const searchCategory = e.target.category.value;
         setSearching(true);
 
-        fetch(`http://localhost:3000/search?search=${searchCategory}`)
+        fetch(`https://eco-track-app-server.vercel.app/search?search=${searchCategory}`)
             .then(res => res.json())
             .then(data => {
-                console.log(data)
+             
                 setChallenges(data)
                 setSearching(false);
             })

@@ -9,10 +9,9 @@ const ActiveChallenge = () => {
 
     useEffect(() => {
 
-        fetch('http://localhost:3000/active-challenges')
+        fetch('https://eco-track-app-server.vercel.app/active-challenges')
             .then(res => res.json())
             .then(data => {
-                console.log(data);
                 setChallenges(data)
 
             })

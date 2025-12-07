@@ -13,10 +13,10 @@ const Hero = () => {
     const [activeIndex, setActiveIndex] = useState(0)
 
     useEffect(() => {
-        fetch('http://localhost:3000/challenges')
+        fetch('https://eco-track-app-server.vercel.app/challenges')
             .then(res => res.json())
             .then(data => {
-                console.log(data)
+              
                 setChallenges(data);
             })
     }, [])

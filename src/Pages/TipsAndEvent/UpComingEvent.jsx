@@ -11,10 +11,10 @@ const UpComingEvent = () => {
         
             useEffect(() => {
         
-               fetch("http://localhost:3000/upcoming-events")
+               fetch("https://eco-track-app-server.vercel.app/upcoming-events")
                     .then(res => res.json())
                     .then(data => {
-                        console.log(data);
+               
                         setEvents(data)
         
                     })

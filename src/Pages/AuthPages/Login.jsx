@@ -13,19 +13,18 @@ const Login = () => {
     const [error, setError] = useState("")
     const location = useLocation();
     const navigate = useNavigate();
-    console.log(location)
+ 
 
     const handleLogIn = (e) => {
         e.preventDefault();
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log({ email, password })
+       
         userSignIn(email, password)
             .then((result) => {
                 const user = result.user;
                 setUser(user)
-                console.log(user)
                 navigate(`${location.state ? location.state : "/"}`);
             })
             .catch((error) => {

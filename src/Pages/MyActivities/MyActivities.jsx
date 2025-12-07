@@ -18,14 +18,14 @@ const MyActivities = () => {
    const [loading, setLoading] = useState(true);
     useEffect(() => {
         if (user?.email) {
-            fetch(`http://localhost:3000/join-challenge?email=${user.email}`, {
+            fetch(`https://eco-track-app-server.vercel.app/join-challenge?email=${user.email}`, {
                 headers: {
                     authorization: `Bearer ${user.accessToken}`
                 }
             })
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data);
+              
                     setJoins(data)
                     setLoading(false)
                 })
@@ -41,7 +41,7 @@ const MyActivities = () => {
 
         }
 
-        axios.put(`http://localhost:3000/join-challenge/${isOpen._id}`, formData,
+        axios.put(`https://eco-track-app-server.vercel.app/join-challenge/${isOpen._id}`, formData,
             {
                 headers: {
                     authorization: `Bearer ${user.accessToken}`
@@ -76,7 +76,7 @@ const MyActivities = () => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                axios.delete(`http://localhost:3000/join-challenge/${_id}`, {
+                axios.delete(`https://eco-track-app-server.vercel.app/join-challenge/${_id}`, {
                     headers: {
                         authorization: `Bearer ${user.accessToken}`
                     }
@@ -170,7 +170,7 @@ if (loading) return <Loading />;
                                         }
 
                                     </td>
-                                    <td >{join.progress}</td>
+                                    <td >{join.progress || 0}%</td>
                                     <th>
                                         <button
                                             onClick={() => setIsOpen(join)}

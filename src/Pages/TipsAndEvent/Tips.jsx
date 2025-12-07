@@ -12,10 +12,10 @@ const Tips = () => {
      
             useEffect(() => {
         
-             fetch('http://localhost:3000/tips')
+             fetch('https://eco-track-app-server.vercel.app/tips')
                     .then(res => res.json())
                     .then(data => {
-                        console.log(data);
+                     
                         setTips(data)
                          setLoading(false);
         

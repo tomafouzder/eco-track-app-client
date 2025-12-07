@@ -11,11 +11,10 @@ const UpdateChallenge = () => {
     const [challenge, setChallenge] = useState(null);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
-    console.log(challenge);
-
+ 
     useEffect(() => {
         if (!id) return;
-        fetch(`http://localhost:3000/challenges/${id}`, {
+        fetch(`https://eco-track-app-server.vercel.app/challenges/${id}`, {
             headers: {
                 authorization: `Bearer ${user.accessToken}`
             }
@@ -27,9 +26,7 @@ const UpdateChallenge = () => {
 
                     setChallenge(data.result);
                     setLoading(false)
-                } else {
-                    console.log("Middleware blocked or no data", data);
-                }
+                } 
             })
             .catch(err => console.log(err));
 
@@ -54,7 +51,7 @@ const UpdateChallenge = () => {
             endDate: e.target.endDate.value,
         }
 
-        axios.put(`http://localhost:3000/challenges/${challenge._id}`, formData, {
+        axios.put(`https://eco-track-app-server.vercel.app/challenges/${challenge._id}`, formData, {
             headers: {
                 authorization: `Bearer ${user.accessToken}`
             }

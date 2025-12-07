@@ -42,13 +42,11 @@ const Register = () => {
 
     const handleRegister = (e) => {
         e.preventDefault();
-        console.log(e.target)
         const form = e.target;
         const name = form.name.value;
         const email = form.email.value;
         const photo = form.photo.value;
         const password = form.password.value;
-        console.log({ name, email, photo, password });
 
         // Prevent submit if password invalid
         const errorMsg = validatePassword(password);

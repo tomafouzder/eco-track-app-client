@@ -5,10 +5,12 @@ import { Link } from 'react-router';
 import icon from "../../assets/icons8-ecosystem-64.png"
 import profileIcon from "../../assets/icons8-profile.gif"
 import { AuthContext } from '../../context/AuthProvider';
+import Swal from 'sweetalert2';
 
 const Navbar = () => {
     const { user, userSignOut } = use(AuthContext);
     const [scrolled, setScrolled] = useState(false);
+
 
     useEffect(() => {
         const handleScroll = () => {
@@ -24,8 +26,9 @@ const Navbar = () => {
 
     const handleLogOut = () => {
         userSignOut()
+         
             .then(() => {
-                alert(' Sign-out successful.')
+               Swal.fire("Sign-out successful!")
             }).catch((error) => {
                 console.log(error);
             });
@@ -34,7 +37,7 @@ const Navbar = () => {
     return (
         <div
             className={`navbar shadow-sm fixed top-0 left-0 w-full -z-50 transition-all duration-300  ${scrolled ? "bg-gray-900" : "bg-transparent"}`}
-            
+
         >
             <MyContainer className="navbar">
                 <div className="navbar-start gap-16 md:gap-6">
@@ -69,15 +72,15 @@ const Navbar = () => {
                             <li>
                                 <MyLinks to={"/allEvent"}>Events</MyLinks>
                             </li>
-                             <li className=''>
-                            {
-                                user ?
-                                    <button onClick={handleLogOut} className="hover:underline">
-                                        LogOut</button>
-                                    :
-                                    <MyLinks to="/login">Login</MyLinks>
-                            }
-                        </li>
+                            <li className=''>
+                                {
+                                    user ?
+                                        <button onClick={handleLogOut} className="hover:underline">
+                                            LogOut</button>
+                                        :
+                                        <MyLinks to="/login">Login</MyLinks>
+                                }
+                            </li>
 
                         </ul>
                     </div>
@@ -121,6 +124,7 @@ const Navbar = () => {
                 </div>
 
                 <div className="navbar-end">
+
 
                     {/* only for sm screen */}
                     <div className='block md:hidden'>

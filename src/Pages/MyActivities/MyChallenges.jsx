@@ -11,14 +11,14 @@ const MyChallenges = () => {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        fetch(`http://localhost:3000/my-challenges?email=${user.email}`, {
+        fetch(`https://eco-track-app-server.vercel.app/my-challenges?email=${user.email}`, {
             headers: {
                 authorization: `Bearer ${user.accessToken}`
             }
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
+          
                 setChallenges(data)
                 setLoading(false)
             })

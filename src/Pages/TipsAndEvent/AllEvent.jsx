@@ -12,10 +12,10 @@ const AllEvent = () => {
 
     useEffect(() => {
 
-        fetch('http://localhost:3000/events')
+        fetch('https://eco-track-app-server.vercel.app/events')
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+           
                 setEvents(data)
                 setLoading(false);
 

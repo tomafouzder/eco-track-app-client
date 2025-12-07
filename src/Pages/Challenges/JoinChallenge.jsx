@@ -17,8 +17,6 @@ const JoinChallenge = ({ challengeId, joinModalRef, joining, setJoining, setRefe
         const status = e.target.status.value;
         const progress = parseInt(e.target.progress.value) || 0;
 
-        console.log(userId, challengeId, status, progress,)
-
         const joinData = {
             userName: userName,
             userId: userId,
@@ -29,14 +27,14 @@ const JoinChallenge = ({ challengeId, joinModalRef, joining, setJoining, setRefe
             createdAt: new Date()
         }
 
-        axios.post('http://localhost:3000/join-challenge', joinData, {
+        axios.post('https://eco-track-app-server.vercel.app/join-challenge', joinData, {
             headers: {
                 authorization: `Bearer ${user.accessToken}`
             }
         })
             .then(res => {
                 const data = res.data;
-                console.log(data)
+             
                 if (data.insertedId) {
                     joinModalRef.current.close();
                     Swal.fire({
@@ -50,16 +48,14 @@ const JoinChallenge = ({ challengeId, joinModalRef, joining, setJoining, setRefe
                     joinData._id = data.insertedId;
                     const newJoins = [...joining, joinData]
                     newJoins.sort((a, b) => b.progress - a.progress)
-                    console.log(newJoins)
+                
                     setJoining(newJoins);
                     setRefetch(prev => ({
                         ...prev,
                         participants: prev.participants + 1
                     }));
 
-                } else {
-                    console.log("it error")
-                }
+                } 
             })
             .catch(error => {
                 console.log(error);

@@ -61,7 +61,7 @@ const AddNewChallenge = () => {
             endDate: e.target.endDate.value,
         }
 
-        axios.post('http://localhost:3000/challenges', submittedData, {
+        axios.post('https://eco-track-app-server.vercel.app/challenges', submittedData, {
             headers: {
                 authorization: `Bearer ${user.accessToken}`
             }
