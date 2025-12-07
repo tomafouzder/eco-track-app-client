@@ -8,7 +8,7 @@
 Eco Track is a responsive and interactive sustainability-focused web application designed to encourage eco-friendly habits and community engagement. The platform allows users to explore environmental challenges, join activities, share eco-tips, and track personal progress. It aims to promote greener lifestyles through real-time updates, dynamic visuals, and community-driven motivation. Eco Track helps users reduce waste, save energy, improve health, and contribute to a cleaner and healthier planet.. ---->
 
 ## Live URL
-[Your Live URL Here](https://pet-care-in-winter001.netlify.app/)
+[Your Live URL Here](https://eco-track-client001.netlify.app/)
 
 ## Key Features
 - **Responsive Design**: Works seamlessly on mobile, tablet, and desktop devices.
