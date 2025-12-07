@@ -86,9 +86,9 @@ const Navbar = () => {
                     </div>
 
 
-                    <div className='flex justify-center items-center gap-2'>
+                    <div className='flex justify-center items-center gap-1 md:gap-2'>
                         <img src={icon} alt="Icon" />
-                        <p className="text-2xl md:text-4xl font-bold text-white ">
+                        <p className="text-xl md:text-4xl font-semibold md:font-bold text-white ">
                             <span className='text-green-500'>Eco</span>Track</p>
                     </div>
                 </div>
@@ -129,7 +129,7 @@ const Navbar = () => {
                     {/* only for sm screen */}
                     <div className='block md:hidden'>
                         {
-                            !user ? (<Link to="/login" className="btn btn-primary text-white font-bold text-sm hover:bg-gray-500">Login</Link>)
+                            !user ? (<Link to="/login" className="btn btn-primary text-white font-semibold text-sm hover:bg-gray-500">Login</Link>)
                                 :
                                 (<div className='relative group'>
                                     <img className='w-12 rounded-full'
