@@ -129,7 +129,7 @@ const Navbar = () => {
                     {/* only for sm screen */}
                     <div className='block md:hidden'>
                         {
-                            !user ? (<Link to="/login" className="btn btn-primary text-white font-bold text-lg hover:bg-gray-500">Login</Link>)
+                            !user ? (<Link to="/login" className="btn btn-primary text-white font-bold text-sm hover:bg-gray-500">Login</Link>)
                                 :
                                 (<div className='relative group'>
                                     <img className='w-12 rounded-full'
